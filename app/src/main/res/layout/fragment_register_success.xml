@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="@dimen/_16sdp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/text_medium"
+        android:text="@string/congrats"
+        android:textColor="@color/color_DE000000"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:textSize="@dimen/_22ssp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:fontFamily="@font/text_medium"
+        android:gravity="center"
+        android:text="@string/content_register_success"
+        android:textColor="@color/color_8A000000"
+        android:textSize="@dimen/_12ssp" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btSkip"
+        style="@style/OutlinedButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:text="@string/spin_later" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btSignIn"
+        style="@style/UnelevatedButtonEnableStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:text="@string/spin_now" />
+</LinearLayout>

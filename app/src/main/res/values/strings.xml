@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">KardiachainMembership</string>
+
+    <string name="announcement">Thông báo</string>
+    <string name="failure_network_connection">Chúng tôi đang gặp khó khăn khi kết nối với Internet. Vui lòng kiểm tra kết nối của bạn</string>
+    <string name="btn_cancel">Hủy</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_retry">Thử lại</string>
+
+    //Introduce
+    <string name="title_content_introduce_1">KAI membership</string>
+    <string name="desc_content_introduce_1">A flagship application pushing the frontier of mass adoption. A super app for the general public to earn, store, spend, and invest KAI, focusing on user experience and utilities.</string>
+    <string name="title_content_introduce_2">Play &amp; Earn</string>
+    <string name="desc_content_introduce_2">Sign in to entertain with plenty of interesting games and receive real KAI, mobile cards, and many lucky gifts.</string>
+    <string name="title_content_introduce_3">Social Mining</string>
+    <string name="desc_content_introduce_3">Contribute your unlimited creativity and complete the tokenized project missions to receive KAI rewards.</string>
+    <string name="let_me_take_a_tour">Let me take a tour</string>
+    <string name="sign_in">Sign In</string>
+
+    //Login
+    <string name="welcome">Welcome!</string>
+    <string name="content_sign_in">Sign in and start our journey with KAI.</string>
+    <string name="email">Email</string>
+    <string name="hint_email">eg. an.nguyen@kardianchain.io</string>
+    <string name="password">Password</string>
+    <string name="hint_password">Your password</string>
+    <string name="question_forgot_password">Forgot password?</string>
+    <string name="not_a_kaiser_yet">Not a KAISER yet?</string>
+    <string name="create_account">Create account</string>
+
+    //Register
+    <string name="be_a_member">Be a Member</string>
+    <string name="content_register">1 step away to be a Kai member. We just need a few details from you.</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="hint_confirm_password">Your confirm password</string>
+    <string name="im_already_a_kaiser">I’m already a KAISER !</string>
+
+    //Create passcode
+    <string name="create_passcode">Create Passcode</string>
+    <string name="content_create_passcode">This passcode is super handy. It can save your life sometime. Try to remember it.</string>
+    <string name="show_passcode">Show Passcode</string>
+    <string name="content_term_and_policy">By creating a passcode, you agree with our Terms &amp; Conditions and Privacy Policy</string>
+    <string name="set_passcode">Set Passcode</string>
+
+    //Confirm passcode
+    <string name="confirm_passcode">Confirm Passcode</string>
+    <string name="content_confirm_passcode">Confirm your passcode again. Just in case.</string>
+    <string name="confirm">Confirm</string>
+
+    //Register success
+    <string name="congrats">Congrats!</string>
+    <string name="content_register_success">Welcome to Kai membership!  \nYou have got 01 lucky spin</string>
+    <string name="spin_later">Spin Later</string>
+    <string name="spin_now">Spin Now</string>
+
+    //Forgot password
+    <string name="forgot_password">Forgot password</string>
+    <string name="content_forgot_password">We will send an instruction to your email.</string>
+    <string name="hint_email_forgot_password">Enter your email</string>
+    <string name="send_instructions">Send Instructions</string>
+    <string name="content_not_receive_any_email">Did not receive any email?\nCheck your spam filter, or resend another mail</string>
+
+    //New password
+    <string name="new_password">New Password</string>
+    <string name="content_new_password">Your new password must be different from previous used one. Try to remember it this time.</string>
+    <string name="hint_new_password">Enter your new password</string>
+    <string name="paste_your_token_here">Paste your token here</string>
+    <string name="set_new_password">Set new Password</string>
+    <string name="hint_paste_your_token">Enter your token</string>
+
+    //New password success
+    <string name="content_new_password_success">Your new Passcode is ready.</string>
+    <string name="ok_i_got_it">OK, I got it</string>
+
+    //Select account
+    <string name="select_account">Select Account</string>
+    <string name="content_select_account">Choose the account you want.</string>
+    <string name="sign_in_to_another_account">Sign in to another account</string>
+
+    //Enter passcode
+    <string name="enter_passcode">Enter passcode</string>
+    <string name="content_enter_passcode">Enter your passcode to continue.</string>
+    <string name="content_forgot_code">Can’t remember my code. Click here</string>
+    <string name="text_continue">Continue</string>
+
+    //Reset passcode
+    <string name="reset_passcode">Reset Passcode</string>
+    <string name="content_reset_passcode">We will send an email with instructions to your registed email.</string>
+
+    //Reset passcode success
+    <string name="instruction_sent">Instruction Sent</string>
+    <string name="content_instruction_sent">We have sent you a email comfirmation to an.nguyen@kardiachain.io email. Please check.</string>
+    <string name="open_email_app">Open email app</string>
+    <string name="content_not_receive_email">Did not receive any email? Check your spam filter, or resend another mail</string>
+
+    //New passcode
+    <string name="new_passcode">New Passcode</string>
+    <string name="content_new_passcode">This passcode is super handy. It can save your life sometime. Try to remember it.</string>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#394656</color>
+    <color name="colorPrimaryDark">#181E25</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="color_navigation_text">#172B4D</color>
+    <color name="color_secondary_highlight_background">#F6F6F6</color>
+
+    //Base
+    <color name="color_181E25">#181E25</color>
+    <color name="color_29323D">#29323D</color>
+    <color name="color_394656">#394656</color>
+    <color name="color_495A6E">#495A6E</color>
+    <color name="color_67798E">#67798E</color>
+    <color name="color_94A2B2">#94A2B2</color>
+    <color name="color_ACB7C3">#ACB7C3</color>
+    <color name="color_CED6DE">#CED6DE</color>
+    <color name="color_E6EAEF">#E6EAEF</color>
+    <color name="color_F3F5F6">#F3F5F6</color>
+
+    //Text
+    <color name="color_DE000000">#DE000000</color>
+    <color name="color_8A000000">#8A000000</color>
+    <color name="color_364766">#364766</color>
+    <color name="color_455571">#455571</color>
+    <color name="color_017CAD">#017CAD</color>
+    <color name="color_717D92">#717D92</color>
+
+    //Button
+    <color name="color_C9CED6">#C9CED6</color>
+
+    //Background
+    <color name="color_9A77FF">#9A77FF</color>
+    <color name="color_background_app">#F7F8F9</color>
+    <color name="color_E1E4E8">#E1E4E8</color>
+</resources>

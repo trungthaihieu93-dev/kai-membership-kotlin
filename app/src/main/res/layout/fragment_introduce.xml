@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/cvContent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvContent"
+        style="@style/CustomCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/_24sdp"
+            android:paddingTop="@dimen/_24sdp"
+            android:paddingEnd="@dimen/_24sdp"
+            android:paddingBottom="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:fontFamily="@font/text_medium"
+                android:textColor="@color/color_DE000000"
+                android:textSize="@dimen/_16ssp"
+                tools:text="KAI membership" />
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/text_medium"
+                android:lines="6"
+                android:textColor="@color/color_8A000000"
+                android:textSize="@dimen/_12ssp"
+                tools:text="A flagship application pushing the frontier of mass adoption. A super app for the general public to earn, store, spend, and invest KAI, focusing on user experience and utilities." />
+
+            <LinearLayout
+                android:id="@+id/llButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btSkip"
+                    style="@style/OutlinedButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/let_me_take_a_tour" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btSignIn"
+                    style="@style/UnelevatedButtonEnableStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/sign_in" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>
