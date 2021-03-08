@@ -14,11 +14,17 @@ class SelectAccountActivity : BaseActivity() {
     }
 
     override fun fragment(): BaseFragment? {
-        return SelectAccountFragment()
+        return SelectAccountFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(
+                    SelectAccountFragment.PASSCODE_DEVICE,intent.getParcelableExtra(
+                        SelectAccountFragment.PASSCODE_DEVICE))
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        changeColorStatusBar(R.color.color_background_app)
+        changeColorStatusBar()
     }
 }

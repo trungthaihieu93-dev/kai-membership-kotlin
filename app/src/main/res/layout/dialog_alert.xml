@@ -17,7 +17,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:fontFamily="@font/text_medium"
@@ -30,7 +30,7 @@
             android:textSize="@dimen/_13ssp"
             tools:text="Lorem Ipsum" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtMessage"
             android:fontFamily="@font/text_regular"
             android:layout_width="wrap_content"

@@ -20,6 +20,6 @@ class CreatePasscodeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        changeColorStatusBar(R.color.color_background_app)
+        changeColorStatusBar()
     }
 }

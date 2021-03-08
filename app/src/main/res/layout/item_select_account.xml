@@ -15,39 +15,39 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/_18sdp"
-        android:paddingTop="@dimen/_14sdp"
-        android:paddingEnd="@dimen/_18sdp"
-        android:paddingBottom="@dimen/_14sdp">
+        android:paddingStart="@dimen/_14sdp"
+        android:paddingTop="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_14sdp"
+        android:paddingBottom="@dimen/_12sdp">
 
         <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:src="@drawable/image_user_test" />
+            android:id="@+id/ivPhotoUser"
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_14sdp"
-            android:layout_marginEnd="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvNameUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/text_medium"
                 android:textColor="@color/color_455571"
-                android:textSize="@dimen/_12ssp"
-                android:text="An Nguyễn" />
+                android:textSize="@dimen/_11ssp" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvEmailUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/text_medium"
                 android:textColor="@color/color_C9CED6"
-                android:textSize="@dimen/_8ssp"
-                android:text="an.nguyen@kardiachain.io" />
+                android:textSize="@dimen/_8ssp" />
         </LinearLayout>
 
         <ImageView

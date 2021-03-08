@@ -21,12 +21,15 @@
     <string name="welcome">Welcome!</string>
     <string name="content_sign_in">Sign in and start our journey with KAI.</string>
     <string name="email">Email</string>
+    <string name="username">Username</string>
     <string name="hint_email">eg. an.nguyen@kardianchain.io</string>
     <string name="password">Password</string>
     <string name="hint_password">Your password</string>
     <string name="question_forgot_password">Forgot password?</string>
     <string name="not_a_kaiser_yet">Not a KAISER yet?</string>
     <string name="create_account">Create account</string>
+    <string name="email_empty">Email can not be blank</string>
+    <string name="password_empty">Password can not be blank</string>
 
     //Register
     <string name="be_a_member">Be a Member</string>
@@ -96,4 +99,25 @@
     //New passcode
     <string name="new_passcode">New Passcode</string>
     <string name="content_new_passcode">This passcode is super handy. It can save your life sometime. Try to remember it.</string>
+
+    //Main
+    <string name="text_navigation_news">News</string>
+    <string name="text_navigation_mission">Mission</string>
+    <string name="text_navigation_games">Games</string>
+    <string name="text_navigation_wallet">My Wallet</string>
+    <string name="text_navigation_utilities">Utilities</string>
+
+    //Wallet
+    <string name="balance">Balance</string>
+    <string name="holder">Holder</string>
+    <string name="member_since">Member since</string>
+    <string name="title_no_transaction">No Transaction</string>
+    <string name="content_no_transaction">Start your first transaction</string>
+    <string name="kai_unit">KAI</string>
+    <string name="wallet_address_from">From: %s</string>
+    <string name="wallet_address_to">To: %s</string>
+    <string name="recent_transactions">Recent Transactions</string>
+
+    //News
+    <string name="latest_news">Latest News</string>
 </resources>

@@ -28,7 +28,7 @@
             android:paddingEnd="@dimen/_24sdp"
             android:paddingBottom="@dimen/_20sdp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:textSize="@dimen/_16ssp"
                 tools:text="KAI membership" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:fontFamily="@font/text_medium"
                 android:lines="6"
                 android:textColor="@color/color_8A000000"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_11ssp"
                 tools:text="A flagship application pushing the frontier of mass adoption. A super app for the general public to earn, store, spend, and invest KAI, focusing on user experience and utilities." />
 
             <LinearLayout

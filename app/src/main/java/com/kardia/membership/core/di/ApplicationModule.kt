@@ -10,6 +10,7 @@ import com.itkacher.okhttpprofiler.OkHttpProfilerInterceptor
 import com.kardia.membership.AndroidApplication
 import com.kardia.membership.data.cache.UserTokenCache
 import com.kardia.membership.domain.network.ServiceInterceptor
+import com.kardia.membership.domain.repositories.*
 import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides
@@ -36,7 +37,7 @@ class ApplicationModule(private val application: AndroidApplication) {
     @Singleton
     fun provideRetrofit(userTokenCache: UserTokenCache, gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://flawless-user.cbidigital.com/api/")
+            .baseUrl("https://membership-backend.kardiachain.io/api/")
             .client(createClient(userTokenCache))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -71,4 +72,30 @@ class ApplicationModule(private val application: AndroidApplication) {
         }
         return okHttpClientBuilder.build()
     }
+
+    @Provides
+    @Singleton
+    fun provideDeviceRepository(dataSource: DeviceRepository.Network): DeviceRepository =
+        dataSource
+
+    @Provides
+    @Singleton
+    fun provideAuthRepository(dataSource: AuthRepository.Network): AuthRepository =
+        dataSource
+
+    @Provides
+    @Singleton
+    fun providePasscodeRepository(dataSource: PasscodeRepository.Network): PasscodeRepository =
+        dataSource
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(dataSource: UserRepository.Network): UserRepository =
+        dataSource
+
+    @Provides
+    @Singleton
+    fun provideTransactionRepository(dataSource: TransactionRepository.Network): TransactionRepository =
+        dataSource
+
 }

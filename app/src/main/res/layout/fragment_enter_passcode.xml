@@ -17,7 +17,7 @@
         android:paddingStart="@dimen/_16sdp"
         android:paddingEnd="@dimen/_16sdp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/text_regular"
@@ -25,14 +25,14 @@
             android:textColor="@color/color_DE000000"
             android:textSize="@dimen/_24ssp" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             android:fontFamily="@font/text_medium"
             android:text="@string/content_enter_passcode"
             android:textColor="@color/color_8A000000"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_11ssp" />
 
 
         <com.mukesh.OtpView
@@ -54,7 +54,7 @@
 
     </LinearLayout>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvResetPasscode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,11 +65,11 @@
         android:gravity="center"
         android:text="@string/content_forgot_code"
         android:textColor="@color/color_8A000000"
-        android:textSize="@dimen/_12ssp" />
+        android:textSize="@dimen/_11ssp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btContinue"
-        style="@style/UnelevatedButtonDisableStyle"
+        style="@style/UnelevatedButtonEnableStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

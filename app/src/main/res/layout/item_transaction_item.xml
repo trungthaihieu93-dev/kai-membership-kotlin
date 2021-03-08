@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:layout_marginBottom="@dimen/_8sdp"
+    android:layout_marginTop="@dimen/_2sdp">
+
+    <ImageView
+        android:id="@+id/ivTypeTransaction"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_14sdp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:orientation="vertical">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTypeTransaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/text_medium"
+            android:textColor="@color/color_DE000000"
+            android:textSize="@dimen/_11ssp"
+            tools:text ="Buy"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvWalletAddressTransaction"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/text_medium"
+            android:textColor="@color/color_42000000"
+            android:textSize="@dimen/_8ssp"
+            android:ellipsize="middle"
+            tools:text ="From: L1A4NydsadasdsadMhoq"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:gravity="end"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:orientation="vertical">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvValueTransaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/text_medium"
+            android:textColor="@color/color_DE000000"
+            android:textSize="@dimen/_11ssp"
+            tools:text ="+ 17.000"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTimeTransaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/text_medium"
+            android:textColor="@color/color_42000000"
+            android:textSize="@dimen/_8ssp"
+            android:ellipsize="middle"
+            tools:text ="05:21 PM"
+            android:singleLine="true" />
+    </LinearLayout>
+</LinearLayout>

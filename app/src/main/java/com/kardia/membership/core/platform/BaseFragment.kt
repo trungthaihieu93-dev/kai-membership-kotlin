@@ -62,6 +62,9 @@ abstract class BaseFragment : Fragment() {
     lateinit var userTokenCache: UserTokenCache
 
     @Inject
+    lateinit var userInfoCache: UserInfoCache
+
+    @Inject
     internal lateinit var mNavigator: Navigator
 
     @Inject
@@ -70,7 +73,7 @@ abstract class BaseFragment : Fragment() {
     @Inject
     lateinit var application: AndroidApplication
 
-    var userID = 0
+//    var userID = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -117,11 +120,12 @@ abstract class BaseFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        userTokenCache.get()?.userID?.let { userID = it }
+//        userTokenCache.get()?.userID?.let { userID = it }
         super.onViewCreated(view, savedInstanceState)
         forceHide()
         initViews()
         initEvents()
+        loadData()
     }
 
     private fun getStatusBarHeight() {
@@ -348,7 +352,7 @@ abstract class BaseFragment : Fragment() {
                         .setTitlePositive("OK")
                         .onPositive {
 //                            logOut()
-                            mNavigator.showMain(activity)
+//                            mNavigator.showMain(activity)
                         }
                         .show(requireContext())
                     hideProgress()
@@ -394,7 +398,7 @@ abstract class BaseFragment : Fragment() {
         if (requestCode == RC_EXPIRED) {
             if (resultCode == RESULT_OK) {
                 isExpired = false
-                userTokenCache.get()?.userID?.let { userID = it }
+//                userTokenCache.get()?.userID?.let { userID = it }
                 Handler().postDelayed({
                     reloadData()
                 }, 500)

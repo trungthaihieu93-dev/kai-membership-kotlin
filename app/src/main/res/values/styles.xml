@@ -88,7 +88,7 @@
         <item name="android:background">@drawable/background_edittext</item>
         <item name="android:fontFamily">@font/text_medium</item>
         <item name="android:textColor">@color/color_8A000000</item>
-        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textSize">@dimen/_11ssp</item>
         <item name="android:textColorHint">@color/color_94A2B2</item>
         <item name="android:paddingStart">@dimen/_12sdp</item>
         <item name="android:paddingTop">@dimen/_10sdp</item>
@@ -109,4 +109,20 @@
         <item name="passwordToggleDrawable">@drawable/ic_eye_edittext</item>
         <item name="passwordToggleEnabled">true</item>
     </style>
+
+    <style name="BottomNavigationViewHome" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemTextAppearanceActive">@style/BottomNavigationView.TextActive</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNavigationView.TextInactive</item>
+    </style>
+
+    <style name="BottomNavigationView.TextActive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">@dimen/_8ssp</item>
+        <item name="fontFamily">@font/text_medium</item>
+    </style>
+
+    <style name="BottomNavigationView.TextInactive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">@dimen/_8ssp</item>
+        <item name="fontFamily">@font/text_regular</item>
+    </style>
+
 </resources>

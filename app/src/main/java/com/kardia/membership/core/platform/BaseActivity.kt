@@ -18,6 +18,8 @@ import com.kardia.membership.AndroidApplication
 import com.kardia.membership.R
 import com.kardia.membership.R.layout
 import com.kardia.membership.core.di.ApplicationComponent
+import com.kardia.membership.data.cache.UserInfoCache
+import com.kardia.membership.data.entities.UserInfo
 import com.kardia.membership.features.dialog.DialogProgress
 import kotlinx.android.synthetic.main.include_toolbar_white.view.*
 import pl.droidsonroids.gif.GifDrawable
@@ -46,6 +48,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var userInfoCache: UserInfoCache
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         (application as AndroidApplication).appComponent
@@ -106,7 +111,7 @@ abstract class BaseActivity : AppCompatActivity() {
         DialogProgress.hide(this)
     }
 
-    fun changeColorStatusBar(color: Int = R.color.white) {
+    fun changeColorStatusBar(color: Int = R.color.color_background_app) {
         val window: Window = window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, color)

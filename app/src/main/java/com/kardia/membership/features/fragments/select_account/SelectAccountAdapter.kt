@@ -5,18 +5,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kardia.membership.R
+import com.kardia.membership.core.extension.loadFromAnyWithoutCache
+import com.kardia.membership.core.extension.loadFromUrlRounded
 import com.kardia.membership.core.platform.OnItemClickListener
-import com.kardia.membership.data.entities.Account
+import com.kardia.membership.data.entities.User
 import javax.inject.Inject
 import kotlin.properties.Delegates
 import com.kardia.membership.features.fragments.select_account.SelectAccountAdapter.SelectAccountViewHolder
+import kotlinx.android.synthetic.main.item_select_account.view.*
 
 class SelectAccountAdapter @Inject constructor() :
     RecyclerView.Adapter<SelectAccountViewHolder>() {
 
     var onItemClickListener: OnItemClickListener? = null
 
-    internal var collection: ArrayList<Account> by Delegates.observable(ArrayList()) { _, _, _ ->
+    internal var collection: ArrayList<User> by Delegates.observable(ArrayList()) { _, _, _ ->
         notifyDataSetChanged()
     }
 
@@ -26,11 +29,12 @@ class SelectAccountAdapter @Inject constructor() :
         }
 
         fun bind(position: Int) {
-//            val item = collection[position]
-
+            val item = collection[position]
+            itemView.ivPhotoUser.loadFromUrlRounded(item.avatar,6f)
+            itemView.tvEmailUser.text = item.email
             itemView.setOnClickListener {
                 onItemClickListener?.onItemClick(
-                    0,
+                    item,
                     position
                 )
             }
@@ -48,7 +52,7 @@ class SelectAccountAdapter @Inject constructor() :
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return collection.size
     }
 
     override fun onBindViewHolder(holder: SelectAccountViewHolder, position: Int) {

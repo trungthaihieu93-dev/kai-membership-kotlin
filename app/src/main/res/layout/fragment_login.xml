@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
@@ -20,31 +20,54 @@
             android:textColor="@color/color_DE000000"
             android:textSize="@dimen/_24ssp" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             android:fontFamily="@font/text_medium"
             android:text="@string/content_sign_in"
             android:textColor="@color/color_8A000000"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_11ssp" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_70sdp"
-            android:fontFamily="@font/text_medium"
-            android:text="@string/email"
-            android:textAllCaps="true"
-            android:textColor="@color/color_364766"
-            android:textSize="@dimen/_8ssp" />
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_medium"
+                android:text="@string/email"
+                android:textAllCaps="true"
+                android:textColor="@color/color_364766"
+                android:textSize="@dimen/_8ssp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_medium"
+                android:text=" / "
+                android:textColor="@color/color_364766"
+                android:textSize="@dimen/_8ssp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_medium"
+                android:text="@string/username"
+                android:textAllCaps="true"
+                android:textColor="@color/color_364766"
+                android:textSize="@dimen/_8ssp" />
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilEmail"
+            style="@style/TextInputLayoutStyleNormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
-            style="@style/TextInputLayoutStyleNormal">
+            android:layout_marginTop="@dimen/_4sdp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietEmail"
@@ -56,7 +79,18 @@
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMessageEmailEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:fontFamily="@font/text_regular"
+            android:text="@string/email_empty"
+            android:textColor="@color/color_C42C15"
+            android:textSize="@dimen/_10ssp"
+            android:visibility="gone" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
@@ -68,10 +102,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPassword"
+            style="@style/TextInputLayoutStylePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
-            style="@style/TextInputLayoutStylePassword">
+            android:layout_marginTop="@dimen/_4sdp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietPassword"
@@ -83,7 +117,18 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMessagePasswordEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:fontFamily="@font/text_regular"
+            android:text="@string/email_empty"
+            android:textColor="@color/color_C42C15"
+            android:textSize="@dimen/_10ssp"
+            android:visibility="gone" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvForgotPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,15 +154,15 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/text_medium"
                 android:text="@string/not_a_kaiser_yet"
                 android:textColor="@color/color_8A000000"
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_11ssp" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvCreateAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +170,7 @@
                 android:fontFamily="@font/text_medium"
                 android:text="@string/create_account"
                 android:textColor="@color/color_94A2B2"
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_11ssp" />
         </LinearLayout>
     </LinearLayout>
 

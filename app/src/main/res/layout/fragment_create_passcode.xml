@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/text_regular"
@@ -19,14 +19,14 @@
             android:textColor="@color/color_DE000000"
             android:textSize="@dimen/_24ssp" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             android:fontFamily="@font/text_medium"
             android:text="@string/content_create_passcode"
             android:textColor="@color/color_8A000000"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_11ssp" />
 
 
         <com.mukesh.OtpView
@@ -46,7 +46,7 @@
             app:OtpLineColor="@color/color_E1E4E8"
             app:OtpViewType="line" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
@@ -58,7 +58,7 @@
 
     </LinearLayout>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/btSetPasscode"
@@ -67,7 +67,7 @@
         android:gravity="center"
         android:text="@string/content_term_and_policy"
         android:textColor="@color/color_8A000000"
-        android:textSize="@dimen/_12ssp" />
+        android:textSize="@dimen/_11ssp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btSetPasscode"

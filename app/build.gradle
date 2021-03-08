@@ -100,4 +100,7 @@ dependencies {
 
     //OTP view
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.2'
+
+    //Paris
+    implementation 'com.airbnb.android:paris:1.7.2'
 }

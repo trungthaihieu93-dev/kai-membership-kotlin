@@ -133,7 +133,7 @@ fun ImageView.loadFromLocal(
 
 fun ImageView.loadFromAnyWithoutCache(
     resourceId: Any?,
-    isAnimation: Boolean = true,
+    isAnimation: Boolean = false,
     isPlaceHolder: Boolean = false
 ) {
     val requestBuilder = Glide.with(this.context.applicationContext).load(resourceId).centerCrop()

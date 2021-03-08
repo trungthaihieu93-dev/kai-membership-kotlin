@@ -1,10 +1,13 @@
 package com.kardia.membership.core.extension
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
+import java.text.DateFormat
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Matcher
@@ -23,7 +26,7 @@ fun String.getCalendarInstance(pattern: String): Calendar {
     val cal = Calendar.getInstance()
     val day = cal.get(Calendar.DAY_OF_MONTH)
     val sdf =
-        SimpleDateFormat(pattern, Locale.ENGLISH)
+        SimpleDateFormat(pattern, Locale.getDefault())
     if (!TextUtils.isEmpty(this)) {
         cal.time = sdf.parse(this) // all done
     } else {
@@ -56,4 +59,21 @@ fun String.appendRed(): SpannableStringBuilder {
         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
     )
     return builder
+}
+
+@SuppressLint("SimpleDateFormat")
+fun String.getDateFormat(pattern: String): String {
+    val df: DateFormat =
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    val date = df.parse(this)
+    date?.let {
+        return SimpleDateFormat(pattern, Locale.getDefault()).format(date)
+    }
+    return ""
+}
+
+fun String.formatKAI(): SpannableStringBuilder {
+    return SpannableStringBuilder(
+        NumberFormat.getNumberInstance(Locale.GERMANY).format(this.toFloat())
+    )
 }

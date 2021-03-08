@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingEnd="@dimen/_16sdp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,275:360"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_news_test" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDateNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:fontFamily="@font/text_medium"
+            android:textColor="@color/color_B2FFFFFF"
+            android:textSize="@dimen/_11ssp"
+            android:text="Today, 27 Nov 2020" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitleNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tvDateNews"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/text_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:text="KardiaChain X DID Alliance to reinforce the pioneering DID proposition in Vietnam" />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

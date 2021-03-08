@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_margin="@dimen/_16sdp">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/text_medium"
@@ -14,7 +14,7 @@
         android:textColor="@color/color_DE000000"
         android:textSize="@dimen/_22ssp" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/text_medium"
@@ -22,7 +22,7 @@
         android:gravity="center"
         android:text="@string/content_instruction_sent"
         android:textColor="@color/color_8A000000"
-        android:textSize="@dimen/_12ssp" />
+        android:textSize="@dimen/_11ssp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btOpenEmailApp"
@@ -32,7 +32,7 @@
         android:layout_marginTop="@dimen/_24sdp"
         android:text="@string/open_email_app" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/text_medium"
@@ -40,5 +40,5 @@
         android:gravity="center"
         android:text="@string/content_not_receive_any_email"
         android:textColor="@color/color_8A000000"
-        android:textSize="@dimen/_12ssp" />
+        android:textSize="@dimen/_11ssp" />
 </LinearLayout>
