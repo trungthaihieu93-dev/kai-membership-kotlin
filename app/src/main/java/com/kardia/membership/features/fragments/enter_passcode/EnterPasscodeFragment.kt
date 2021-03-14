@@ -10,13 +10,13 @@ import androidx.core.content.ContextCompat
 import com.airbnb.paris.Paris
 import com.google.android.material.button.MaterialButton
 import com.kardia.membership.R
-import com.kardia.membership.core.extension.close
-import com.kardia.membership.core.extension.observe
-import com.kardia.membership.core.extension.viewModel
+import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.data.entities.UserToken
 import com.kardia.membership.domain.entities.device.PasscodeDeviceEntity
+import com.kardia.membership.domain.entities.passcode.CheckPasscodeEntity
 import com.kardia.membership.domain.entities.passcode.LoginPasscodeEntity
+import com.kardia.membership.domain.usecases.passcode.PostCheckPasscodeUseCase
 import com.kardia.membership.domain.usecases.passcode.PostLoginPasscodeUseCase
 import com.kardia.membership.features.utils.AppConstants
 import com.kardia.membership.features.viewmodel.DeviceViewModel
@@ -30,9 +30,11 @@ class EnterPasscodeFragment : BaseFragment() {
 
     private var email: String? = null
     private var otp: String? = null
+    private var fromChangePassword: Boolean = false
 
     companion object {
         const val EMAIL = "email"
+        const val FROM_CHANGE_PASSWORD = "fromChangePassword"
     }
 
     override fun layoutId() = R.layout.fragment_enter_passcode
@@ -41,18 +43,28 @@ class EnterPasscodeFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         passcodeViewModel = viewModel(viewModelFactory) {
-            observe(loginEntity, ::onReceivePasscodeDeviceEntity)
+            observe(loginEntity, ::onReceiveLoginPasscodeEntity)
+            observe(checkEntity, ::onReceiveCheckPasscodeEntity)
             observe(failureData, ::handleFailure)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         email = arguments?.getString(EMAIL)
+        arguments?.getBoolean(FROM_CHANGE_PASSWORD, false)?.let {
+            fromChangePassword = it
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun initViews() {
+        ivBack.visible()
 
+        if (!fromChangePassword) {
+            flPaddingTop.gone()
+        } else {
+            flPaddingTop.visible()
+        }
     }
 
     override fun initEvents() {
@@ -66,27 +78,46 @@ class EnterPasscodeFragment : BaseFragment() {
 
         btContinue.setOnClickListener {
             otp?.let { otp ->
+                showProgress()
+                if (!fromChangePassword) {
+                    passcodeViewModel.loginPasscode(
+                        PostLoginPasscodeUseCase.Params(
+                            otp,
+                            email,
+                            AppConstants.DEVICE_ID_TEST,
+                            AppConstants.DEVICE_OS
+                        )
+                    )
+                } else {
+                    passcodeViewModel.checkPasscode(
+                        PostCheckPasscodeUseCase.Params(
+                            otp,
+                            AppConstants.DEVICE_ID_TEST
+                        )
+                    )
+                }
+            }
+        }
+
+        ovPasscode.setOtpCompletionListener {
+            showProgress()
+            if (!fromChangePassword) {
                 passcodeViewModel.loginPasscode(
                     PostLoginPasscodeUseCase.Params(
-                        otp,
+                        it,
                         email,
                         AppConstants.DEVICE_ID_TEST,
                         AppConstants.DEVICE_OS
                     )
                 )
-            }
-
-        }
-
-        ovPasscode.setOtpCompletionListener {
-            passcodeViewModel.loginPasscode(
-                PostLoginPasscodeUseCase.Params(
-                    it,
-                    email,
-                    AppConstants.DEVICE_ID_TEST,
-                    AppConstants.DEVICE_OS
+            } else {
+                passcodeViewModel.checkPasscode(
+                    PostCheckPasscodeUseCase.Params(
+                        it,
+                        AppConstants.DEVICE_ID_TEST
+                    )
                 )
-            )
+            }
         }
         ovPasscode.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -112,13 +143,20 @@ class EnterPasscodeFragment : BaseFragment() {
 
     }
 
-    private fun onReceivePasscodeDeviceEntity(entity: LoginPasscodeEntity?) {
+    private fun onReceiveLoginPasscodeEntity(entity: LoginPasscodeEntity?) {
         hideProgress()
-        finish()
+        ovPasscode.setText("")
         entity?.data?.let {
+            userInfoCache.clear()
             userTokenCache.put(UserToken(it.access_token, it.refresh_token, it.expires_in))
             mNavigator.showMain(activity)
         }
+        finish()
+    }
 
+    private fun onReceiveCheckPasscodeEntity(entity: CheckPasscodeEntity?) {
+        hideProgress()
+        ovPasscode.setText("")
+        mNavigator.showNewPassword(activity, true)
     }
 }

@@ -6,13 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kardia.membership.R
-import com.kardia.membership.core.extension.formatKAI
+import com.kardia.membership.core.extension.formatThousand
 import com.kardia.membership.core.extension.getDateFormat
-import com.kardia.membership.core.extension.loadFromUrlRounded
-import com.kardia.membership.core.platform.OnItemClickListener
-import com.kardia.membership.data.entities.Transaction
 import com.kardia.membership.data.entities.TransactionItem
-import kotlinx.android.synthetic.main.item_select_account.view.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
 import com.kardia.membership.features.fragments.wallet.TransactionItemAdapter.TransactionItemViewHolder
@@ -38,17 +34,17 @@ class TransactionItemAdapter
             when(item.type){
                 AppConstants.TYPE_GET_TRANSACTION->{
                     itemView.tvWalletAddressTransaction.text = context.getString(R.string.wallet_address_from,item.wallet_send)
-                    itemView.tvValueTransaction.text = String.format("+ %s",item.value?.formatKAI())
+                    itemView.tvValueTransaction.text = String.format("+ %s",item.value?.formatThousand())
                     itemView.ivTypeTransaction.setImageResource(R.drawable.ic_type_get_transaction)
                 }
                 AppConstants.TYPE_BUY_TRANSACTION->{
                     itemView.tvWalletAddressTransaction.text = context.getString(R.string.wallet_address_from,item.wallet_send)
-                    itemView.tvValueTransaction.text = String.format("+ %s",item.value?.formatKAI())
+                    itemView.tvValueTransaction.text = String.format("+ %s",item.value?.formatThousand())
                     itemView.ivTypeTransaction.setImageResource(R.drawable.ic_type_buy_transaction)
                 }
                 AppConstants.TYPE_SEND_TRANSACTION->{
                     itemView.tvWalletAddressTransaction.text = context.getString(R.string.wallet_address_to,item.wallet_receive)
-                    itemView.tvValueTransaction.text = String.format("- %s",item.value?.formatKAI())
+                    itemView.tvValueTransaction.text = String.format("- %s",item.value?.formatThousand())
                     itemView.ivTypeTransaction.setImageResource(R.drawable.ic_type_send_transaction)
                 }
             }

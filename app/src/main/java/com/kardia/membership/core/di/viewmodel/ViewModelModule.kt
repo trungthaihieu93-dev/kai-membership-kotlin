@@ -43,4 +43,14 @@ abstract class ViewModelModule {
     @ViewModelKey(TransactionViewModel::class)
     abstract fun bindsTransactionViewModel(viewModel: TransactionViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(ConfigViewModel::class)
+    abstract fun bindsConfigViewModel(viewModel: ConfigViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TopUpViewModel::class)
+    abstract fun bindsTopUpViewModel(viewModel: TopUpViewModel): ViewModel
+
 }

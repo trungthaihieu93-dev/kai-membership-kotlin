@@ -24,8 +24,8 @@ class CheckMailFragment : BaseFragment() {
 
     override fun initEvents() {
         btOpenEmailApp.setOnClickListener {
-            finish()
             mNavigator.showLogin(activity)
+            finish()
         }
     }
 

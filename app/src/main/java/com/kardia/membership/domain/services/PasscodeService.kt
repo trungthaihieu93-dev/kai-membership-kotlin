@@ -2,8 +2,10 @@ package com.kardia.membership.domain.services
 
 import com.kardia.membership.domain.api.PasscodeAPI
 import com.kardia.membership.domain.entities.auth.LoginAuthEntity
+import com.kardia.membership.domain.entities.passcode.CheckPasscodeEntity
 import com.kardia.membership.domain.entities.passcode.LoginPasscodeEntity
 import com.kardia.membership.domain.entities.passcode.RegisterPasscodeEntity
+import com.kardia.membership.domain.usecases.passcode.PostCheckPasscodeUseCase
 import com.kardia.membership.domain.usecases.passcode.PostLoginPasscodeUseCase
 import com.kardia.membership.domain.usecases.passcode.PostRegisterPasscodeUseCase
 import retrofit2.Call
@@ -23,6 +25,10 @@ class PasscodeService @Inject constructor(retrofit: Retrofit) : PasscodeAPI {
 
     override fun register(params: PostRegisterPasscodeUseCase.Params): Call<RegisterPasscodeEntity> {
         return passcodeAPI.register(params)
+    }
+
+    override fun check(params: PostCheckPasscodeUseCase.Params): Call<CheckPasscodeEntity> {
+        return passcodeAPI.check(params)
     }
 
 }

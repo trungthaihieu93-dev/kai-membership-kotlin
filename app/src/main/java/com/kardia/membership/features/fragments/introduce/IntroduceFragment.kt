@@ -1,9 +1,7 @@
 package com.kardia.membership.features.fragments.introduce
 
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import com.kardia.membership.R
-import com.kardia.membership.core.extension.gone
 import com.kardia.membership.core.extension.invisible
 import com.kardia.membership.core.extension.visible
 import com.kardia.membership.core.platform.BaseFragment
@@ -43,7 +41,7 @@ class IntroduceFragment : BaseFragment() {
             }
             2 -> {
                 ivBackground.setImageResource(R.drawable.background_introduce_2)
-                rlMain.setBackgroundColor(getColorDrawable(R.color.color_9A77FF))
+                rlMain.setBackgroundColor(getColor(R.color.color_9A77FF))
                 tvTitle.text = getString(R.string.title_content_introduce_2)
                 tvDesc.text = getString(R.string.desc_content_introduce_2)
             }

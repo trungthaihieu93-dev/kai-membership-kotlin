@@ -8,6 +8,7 @@ import com.kardia.membership.core.platform.BaseActivity
 import com.kardia.membership.domain.entities.BaseEntities
 import com.kardia.membership.features.utils.AppLog
 import com.google.gson.Gson
+import com.kardia.membership.domain.entities.FailEntity
 import retrofit2.Call
 import java.lang.Exception
 import java.net.SocketTimeoutException
@@ -30,16 +31,16 @@ abstract class BaseNetwork {
                     val errorBody =
                         response.errorBody()?.string()?.replace("\"data\":\"\"", "\"data\":{}")
                     AppLog.e("OkHttpClient - Duy", "$errorBody")
-                    var code: Int = response.code()
-                    var message: String = ""
-//                    try {
-//                        Gson().fromJson(errorBody, SignInUpEntity::class.java)?.message_code?.let {
-//                            code = it
-//                        }
-//                    } catch (e: Exception) {
-//                    }
+                    val code: Int = response.code()
+                    var message = ""
+                    try {
+                        Gson().fromJson(errorBody, FailEntity::class.java)?.data?.let {
+                            message = it
+                        }
+                    } catch (e: Exception) {
+                    }
 
-                    Gson().fromJson(errorBody, BaseEntities::class.java)?.let { message = it.error }
+//                    Gson().fromJson(errorBody, BaseEntities::class.java)?.let { message = it.error }
 
                     Either.Left(Failure.ServerError(message, code))
                 }

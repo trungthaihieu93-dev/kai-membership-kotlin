@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -23,6 +24,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import com.github.dhaval2404.imagepicker.ImagePicker
+import com.github.dhaval2404.imagepicker.util.FileUriUtils
 import com.kardia.membership.AndroidApplication
 import com.kardia.membership.R
 import com.kardia.membership.core.di.ApplicationComponent
@@ -35,6 +38,7 @@ import com.kardia.membership.features.utils.AppLog
 import com.google.android.material.snackbar.Snackbar
 import com.kardia.membership.features.dialog.NoInternetDialog
 import com.kardia.membership.features.utils.CommonUtils
+import java.io.File
 import javax.inject.Inject
 
 /**
@@ -63,6 +67,9 @@ abstract class BaseFragment : Fragment() {
 
     @Inject
     lateinit var userInfoCache: UserInfoCache
+
+    @Inject
+    lateinit var configCache: ConfigCache
 
     @Inject
     internal lateinit var mNavigator: Navigator
@@ -344,15 +351,14 @@ abstract class BaseFragment : Fragment() {
             }
             is Failure.ServerError -> {
                 AppLog.e("Duy", "${failure.error} : ${(activity as BaseActivity).isShowError}")
-                if (failure.errorCode == 401 || failure.errorCode == 403) {
+                if (failure.errorCode == 401) {
                     DialogAlert()
                         .setTitle("This account is already logged into on another device.")
                         .setMessage("You are currently logged in on another device. Please log out of the other device or contact your administrator.")
                         .setCancel(false)
                         .setTitlePositive("OK")
                         .onPositive {
-//                            logOut()
-//                            mNavigator.showMain(activity)
+                            mNavigator.showSelectAccountNew(activity)
                         }
                         .show(requireContext())
                     hideProgress()
@@ -509,7 +515,7 @@ abstract class BaseFragment : Fragment() {
         return null
     }
 
-    fun getColorDrawable(id: Int): Int {
+    fun getColor(id: Int): Int {
         context?.let {
             return ContextCompat.getColor(it, id)
         }
@@ -518,5 +524,28 @@ abstract class BaseFragment : Fragment() {
 
     fun finish(){
         activity?.finish()
+    }
+
+    fun showImagePicker() {
+        ImagePicker.with(this)
+            .galleryMimeTypes(  //Exclude gif images
+                mimeTypes = arrayOf(
+                    "image/png",
+                    "image/jpg",
+                    "image/jpeg"
+                )
+            )
+            .start()
+    }
+
+    fun getImageSize(chosen: Uri?): Long {
+        if (chosen == null) {
+            return 0
+        }
+        val fileStr: String? = FileUriUtils.getRealPath(application.applicationContext, chosen)
+        val file = File(fileStr)
+        val fileSizeInBytes: Long = file.length()
+        val fileSizeInKB = fileSizeInBytes / 1024
+        return fileSizeInKB / 1024
     }
 }

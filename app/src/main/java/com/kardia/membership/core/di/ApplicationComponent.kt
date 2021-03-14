@@ -6,6 +6,7 @@ import com.kardia.membership.core.navigation.RouteActivity
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.features.MainActivity
 import com.kardia.membership.features.dialog.NoInternetDialog
+import com.kardia.membership.features.fragments.buy.BuyFragment
 import com.kardia.membership.features.fragments.check_mail.CheckMailFragment
 import com.kardia.membership.features.fragments.confirm_passcode.ConfirmPasscodeFragment
 import com.kardia.membership.features.fragments.create_passcode.CreatePasscodeFragment
@@ -14,15 +15,25 @@ import com.kardia.membership.features.fragments.forgot_password.ForgotPasswordFr
 import com.kardia.membership.features.fragments.introduce.IntroduceFragment
 import com.kardia.membership.features.fragments.introduce.IntroduceManagementFragment
 import com.kardia.membership.features.fragments.login.LoginFragment
+import com.kardia.membership.features.fragments.my_profile.MyProfileFragment
+import com.kardia.membership.features.fragments.new_passcode.ChangePasswordSuccessBottomSheet
 import com.kardia.membership.features.fragments.new_passcode.NewPasscodeFragment
 import com.kardia.membership.features.fragments.new_password.NewPasswordFragment
 import com.kardia.membership.features.fragments.new_password_success.NewPasswordSuccessFragment
 import com.kardia.membership.features.fragments.news.NewsFragment
+import com.kardia.membership.features.fragments.overview.ClaimTopUpFailBottomSheet
+import com.kardia.membership.features.fragments.overview.ClaimTopUpSuccessBottomSheet
+import com.kardia.membership.features.fragments.overview.OverviewFragment
+import com.kardia.membership.features.fragments.profile.ProfileFragment
+import com.kardia.membership.features.fragments.receive.ReceiveFragment
 import com.kardia.membership.features.fragments.register.RegisterFragment
 import com.kardia.membership.features.fragments.register_success.RegisterSuccessFragment
 import com.kardia.membership.features.fragments.reset_passcode.ResetPasscodeFragment
 import com.kardia.membership.features.fragments.select_account.SelectAccountFragment
 import com.kardia.membership.features.fragments.splash.SplashFragment
+import com.kardia.membership.features.fragments.top_up.TopUpAmountBottomSheet
+import com.kardia.membership.features.fragments.top_up.TopUpFragment
+import com.kardia.membership.features.fragments.utilities.UtilitiesFragment
 import com.kardia.membership.features.fragments.wallet.WalletFragment
 import dagger.Component
 import javax.inject.Singleton
@@ -54,4 +65,15 @@ interface ApplicationComponent {
     fun inject(newPasscodeFragment: NewPasscodeFragment)
     fun inject(walletFragment: WalletFragment)
     fun inject(newsFragment: NewsFragment)
+    fun inject(receiveFragment: ReceiveFragment)
+    fun inject(buyFragment: BuyFragment)
+    fun inject(utilitiesFragment: UtilitiesFragment)
+    fun inject(topUpFragment: TopUpFragment)
+    fun inject(overviewFragment: OverviewFragment)
+    fun inject(topUpAmountBottomSheet: TopUpAmountBottomSheet)
+    fun inject(claimTopUpFailBottomSheet: ClaimTopUpFailBottomSheet)
+    fun inject(claimTopUpSuccessBottomSheet: ClaimTopUpSuccessBottomSheet)
+    fun inject(profileFragment: ProfileFragment)
+    fun inject(myProfileFragment: MyProfileFragment)
+    fun inject(changePasswordSuccessBottomSheet: ChangePasswordSuccessBottomSheet)
 }

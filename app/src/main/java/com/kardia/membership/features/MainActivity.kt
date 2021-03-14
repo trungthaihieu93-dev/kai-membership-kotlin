@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kardia.membership.R
-import com.kardia.membership.core.extension.observe
-import com.kardia.membership.core.extension.viewModel
+import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseActivity
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.domain.entities.user.UserInfoEntity
@@ -35,7 +34,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         userViewModel = viewModel(viewModelFactory) {
-            observe(userInfoEntity, ::onReceiveUserInfoEntity)
+            observe(getUserInfoEntity, ::onReceiveUserInfoEntity)
         }
         setContentView(R.layout.activity_main)
         changeColorStatusBar()
@@ -44,8 +43,28 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
         userViewModel.getUserInfo()
         tvHeader.text = getString(R.string.text_navigation_news)
+
+        ivProfileMain.setOnClickListener {
+            mNavigator.showProfile(this)
+        }
+
+        ivAvatarMain.setOnClickListener {
+            mNavigator.showProfile(this)
+        }
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadData()
+    }
+
+    private fun loadData(){
+        ivAvatarMain.gone()
+        userInfoCache.get()?.user_info?.avatar?.let{
+            ivAvatarMain.visible()
+            ivAvatarMain.loadFromUrlRounded(it,8f)
+        }
+    }
     fun selectNavigation(menuID: Int) {
         onNavigationItemSelected(bottom_navigation.menu.findItem(menuID))
         bottom_navigation.selectedItemId = menuID
@@ -115,6 +134,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     private fun onReceiveUserInfoEntity(entity: UserInfoEntity?) {
         entity?.data?.let {
             userInfoCache.put(it)
+            loadData()
         }
     }
 }

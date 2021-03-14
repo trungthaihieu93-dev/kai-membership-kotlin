@@ -6,6 +6,7 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
+import com.kardia.membership.features.utils.AppConstants
 import java.text.DateFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -33,13 +34,6 @@ fun String.getCalendarInstance(pattern: String): Calendar {
         cal.set(Calendar.DAY_OF_MONTH, day - 1)
     }
     return cal
-}
-
-fun String.formatID(length: Int = 12): String {
-    if (this.length < length) {
-        return this.toUpperCase(Locale.ROOT)
-    }
-    return this.substring(this.length - length, this.length).toUpperCase(Locale.ROOT)
 }
 
 fun String.isValidVNPhoneNumber(): Boolean {
@@ -72,8 +66,16 @@ fun String.getDateFormat(pattern: String): String {
     return ""
 }
 
-fun String.formatKAI(): SpannableStringBuilder {
-    return SpannableStringBuilder(
-        NumberFormat.getNumberInstance(Locale.GERMANY).format(this.toFloat())
+fun String.formatThousand(): String {
+    val nf = NumberFormat.getInstance(Locale.US)
+    nf.maximumFractionDigits = 4
+    return nf.format(this.toFloat())
+}
+
+fun String.formatPrice(): String {
+    return String.format(
+        "%s %s",
+        NumberFormat.getNumberInstance(Locale.US).format(this.toFloat()),
+        AppConstants.UNIT_PRICE
     )
 }

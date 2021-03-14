@@ -18,6 +18,7 @@ import com.kardia.membership.AndroidApplication
 import com.kardia.membership.R
 import com.kardia.membership.R.layout
 import com.kardia.membership.core.di.ApplicationComponent
+import com.kardia.membership.core.navigation.Navigator
 import com.kardia.membership.data.cache.UserInfoCache
 import com.kardia.membership.data.entities.UserInfo
 import com.kardia.membership.features.dialog.DialogProgress
@@ -51,6 +52,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
     @Inject
     lateinit var userInfoCache: UserInfoCache
+
+    @Inject
+    internal lateinit var mNavigator: Navigator
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         (application as AndroidApplication).appComponent

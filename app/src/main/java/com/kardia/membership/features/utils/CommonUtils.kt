@@ -12,7 +12,7 @@ object CommonUtils {
                 .setTitle(title ?: "ServerError")
                 .setMessage(message ?: "")
                 .setCancel(false)
-                .setTitlePositive("Đồng ý")
+                .setTitlePositive("Ok")
                 .onDismiss { (context as BaseActivity).isShowError = false }
                 .show(context)
     }

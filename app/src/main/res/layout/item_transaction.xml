@@ -13,7 +13,7 @@
         android:fontFamily="@font/text_semi_bold"
         android:textAllCaps="true"
         android:textColor="@color/color_B0B7C3"
-        android:textSize="@dimen/_8ssp"
+        android:textSize="@dimen/_9ssp"
         tools:text="Today" />
 
     <androidx.recyclerview.widget.RecyclerView

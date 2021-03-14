@@ -98,4 +98,14 @@ class ApplicationModule(private val application: AndroidApplication) {
     fun provideTransactionRepository(dataSource: TransactionRepository.Network): TransactionRepository =
         dataSource
 
+    @Provides
+    @Singleton
+    fun provideConfigRepository(dataSource: ConfigRepository.Network): ConfigRepository =
+        dataSource
+
+    @Provides
+    @Singleton
+    fun provideTopUpRepository(dataSource: TopUpRepository.Network): TopUpRepository =
+        dataSource
+
 }

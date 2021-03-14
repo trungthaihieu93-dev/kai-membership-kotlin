@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/lToolbar"
+        layout="@layout/layout_toolbar" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/text_regular"
+        android:paddingStart="@dimen/_16sdp"
+        android:paddingEnd="@dimen/_16sdp"
+        android:layout_below="@id/lToolbar"
+        android:text="@string/buy"
+        android:textColor="@color/color_DE000000"
+        android:textSize="@dimen/_26ssp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_38sdp"
+            android:src="@drawable/ic_nami_kai" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:fontFamily="@font/text_medium"
+            android:text="@string/title_buy"
+            android:textColor="@color/color_0A1F44"
+            android:textSize="@dimen/_16ssp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/text_medium"
+            android:gravity="center"
+            android:text="@string/content_buy"
+            android:textColor="@color/color_8A000000"
+            android:textSize="@dimen/_11ssp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/_16sdp">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btDownloadNami"
+            style="@style/OutlinedButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/download_nami_from_appStore" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btOpenNami"
+            style="@style/UnelevatedButtonEnableStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/open_nami" />
+    </RelativeLayout>
+</RelativeLayout>

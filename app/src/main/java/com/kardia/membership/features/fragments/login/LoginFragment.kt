@@ -10,12 +10,10 @@ import com.kardia.membership.core.extension.visible
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.data.entities.UserToken
 import com.kardia.membership.domain.entities.auth.LoginAuthEntity
-import com.kardia.membership.domain.entities.device.PasscodeDeviceEntity
 import com.kardia.membership.domain.entities.user.UserInfoEntity
 import com.kardia.membership.domain.usecases.auth.PostLoginAuthUseCase
 import com.kardia.membership.features.utils.AppConstants
 import com.kardia.membership.features.viewmodel.AuthViewModel
-import com.kardia.membership.features.viewmodel.DeviceViewModel
 import com.kardia.membership.features.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -33,7 +31,7 @@ class LoginFragment : BaseFragment() {
         }
 
         userViewModel = viewModel(viewModelFactory) {
-            observe(userInfoEntity, ::onReceiveUserInfoEntity)
+            observe(getUserInfoEntity, ::onReceiveUserInfoEntity)
         }
     }
 
@@ -99,6 +97,7 @@ class LoginFragment : BaseFragment() {
 
     private fun onReceiveUserInfoEntity(entity: UserInfoEntity?) {
         entity?.data?.let {
+            userInfoCache.put(it)
             mNavigator.showEnterPasscode(activity, it.user_info?.email)
         }
     }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.close
+import com.kardia.membership.core.extension.visible
 import com.kardia.membership.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_reset_passcode.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
@@ -21,7 +22,7 @@ class ResetPasscodeFragment : BaseFragment() {
     }
 
     override fun initViews() {
-
+        ivBack.visible()
     }
 
     override fun initEvents() {

@@ -43,6 +43,9 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
     lateinit var userTokenCache: UserTokenCache
 
     @Inject
+    lateinit var configCache: ConfigCache
+
+    @Inject
     internal lateinit var mNavigator: Navigator
 
     @Inject
@@ -63,8 +66,10 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogThemeBorder)
         appComponent.inject(this)
     }
+
 
     //    override fun getTheme(): Int {
 //        return R.style.Widget_AppTheme_BottomSheet
@@ -123,6 +128,9 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
             })
         }
         forceHide()
+        initViews()
+        initEvents()
+        loadData()
     }
 
     internal fun forceHide() =
@@ -173,7 +181,7 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
                                 (activity as BaseActivity).isShowNoInternet = false
                             }
                         }
-                            .onPositive { onReloadData() }.show(requireContext())
+                            .onPositive { reloadData() }.show(requireContext())
                     }
                 }
             }
@@ -210,7 +218,7 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
                             DialogAlert().setTitle("Sorry!")
                                 .setMessage("${failure.error}")
                                 .setTitlePositive("Retry")
-                                .onPositive { onReloadData() }
+                                .onPositive { reloadData() }
                                 .onDismiss { (activity as BaseActivity).isShowError = false }
                                 .show(requireContext())
                         } else {
@@ -252,9 +260,6 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
             .show(requireContext())
         hideProgress()
     }
-
-    open fun onReloadData() {}
-
 
     fun isNetworkAvailable(context: Context?): Boolean {
         if (context == null) return false
@@ -342,5 +347,10 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 .show(it)
         }
     }
+
+    protected abstract fun initViews()
+    protected abstract fun initEvents()
+    protected abstract fun loadData()
+    protected abstract fun reloadData()
 }
 

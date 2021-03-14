@@ -10,6 +10,7 @@ import com.kardia.membership.domain.entities.transaction.TransactionsEntity
 import com.kardia.membership.features.utils.DataConstants
 import com.kardia.membership.features.viewmodel.TransactionViewModel
 import kotlinx.android.synthetic.main.fragment_wallet.*
+
 import javax.inject.Inject
 
 class WalletFragment : BaseFragment() {
@@ -38,6 +39,13 @@ class WalletFragment : BaseFragment() {
     }
 
     override fun initEvents() {
+        fabReceive.setOnClickListener {
+            mNavigator.showReceive(activity)
+        }
+
+        fabBuy.setOnClickListener {
+            mNavigator.showBuy(activity)
+        }
     }
 
     override fun loadData() {
@@ -56,7 +64,7 @@ class WalletFragment : BaseFragment() {
 
     private fun setDataWallet(userInfo: UserInfo) {
         userInfo.kai_info?.let { kai ->
-            tvBalanceWallet.text = kai.wallet?.balance?.formatKAI()
+            tvBalanceWallet.text = kai.wallet?.balance?.formatThousand()
             tvAddressWallet.text = kai.wallet?.wallet_address
             tvHolderWallet.text = kai.first_name
         }

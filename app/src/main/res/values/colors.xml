@@ -33,11 +33,17 @@
     <color name="color_C42C15">#C42C15</color>
     <color name="color_B2FFFFFF">#B2FFFFFF</color>
     <color name="color_B0B7C3">#B0B7C3</color>
+    <color name="color_0A1F44">#0A1F44</color>
+    <color name="color_00FFFFFF">#00FFFFFF</color>
+    <color name="color_98A1B1">#98A1B1</color>
+
     //Button
     <color name="color_C9CED6">#C9CED6</color>
+    <color name="color_F7F8F9">#F7F8F9</color>
 
     //Background
     <color name="color_9A77FF">#9A77FF</color>
     <color name="color_background_app">#F7F8F9</color>
     <color name="color_E1E4E8">#E1E4E8</color>
+    <color name="color_F1F2F4">#F1F2F4</color>
 </resources>

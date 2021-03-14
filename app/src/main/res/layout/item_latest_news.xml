@@ -26,7 +26,7 @@
             android:lines="2"
             android:textColor="@color/color_DE000000"
             android:textSize="@dimen/_11ssp"
-            android:text="Lex Luger Can Write a Hit Rap Song in the Time It Takes to Read This" />
+            android:text="bu" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:layout_marginTop="@dimen/_6sdp"
             android:fontFamily="@font/text_medium"
             android:textColor="@color/color_8A000000"
-            android:textSize="@dimen/_8ssp"
+            android:textSize="@dimen/_9ssp"
             android:text="Wed, 10 Jun 2020" />
     </LinearLayout>
 </LinearLayout>

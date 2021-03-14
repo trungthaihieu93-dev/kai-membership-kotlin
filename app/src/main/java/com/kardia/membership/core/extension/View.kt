@@ -80,15 +80,14 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
     LayoutInflater.from(context).inflate(layoutRes, this, false)
 
 fun ImageView.loadFromUrl(
-    url: String?,
-    isAnimation: Boolean = true,
-    isPlaceHolder: Boolean = false
+    url: String?
 ) {
     if (url == null) return
-    val requestBuilder = Glide.with(this.context.applicationContext).load(url).centerCrop()
+    val options: RequestOptions = RequestOptions()
         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-    if (isAnimation) requestBuilder.transition(DrawableTransitionOptions.withCrossFade())
-//    if (isPlaceHolder) requestBuilder.placeholder(R.drawable.place_holder) else requestBuilder.placeholder(null)
+        .centerCrop()
+        .dontAnimate()
+    val requestBuilder = Glide.with(this.context.applicationContext).load(url).apply(options)
     requestBuilder.into(this)
 }
 

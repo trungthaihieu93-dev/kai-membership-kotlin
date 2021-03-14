@@ -11,15 +11,18 @@ import com.kardia.membership.R
 import com.kardia.membership.core.extension.observe
 import com.kardia.membership.core.extension.viewModel
 import com.kardia.membership.core.platform.BaseFragment
+import com.kardia.membership.data.cache.ConfigCache
+import com.kardia.membership.domain.entities.config.ConfigEntity
 import com.kardia.membership.domain.entities.device.PasscodeDeviceEntity
 import com.kardia.membership.features.utils.AppConstants
+import com.kardia.membership.features.viewmodel.ConfigViewModel
 import com.kardia.membership.features.viewmodel.DeviceViewModel
 import java.util.*
 
 
 class SplashFragment : BaseFragment() {
     private lateinit var deviceViewModel: DeviceViewModel
-
+    private lateinit var configViewModel: ConfigViewModel
     override fun layoutId() = R.layout.fragment_splash
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +30,11 @@ class SplashFragment : BaseFragment() {
         appComponent.inject(this)
         deviceViewModel = viewModel(viewModelFactory) {
             observe(passcodeDeviceEntity, ::onReceivePasscodeDeviceEntity)
+            observe(failureData, ::handleFailure)
+        }
+
+        configViewModel = viewModel(viewModelFactory) {
+            observe(configEntity, ::onReceiveConfigEntity)
             observe(failureData, ::handleFailure)
         }
     }
@@ -61,6 +69,7 @@ class SplashFragment : BaseFragment() {
             val deviceId: String = androidId_UUID.toString()
             deviceViewModel.getPasscodeByDevice(AppConstants.DEVICE_ID_TEST)
         }
+        configViewModel.getConfig()
     }
 
     override fun reloadData() {
@@ -100,6 +109,12 @@ class SplashFragment : BaseFragment() {
                 mNavigator.showSelectAccount(activity,it)
             }
         }
+    }
 
+    private fun onReceiveConfigEntity(entity: ConfigEntity?) {
+        entity?.let{
+            configCache.put(it)
+        }
+        finish()
     }
 }

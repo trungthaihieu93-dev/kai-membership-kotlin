@@ -103,4 +103,14 @@ dependencies {
 
     //Paris
     implementation 'com.airbnb.android:paris:1.7.2'
+
+    //FAB
+    implementation 'com.github.clans:fab:1.6.4'
+
+    //Scan barcode, qr code
+    implementation('com.journeyapps:zxing-android-embedded:4.1.0') { transitive = false }
+    implementation 'com.google.zxing:core:3.3.3'
+
+    //image picker
+    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
 }

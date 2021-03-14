@@ -3,6 +3,7 @@ package com.kardia.membership.features.fragments.forgot_password
 import android.os.Bundle
 import android.view.View
 import com.kardia.membership.R
+import com.kardia.membership.core.extension.visible
 import com.kardia.membership.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
@@ -20,7 +21,9 @@ class ForgotPasswordFragment : BaseFragment() {
     }
 
     override fun initViews() {
+        ivBack.visible()
 
+        flPaddingTop.visible()
     }
 
     override fun initEvents() {
