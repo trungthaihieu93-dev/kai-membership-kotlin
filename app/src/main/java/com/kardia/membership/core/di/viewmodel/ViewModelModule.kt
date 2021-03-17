@@ -53,4 +53,8 @@ abstract class ViewModelModule {
     @ViewModelKey(TopUpViewModel::class)
     abstract fun bindsTopUpViewModel(viewModel: TopUpViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(QuestViewModel::class)
+    abstract fun bindsQuestViewModel(viewModel: QuestViewModel): ViewModel
 }

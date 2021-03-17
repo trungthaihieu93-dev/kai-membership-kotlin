@@ -15,4 +15,12 @@ object AppConstants {
 
     const val UNIT_PRICE = "VND"
     const val UNIT_KAI = "KAI"
+
+    const val KEY_QUEST_HIGHEST_SCORES = "HIGHEST_SCORES"
+    const val KEY_QUEST_THIRTY_MINUTES = "THIRTY_MINUTES"
+    const val KEY_QUEST_INVITE_FRIEND = "INVITE_FRIEND"
+    const val KEY_QUEST_SIGN_IN = "SIGN_IN"
+
+    const val TYPE_QUEST_DAILY = "DAILY"
+    const val TYPE_QUEST_MONTH = "MONTH"
 }

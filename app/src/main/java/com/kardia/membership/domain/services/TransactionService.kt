@@ -5,7 +5,9 @@ import com.kardia.membership.domain.entities.transaction.TransactionsEntity
 import retrofit2.Call
 import retrofit2.Retrofit
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class TransactionService
 @Inject constructor(retrofit: Retrofit) : TransactionAPI {
     private val transactionAPI by lazy {

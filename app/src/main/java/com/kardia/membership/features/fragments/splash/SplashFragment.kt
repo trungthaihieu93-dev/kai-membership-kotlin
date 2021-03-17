@@ -48,7 +48,7 @@ class SplashFragment : BaseFragment() {
     }
 
     override fun initViews() {
-
+        resetDataUser()
     }
 
     override fun initEvents() {

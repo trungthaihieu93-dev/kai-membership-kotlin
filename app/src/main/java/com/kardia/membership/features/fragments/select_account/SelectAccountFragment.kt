@@ -44,6 +44,7 @@ class SelectAccountFragment : BaseFragment() {
     }
 
     override fun initViews() {
+        resetDataUser()
         rvAccount.adapter = selectAccountAdapter.apply {
             onItemClickListener = object : OnItemClickListener {
                 override fun onItemClick(item: Any?, position: Int) {

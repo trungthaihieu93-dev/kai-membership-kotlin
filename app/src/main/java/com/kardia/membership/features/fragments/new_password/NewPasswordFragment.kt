@@ -5,15 +5,20 @@ import android.view.View
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseFragment
+import com.kardia.membership.domain.entities.auth.ResetPasswordConfirmEntity
+import com.kardia.membership.domain.entities.auth.ResetPasswordEntity
 import com.kardia.membership.domain.entities.user.ChangePasswordEntity
+import com.kardia.membership.domain.usecases.auth.PostResetPasswordConfirmUseCase
 import com.kardia.membership.domain.usecases.user.PostChangePasswordUseCase
 import com.kardia.membership.features.fragments.new_passcode.ChangePasswordSuccessBottomSheet
+import com.kardia.membership.features.viewmodel.AuthViewModel
 import com.kardia.membership.features.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_new_password.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class NewPasswordFragment : BaseFragment() {
     private lateinit var userViewModel: UserViewModel
+    private lateinit var authViewModel: AuthViewModel
 
     private var fromChangePassword: Boolean = false
 
@@ -28,6 +33,10 @@ class NewPasswordFragment : BaseFragment() {
         appComponent.inject(this)
         userViewModel = viewModel(viewModelFactory) {
             observe(changePasswordEntity, ::onReceiveChangePasswordEntity)
+            observe(failureData, ::handleFailure)
+        }
+        authViewModel = viewModel(viewModelFactory) {
+            observe(resetPasswordConfirmEntity, ::onReceiveResetPasswordConfirmEntity)
             observe(failureData, ::handleFailure)
         }
     }
@@ -58,8 +67,38 @@ class NewPasswordFragment : BaseFragment() {
 
         btSetNewPassword.setOnClickListener {
             if (!fromChangePassword) {
-                mNavigator.showNewPasswordSuccess(activity)
-                finish()
+                tvMessageNewPasswordEmpty.gone()
+                tvMessageConfirmPasswordEmpty.gone()
+                tvMessageTokenEmpty.gone()
+                val newPassword = tietNewPassword.text.toString().trim()
+                val confirmPassword = tietConfirmPassword.text.toString().trim()
+                val token = tietToken.text.toString().trim()
+                if (newPassword.isEmpty()) {
+                    tvMessageNewPasswordEmpty.visible()
+                }
+                if (confirmPassword.isEmpty()) {
+                    tvMessageConfirmPasswordEmpty.visible()
+                    tvMessageConfirmPasswordEmpty.text = getString(R.string.confirm_password_empty)
+                }
+                if (token.isEmpty()) {
+                    tvMessageTokenEmpty.visible()
+                }
+                if (token.isNotEmpty() && newPassword.isNotEmpty() && confirmPassword.isNotEmpty()) {
+                    if (newPassword == confirmPassword) {
+                        showProgress()
+                        authViewModel.resetPasswordConfirm(
+                            PostResetPasswordConfirmUseCase.Params(
+                                token,
+                                newPassword
+                            )
+                        )
+                    } else {
+                        tvMessageConfirmPasswordEmpty.visible()
+                        tvMessageConfirmPasswordEmpty.text =
+                            getString(R.string.confirm_password_not_correct)
+                    }
+                }
+
             } else {
                 tvMessageOldPasswordEmpty.gone()
                 tvMessageNewPasswordEmpty.gone()
@@ -110,7 +149,12 @@ class NewPasswordFragment : BaseFragment() {
             override fun onDismiss() {
             }
         }
-        mNavigator.showChangePasswordSuccess(activity,callback)
+        mNavigator.showChangePasswordSuccess(activity, callback)
     }
 
+    private fun onReceiveResetPasswordConfirmEntity(entity: ResetPasswordConfirmEntity?) {
+        hideProgress()
+        mNavigator.showNewPasswordSuccess(activity)
+        finish()
+    }
 }

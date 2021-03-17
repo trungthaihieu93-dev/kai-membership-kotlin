@@ -40,7 +40,7 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun initViews() {
-
+        resetDataUser()
     }
 
     override fun initEvents() {

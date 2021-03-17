@@ -1,5 +1,8 @@
 package com.kardia.membership.core.extension
 
+import java.text.NumberFormat
+import java.util.*
+
 fun Int.minToSecond(): Int = this * 60
 
 fun Int.displayDayOfWeek(): String{
@@ -12,4 +15,10 @@ fun Int.displayDayOfWeek(): String{
         6 -> "Thứ 6"
         else -> "Thứ 7"
     }
+}
+
+fun Int.formatThousand(): String {
+    val nf = NumberFormat.getInstance(Locale.US)
+    nf.maximumFractionDigits = 4
+    return nf.format(this.toFloat())
 }

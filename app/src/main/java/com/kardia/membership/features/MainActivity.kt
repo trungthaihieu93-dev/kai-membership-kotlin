@@ -2,8 +2,11 @@ package com.kardia.membership.features
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.*
@@ -37,10 +40,9 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             observe(getUserInfoEntity, ::onReceiveUserInfoEntity)
         }
         setContentView(R.layout.activity_main)
-        changeColorStatusBar()
 
         bottom_navigation.setOnNavigationItemSelectedListener(this)
-
+        changeColorStatusBarMain(true)
         userViewModel.getUserInfo()
         tvHeader.text = getString(R.string.text_navigation_news)
 
@@ -80,6 +82,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 ) {
                     BaseFragment.setFragment(supportFragmentManager, NewsFragment())
                     tvHeader.text = getString(R.string.text_navigation_news)
+                    tvHeader.setTextColor(getColor(R.color.color_DE000000))
+                    changeColorStatusBarMain(true)
                 }
                 return true
             }
@@ -91,6 +95,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 ) {
                     BaseFragment.setFragment(supportFragmentManager, MissionFragment())
                     tvHeader.text = getString(R.string.text_navigation_mission)
+                    tvHeader.setTextColor(getColor(R.color.white))
+                    changeColorStatusBarMain(false)
                 }
                 return true
             }
@@ -102,6 +108,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 ) {
                     BaseFragment.setFragment(supportFragmentManager, GamesFragment())
                     tvHeader.text = getString(R.string.text_navigation_games)
+                    tvHeader.setTextColor(getColor(R.color.color_DE000000))
+                    changeColorStatusBarMain(true)
                 }
                 return true
             }
@@ -113,6 +121,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 ) {
                     BaseFragment.setFragment(supportFragmentManager, WalletFragment())
                     tvHeader.text = getString(R.string.text_navigation_wallet)
+                    tvHeader.setTextColor(getColor(R.color.color_DE000000))
+                    changeColorStatusBarMain(true)
                 }
                 return true
             }
@@ -124,6 +134,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 ) {
                     BaseFragment.setFragment(supportFragmentManager, UtilitiesFragment())
                     tvHeader.text = getString(R.string.text_navigation_utilities)
+                    tvHeader.setTextColor(getColor(R.color.color_DE000000))
+                    changeColorStatusBarMain(true)
                 }
                 return true
             }
@@ -135,6 +147,20 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         entity?.data?.let {
             userInfoCache.put(it)
             loadData()
+        }
+    }
+
+    private fun changeColorStatusBarMain(isChange: Boolean) {
+        if (isChange) {
+            val decor = window.decorView
+            decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            window.statusBarColor = ContextCompat.getColor(this, R.color.color_background_app)
+            //                StatusBarUtil.setColorNoTranslucent(this, getResources().getColor(R.color.white));
+        } else {
+            val decor = window.decorView
+            decor.systemUiVisibility = 0
+            window.statusBarColor = ContextCompat.getColor(this, R.color.color_0A1F44)
+            //                StatusBarUtil.setColorNoTranslucent(this, getResources().getColor(R.color.colorPrimary));
         }
     }
 }

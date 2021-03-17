@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_0A1F44">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="H,414:365"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivAvatarProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_75sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:src="@drawable/ic_misssion" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="@dimen/_122sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_90sdp"
+                android:fontFamily="@font/text_medium"
+                android:text="@string/content_mission"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp" />
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_minus19sdp"
+        android:background="@drawable/background_tab_mission"
+       >
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tlMission"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_28sdp"
+            app:tabBackground="@drawable/background_tab_item_mission"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="auto"
+            android:background="@android:color/transparent"
+            app:tabTextAppearance="@style/CustomTextTabItemAppearance"
+            android:layout_margin="@dimen/_4sdp"/>
+
+    </FrameLayout>
+
+    <com.kardia.membership.features.utils.NonSwipeViewPager
+        android:id="@+id/vpMission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

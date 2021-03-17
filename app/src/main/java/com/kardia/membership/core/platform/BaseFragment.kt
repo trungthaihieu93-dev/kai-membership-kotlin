@@ -38,6 +38,7 @@ import com.kardia.membership.features.utils.AppLog
 import com.google.android.material.snackbar.Snackbar
 import com.kardia.membership.features.dialog.NoInternetDialog
 import com.kardia.membership.features.utils.CommonUtils
+import com.kardia.membership.features.utils.DataConstants
 import java.io.File
 import javax.inject.Inject
 
@@ -547,5 +548,12 @@ abstract class BaseFragment : Fragment() {
         val fileSizeInBytes: Long = file.length()
         val fileSizeInKB = fileSizeInBytes / 1024
         return fileSizeInKB / 1024
+    }
+
+    fun resetDataUser(){
+        DataConstants.TRANSACTION_ENTITY = null
+        DataConstants.QUEST_ENTITY = null
+        userInfoCache.clear()
+        userTokenCache.clear()
     }
 }

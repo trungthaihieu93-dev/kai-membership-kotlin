@@ -15,6 +15,8 @@ import com.kardia.membership.features.fragments.forgot_password.ForgotPasswordFr
 import com.kardia.membership.features.fragments.introduce.IntroduceFragment
 import com.kardia.membership.features.fragments.introduce.IntroduceManagementFragment
 import com.kardia.membership.features.fragments.login.LoginFragment
+import com.kardia.membership.features.fragments.mission.MissionFragment
+import com.kardia.membership.features.fragments.mission.SubMissionFragment
 import com.kardia.membership.features.fragments.my_profile.MyProfileFragment
 import com.kardia.membership.features.fragments.new_passcode.ChangePasswordSuccessBottomSheet
 import com.kardia.membership.features.fragments.new_passcode.NewPasscodeFragment
@@ -76,4 +78,6 @@ interface ApplicationComponent {
     fun inject(profileFragment: ProfileFragment)
     fun inject(myProfileFragment: MyProfileFragment)
     fun inject(changePasswordSuccessBottomSheet: ChangePasswordSuccessBottomSheet)
+    fun inject(missionFragment: MissionFragment)
+    fun inject(subMissionFragment: SubMissionFragment)
 }

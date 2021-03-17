@@ -108,4 +108,10 @@ class ApplicationModule(private val application: AndroidApplication) {
     fun provideTopUpRepository(dataSource: TopUpRepository.Network): TopUpRepository =
         dataSource
 
+    @Provides
+    @Singleton
+    fun provideQuestRepository(dataSource: QuestRepository.Network): QuestRepository =
+        dataSource
+
+
 }
