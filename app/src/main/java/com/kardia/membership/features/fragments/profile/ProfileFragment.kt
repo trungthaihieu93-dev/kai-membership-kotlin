@@ -63,11 +63,15 @@ class ProfileFragment : BaseFragment() {
         }
 
         mcvMyRewards.setOnClickListener {
-//            mNavigator.showMyProfile(activity)
+            mNavigator.showMyReward(activity)
         }
 
         mcvChangePassword.setOnClickListener {
-            mNavigator.showEnterPasscode(activity, isFromChangePassword = true)
+            mNavigator.showEnterPasscode(
+                activity,
+                userInfoCache.get()?.kai_info?.email,
+                isFromChangePassword = true
+            )
         }
 
         mcvSwitchAccount.setOnClickListener {
@@ -116,7 +120,8 @@ class ProfileFragment : BaseFragment() {
 
                     //You can also get File Path from intent
                     val filePath = ImagePicker.getFilePath(data)
-                    val fileRequest = file?.asRequestBody(getMimeType(filePath)?.toMediaTypeOrNull())
+                    val fileRequest =
+                        file?.asRequestBody(getMimeType(filePath)?.toMediaTypeOrNull())
                     fileRequest?.let {
                         val fileToUpload: MultipartBody.Part =
                             MultipartBody.Part.createFormData("avatar", file.name, fileRequest)

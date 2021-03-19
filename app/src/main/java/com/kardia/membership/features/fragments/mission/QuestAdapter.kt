@@ -7,18 +7,15 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kardia.membership.R
-import com.kardia.membership.core.extension.formatThousand
 import com.kardia.membership.core.extension.gone
 import com.kardia.membership.core.extension.visible
 import com.kardia.membership.data.entities.Quest
-import com.kardia.membership.features.fragments.wallet.TransactionItemAdapter
-import com.kardia.membership.features.fragments.mission.MissionAdapter.MissionViewHolder
-import com.kardia.membership.features.utils.AppConstants
-import kotlinx.android.synthetic.main.item_mission.view.*
+import com.kardia.membership.features.fragments.mission.QuestAdapter.MissionViewHolder
+import kotlinx.android.synthetic.main.item_quest.view.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class MissionAdapter
+class QuestAdapter
 @Inject constructor(val context: Context) :
     RecyclerView.Adapter<MissionViewHolder>() {
 
@@ -95,7 +92,7 @@ class MissionAdapter
     ): MissionViewHolder {
         return MissionViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_mission, parent, false)
+                .inflate(R.layout.item_quest, parent, false)
         )
     }
 

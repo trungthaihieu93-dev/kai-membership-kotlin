@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -53,6 +54,13 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         ivAvatarMain.setOnClickListener {
             mNavigator.showProfile(this)
         }
+
+        val tab = intent.getIntExtra(TAB, 0)
+        if (tab != 0) {
+            Handler().postDelayed({
+                selectNavigation(tab)
+            }, 500)
+        }
     }
 
     override fun onResume() {
@@ -62,9 +70,19 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
     private fun loadData(){
         ivAvatarMain.gone()
-        userInfoCache.get()?.user_info?.avatar?.let{
-            ivAvatarMain.visible()
-            ivAvatarMain.loadFromUrlRounded(it,8f)
+        userInfoCache.get()?.user_info?.let{user->
+           user.avatar?.let{
+               ivAvatarMain.visible()
+               ivAvatarMain.loadFromUrlRounded(it,8f)
+           }
+            user.spinturn?.let{
+                if(it>0){
+                    ivSpinWallet.setImageResource(R.drawable.ic_spin_active_main)
+                }
+                else{
+                    ivSpinWallet.setImageResource(R.drawable.ic_spin_main)
+                }
+            }
         }
     }
     fun selectNavigation(menuID: Int) {

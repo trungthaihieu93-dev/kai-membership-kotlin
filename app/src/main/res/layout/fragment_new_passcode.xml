@@ -25,6 +25,7 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:fontFamily="@font/text_medium"
             android:text="@string/content_new_passcode"
+            android:lineSpacingExtra="@dimen/_6sdp"
             android:textColor="@color/color_8A000000"
             android:textSize="@dimen/_11ssp" />
 
@@ -66,6 +67,7 @@
         android:fontFamily="@font/text_medium"
         android:gravity="center"
         android:text="@string/content_term_and_policy"
+        android:lineSpacingExtra="@dimen/_6sdp"
         android:textColor="@color/color_8A000000"
         android:textSize="@dimen/_11ssp" />
 

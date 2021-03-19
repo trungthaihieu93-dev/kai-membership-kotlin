@@ -33,6 +33,7 @@
         android:gravity="center"
         android:text="@string/content_top_up_success"
         android:textColor="@color/color_8A000000"
+        android:lineSpacingExtra="@dimen/_6sdp"
         android:textSize="@dimen/_11ssp" />
 
     <com.google.android.material.button.MaterialButton

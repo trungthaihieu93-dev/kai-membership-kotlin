@@ -1,10 +1,7 @@
 package com.kardia.membership.domain.services
 
 import com.kardia.membership.domain.api.UserAPI
-import com.kardia.membership.domain.entities.user.ChangePasswordEntity
-import com.kardia.membership.domain.entities.user.UpdateAvatarEntity
-import com.kardia.membership.domain.entities.user.UpdateUserEntity
-import com.kardia.membership.domain.entities.user.UserInfoEntity
+import com.kardia.membership.domain.entities.user.*
 import com.kardia.membership.domain.usecases.user.PostChangePasswordUseCase
 import com.kardia.membership.domain.usecases.user.PostUpdateInfoUseCase
 import okhttp3.MultipartBody
@@ -33,5 +30,9 @@ class UserService @Inject constructor(retrofit: Retrofit) : UserAPI {
 
     override fun updateAvatar(file: MultipartBody.Part): Call<UpdateAvatarEntity> {
         return userAPI.updateAvatar(file)
+    }
+
+    override fun getHistory(): Call<HistoryEntity> {
+        return userAPI.getHistory()
     }
 }

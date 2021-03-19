@@ -1,9 +1,6 @@
 package com.kardia.membership.domain.api
 
-import com.kardia.membership.domain.entities.user.ChangePasswordEntity
-import com.kardia.membership.domain.entities.user.UpdateAvatarEntity
-import com.kardia.membership.domain.entities.user.UpdateUserEntity
-import com.kardia.membership.domain.entities.user.UserInfoEntity
+import com.kardia.membership.domain.entities.user.*
 import com.kardia.membership.domain.usecases.user.PostChangePasswordUseCase
 import com.kardia.membership.domain.usecases.user.PostUpdateInfoUseCase
 import okhttp3.MultipartBody
@@ -15,6 +12,7 @@ internal interface UserAPI {
         private const val INFO = "v1/users/info"
         private const val CHANGE_PASSWORD = "v1/users/change-password"
         private const val UPDATE_AVATAR = "v1/users/avatar"
+        private const val HISTORY = "v1/users/history"
     }
 
     @GET(INFO)
@@ -29,4 +27,7 @@ internal interface UserAPI {
     @Multipart
     @POST(UPDATE_AVATAR)
     fun updateAvatar(@Part file: MultipartBody.Part): Call<UpdateAvatarEntity>
+
+    @GET(HISTORY)
+    fun getHistory(): Call<HistoryEntity>
 }

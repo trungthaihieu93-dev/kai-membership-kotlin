@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_16sdp"
         app:cardCornerRadius="12dp"
-        android:layout_marginTop="@dimen/_4sdp"
         app:cardElevation="@dimen/_5sdp">
 
         <LinearLayout
@@ -43,7 +43,9 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/text_medium"
+                    android:lineSpacingExtra="@dimen/_6sdp"
                     android:text="@string/content_mobile_topup"
                     android:textColor="@color/color_8A000000"
                     android:textSize="@dimen/_9ssp" />
@@ -53,9 +55,9 @@
                     style="@style/UnelevatedButtonDisableStyleUtilities"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_24sdp"
                     android:clickable="false"
                     android:enabled="false"
-                    android:layout_marginTop="@dimen/_24sdp"
                     android:text="@string/topup_now" />
             </LinearLayout>
 
@@ -73,8 +75,8 @@
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_24sdp"
         android:layout_marginEnd="@dimen/_16sdp"
-        app:cardCornerRadius="12dp"
         android:alpha="0.5"
+        app:cardCornerRadius="12dp"
         app:cardElevation="@dimen/_5sdp">
 
         <LinearLayout
@@ -104,7 +106,9 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/text_medium"
+                    android:lineSpacingExtra="@dimen/_6sdp"
                     android:text="@string/content_get_vouchers"
                     android:textColor="@color/color_8A000000"
                     android:textSize="@dimen/_9ssp" />

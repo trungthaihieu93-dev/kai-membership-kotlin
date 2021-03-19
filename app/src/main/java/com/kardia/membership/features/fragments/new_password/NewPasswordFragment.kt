@@ -2,6 +2,7 @@ package com.kardia.membership.features.fragments.new_password
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseFragment
@@ -51,13 +52,13 @@ class NewPasswordFragment : BaseFragment() {
     override fun initViews() {
         ivBack.visible()
         flPaddingTop.visible()
-        llToken.gone()
-        llOldPassword.gone()
-        if (!fromChangePassword) {
-            llToken.visible()
-        } else {
-            llOldPassword.visible()
-        }
+//        llToken.gone()
+//        llOldPassword.gone()
+//        if (!fromChangePassword) {
+//            llToken.visible()
+//        } else {
+//            llOldPassword.visible()
+//        }
     }
 
     override fun initEvents() {
@@ -66,77 +67,78 @@ class NewPasswordFragment : BaseFragment() {
         }
 
         btSetNewPassword.setOnClickListener {
-            if (!fromChangePassword) {
-                tvMessageNewPasswordEmpty.gone()
-                tvMessageConfirmPasswordEmpty.gone()
-                tvMessageTokenEmpty.gone()
-                val newPassword = tietNewPassword.text.toString().trim()
-                val confirmPassword = tietConfirmPassword.text.toString().trim()
-                val token = tietToken.text.toString().trim()
-                if (newPassword.isEmpty()) {
-                    tvMessageNewPasswordEmpty.visible()
-                }
-                if (confirmPassword.isEmpty()) {
-                    tvMessageConfirmPasswordEmpty.visible()
-                    tvMessageConfirmPasswordEmpty.text = getString(R.string.confirm_password_empty)
-                }
-                if (token.isEmpty()) {
-                    tvMessageTokenEmpty.visible()
-                }
-                if (token.isNotEmpty() && newPassword.isNotEmpty() && confirmPassword.isNotEmpty()) {
-                    if (newPassword == confirmPassword) {
-                        showProgress()
-                        authViewModel.resetPasswordConfirm(
-                            PostResetPasswordConfirmUseCase.Params(
-                                token,
-                                newPassword
-                            )
+//            if (!fromChangePassword) {
+            tvMessageNewPasswordEmpty.gone()
+            tvMessageConfirmPasswordEmpty.gone()
+            tvMessageTokenEmpty.gone()
+            val newPassword = tietNewPassword.text.toString().trim()
+            val confirmPassword = tietConfirmPassword.text.toString().trim()
+            val token = tietToken.text.toString().trim()
+            if (newPassword.isEmpty()) {
+                tvMessageNewPasswordEmpty.visible()
+            }
+            if (confirmPassword.isEmpty()) {
+                tvMessageConfirmPasswordEmpty.visible()
+                tvMessageConfirmPasswordEmpty.text = getString(R.string.confirm_password_empty)
+            }
+            if (token.isEmpty()) {
+                tvMessageTokenEmpty.visible()
+            }
+            if (token.isNotEmpty() && newPassword.isNotEmpty() && confirmPassword.isNotEmpty()) {
+                if (newPassword == confirmPassword) {
+                    showProgress()
+                    authViewModel.resetPasswordConfirm(
+                        PostResetPasswordConfirmUseCase.Params(
+                            token,
+                            newPassword
                         )
-                    } else {
-                        tvMessageConfirmPasswordEmpty.visible()
-                        tvMessageConfirmPasswordEmpty.text =
-                            getString(R.string.confirm_password_not_correct)
-                    }
-                }
-
-            } else {
-                tvMessageOldPasswordEmpty.gone()
-                tvMessageNewPasswordEmpty.gone()
-                tvMessageConfirmPasswordEmpty.gone()
-
-                val oldPassword = tietOldPassword.text.toString().trim()
-                val newPassword = tietNewPassword.text.toString().trim()
-                val confirmPassword = tietConfirmPassword.text.toString().trim()
-                if (oldPassword.isEmpty()) {
-                    tvMessageOldPasswordEmpty.visible()
-                }
-                if (newPassword.isEmpty()) {
-                    tvMessageNewPasswordEmpty.visible()
-                }
-                if (confirmPassword.isEmpty()) {
+                    )
+                } else {
                     tvMessageConfirmPasswordEmpty.visible()
-                    tvMessageConfirmPasswordEmpty.text = getString(R.string.confirm_password_empty)
-                }
-                if (oldPassword.isNotEmpty() && newPassword.isNotEmpty() && confirmPassword.isNotEmpty()) {
-                    if (newPassword == confirmPassword) {
-                        showProgress()
-                        userViewModel.changePassword(
-                            PostChangePasswordUseCase.Params(
-                                oldPassword,
-                                newPassword
-                            )
-                        )
-                    } else {
-                        tvMessageConfirmPasswordEmpty.visible()
-                        tvMessageConfirmPasswordEmpty.text =
-                            getString(R.string.confirm_password_not_correct)
-                    }
+                    tvMessageConfirmPasswordEmpty.text =
+                        getString(R.string.confirm_password_not_correct)
                 }
             }
+
+//            } else {
+//                tvMessageOldPasswordEmpty.gone()
+//                tvMessageNewPasswordEmpty.gone()
+//                tvMessageConfirmPasswordEmpty.gone()
+//
+//                val oldPassword = tietOldPassword.text.toString().trim()
+//                val newPassword = tietNewPassword.text.toString().trim()
+//                val confirmPassword = tietConfirmPassword.text.toString().trim()
+//                if (oldPassword.isEmpty()) {
+//                    tvMessageOldPasswordEmpty.visible()
+//                }
+//                if (newPassword.isEmpty()) {
+//                    tvMessageNewPasswordEmpty.visible()
+//                }
+//                if (confirmPassword.isEmpty()) {
+//                    tvMessageConfirmPasswordEmpty.visible()
+//                    tvMessageConfirmPasswordEmpty.text = getString(R.string.confirm_password_empty)
+//                }
+//                if (oldPassword.isNotEmpty() && newPassword.isNotEmpty() && confirmPassword.isNotEmpty()) {
+//                    if (newPassword == confirmPassword) {
+//                        showProgress()
+//                        userViewModel.changePassword(
+//                            PostChangePasswordUseCase.Params(
+//                                oldPassword,
+//                                newPassword
+//                            )
+//                        )
+//                    } else {
+//                        tvMessageConfirmPasswordEmpty.visible()
+//                        tvMessageConfirmPasswordEmpty.text =
+//                            getString(R.string.confirm_password_not_correct)
+//                    }
+//                }
+//            }
         }
     }
 
     override fun loadData() {
+        Toast.makeText(appContext,getString(R.string.content_forgot_password),Toast.LENGTH_LONG).show()
     }
 
     override fun reloadData() {
@@ -154,7 +156,16 @@ class NewPasswordFragment : BaseFragment() {
 
     private fun onReceiveResetPasswordConfirmEntity(entity: ResetPasswordConfirmEntity?) {
         hideProgress()
-        mNavigator.showNewPasswordSuccess(activity)
-        finish()
+        if (fromChangePassword) {
+            val callback = object : ChangePasswordSuccessBottomSheet.CallBack {
+                override fun onDismiss() {
+                    mNavigator.showLoginNew(activity)
+                }
+            }
+            mNavigator.showChangePasswordSuccess(activity, callback)
+        } else {
+            mNavigator.showNewPasswordSuccess(activity)
+            finish()
+        }
     }
 }

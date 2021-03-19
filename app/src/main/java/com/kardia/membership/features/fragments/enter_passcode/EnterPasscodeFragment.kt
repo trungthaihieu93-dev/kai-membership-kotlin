@@ -1,24 +1,34 @@
 package com.kardia.membership.features.fragments.enter_passcode
 
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableStringBuilder
+import android.text.TextPaint
 import android.text.TextWatcher
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.ContextMenu
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.text.color
+import androidx.core.text.set
 import com.airbnb.paris.Paris
 import com.google.android.material.button.MaterialButton
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.data.entities.UserToken
+import com.kardia.membership.domain.entities.auth.ResetPasswordEntity
 import com.kardia.membership.domain.entities.device.PasscodeDeviceEntity
 import com.kardia.membership.domain.entities.passcode.CheckPasscodeEntity
 import com.kardia.membership.domain.entities.passcode.LoginPasscodeEntity
+import com.kardia.membership.domain.usecases.auth.PostResetPasswordUseCase
 import com.kardia.membership.domain.usecases.passcode.PostCheckPasscodeUseCase
 import com.kardia.membership.domain.usecases.passcode.PostLoginPasscodeUseCase
 import com.kardia.membership.features.utils.AppConstants
+import com.kardia.membership.features.viewmodel.AuthViewModel
 import com.kardia.membership.features.viewmodel.DeviceViewModel
 import com.kardia.membership.features.viewmodel.PasscodeViewModel
 import kotlinx.android.synthetic.main.fragment_enter_passcode.*
@@ -27,6 +37,7 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class EnterPasscodeFragment : BaseFragment() {
     private lateinit var passcodeViewModel: PasscodeViewModel
+    private lateinit var authViewModel: AuthViewModel
 
     private var email: String? = null
     private var otp: String? = null
@@ -47,6 +58,11 @@ class EnterPasscodeFragment : BaseFragment() {
             observe(checkEntity, ::onReceiveCheckPasscodeEntity)
             observe(failureData, ::handleFailure)
         }
+
+        authViewModel = viewModel(viewModelFactory) {
+            observe(resetPasswordEntity, ::onReceiveResetPasswordEntity)
+            observe(failureData, ::handleFailure)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,12 +81,31 @@ class EnterPasscodeFragment : BaseFragment() {
         } else {
             flPaddingTop.visible()
         }
+
+        val myCustomizedString = SpannableStringBuilder()
+            .append(getString(R.string.content_forgot_code))
+            .append(" ")
+            .color(getColor(R.color.color_94A2B2)) {
+                append(getString(R.string.click_here))
+            }
+        myCustomizedString[getString(R.string.content_forgot_code).length + 1 until getString(
+            R.string.content_forgot_code
+        ).length + 1 + getString(R.string.click_here).length + 1] =
+            object : ClickableSpan() {
+                override fun onClick(view: View) {
+                    mNavigator.showResetPasscode(activity, email)
+                }
+
+                override fun updateDrawState(ds: TextPaint) { // override updateDrawState
+                    ds.isUnderlineText = false // set to false to remove underline
+                }
+            }
+        tvResetPasscode.highlightColor = Color.TRANSPARENT;
+        tvResetPasscode.movementMethod = LinkMovementMethod()
+        tvResetPasscode.text = myCustomizedString
     }
 
     override fun initEvents() {
-        tvResetPasscode.setOnClickListener {
-            mNavigator.showResetPasscode(activity)
-        }
 
         ivBack.setOnClickListener {
             close()
@@ -156,7 +191,15 @@ class EnterPasscodeFragment : BaseFragment() {
 
     private fun onReceiveCheckPasscodeEntity(entity: CheckPasscodeEntity?) {
         hideProgress()
+        email?.let {
+            showProgress()
+            authViewModel.resetPassword(PostResetPasswordUseCase.Params(it))
+        }
+    }
+
+    private fun onReceiveResetPasswordEntity(entity: ResetPasswordEntity?) {
         ovPasscode.setText("")
+        forceHide()
         mNavigator.showNewPassword(activity, true)
     }
 }

@@ -33,5 +33,7 @@ data class User(
     val refreshToken: String?,
     val is_captcha: Boolean?,
     val is_verified: Boolean?,
-    val refarral_appflyer_link: String?
+    val last_region_login: String?,
+    val refarral_appflyer_link: String?,
+    val birthday_time: Long?
 ) : Parcelable

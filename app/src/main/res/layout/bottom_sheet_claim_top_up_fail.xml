@@ -32,6 +32,7 @@
         android:fontFamily="@font/text_medium"
         android:gravity="center"
         android:text="@string/content_top_up_fail"
+        android:lineSpacingExtra="@dimen/_6sdp"
         android:textColor="@color/color_8A000000"
         android:textSize="@dimen/_11ssp" />
 

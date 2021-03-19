@@ -112,6 +112,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun forceHide() {
         apiRequestCount = 0
+        isShowProgress = false
         DialogProgress.hide(this)
     }
 

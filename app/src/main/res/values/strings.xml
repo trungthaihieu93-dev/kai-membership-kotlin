@@ -52,7 +52,7 @@
 
     //Register success
     <string name="congrats">Congrats!</string>
-    <string name="content_register_success">Welcome to Kai membership! \nYou have got 01 lucky spin</string>
+    <string name="content_register_success">Welcome to Kai membership!\nYou have got 01 lucky spin</string>
     <string name="spin_later">Spin Later</string>
     <string name="spin_now">Spin Now</string>
 
@@ -61,7 +61,8 @@
     <string name="content_forgot_password">We will send an instruction to your email.</string>
     <string name="hint_email_forgot_password">Enter your email</string>
     <string name="send_instructions">Send Instructions</string>
-    <string name="content_not_receive_any_email">Did not receive any email? \nCheck your spam filter, or resend another mail</string>
+    <string name="content_not_receive_any_email">Did not receive any email? \nCheck your spam filter, or</string>
+    <string name="resend_another_mail">resend another mail</string>
 
     //New password
     <string name="new_password">New Password</string>
@@ -92,7 +93,8 @@
     //Enter passcode
     <string name="enter_passcode">Enter passcode</string>
     <string name="content_enter_passcode">Enter your passcode to continue.</string>
-    <string name="content_forgot_code">Can’t remember my code. Click here</string>
+    <string name="content_forgot_code">Can’t remember my code.</string>
+    <string name="click_here">Click here</string>
     <string name="text_continue">Continue</string>
 
     //Reset passcode
@@ -101,7 +103,8 @@
 
     //Reset passcode success
     <string name="instruction_sent">Instruction Sent</string>
-    <string name="content_instruction_sent">We have sent you a email confirmation to an.nguyen@kardiachain.io email. Please check.</string>
+    <string name="content_instruction_sent_1">We have sent you a email confirmation to</string>
+    <string name="content_instruction_sent_2">email. Please check.</string>
     <string name="open_email_app">Open email app</string>
     <string name="content_not_receive_email">Did not receive any email? Check your spam filter, or resend another mail</string>
 
@@ -192,4 +195,30 @@
     <string name="content_mission">01 spin for every finished mission.\nGet it now!</string>
     <string name="completed">Completed</string>
     <string name="content_top_score">Top score: %s (%s)</string>
+
+    //My Reward
+    <string name="my_reward">My reward</string>
+    <string name="title_no_data_reward">No Reward</string>
+    <string name="content_no_data_reward">You don’t have any reward to claim.\nStart doing missions now and earn valuable gifts</string>
+    <string name="go_to_mission">Go to Mission</string>
+    <string name="title_fill_the_form">You won!</string>
+    <string name="content_fill_the_form">We will need some details so your gift can be send correctly.</string>
+    <string name="fill_the_form">Fill the Form</string>
+    <string name="history">History</string>
+    <string name="redeem">Redeem</string>
+    <string name="top_up">Top-up</string>
+    <string name="title_select_provider">Select provider</string>
+    <string name="content_select_provider">Choose your service provider</string>
+    <string name="redeem_only">Redeem only</string>
+    <string name="redeem_topup_now">Redeem &amp; Topup Now</string>
+    <string name="top_up_your_phone">Top-up your phone</string>
+    <string name="title_fill_your_form">Fill your form</string>
+    <string name="content_fill_your_form">We will need some of your details</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="note">Anything else to say?</string>
+    <string name="hint_note_fill_your_form">Anything else to say?</string>
+    <string name="send">Send</string>
+    <string name="received_on">Received on:</string>
+    <string name="code">Code:</string>
 </resources>

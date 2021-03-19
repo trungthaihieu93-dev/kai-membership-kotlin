@@ -2,9 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/_16sdp"
     android:gravity="center"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/_16sdp">
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/_49sdp"
+        android:layout_height="104dp"
+        android:src="@drawable/img_mail" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
@@ -15,12 +20,13 @@
         android:textSize="@dimen/_22ssp" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvContentInstructionSent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/text_medium"
         android:layout_marginTop="@dimen/_8sdp"
+        android:fontFamily="@font/text_medium"
         android:gravity="center"
-        android:text="@string/content_instruction_sent"
+        android:lineSpacingExtra="@dimen/_6sdp"
         android:textColor="@color/color_8A000000"
         android:textSize="@dimen/_11ssp" />
 
@@ -33,11 +39,13 @@
         android:text="@string/open_email_app" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvReSendEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/text_medium"
         android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/text_medium"
         android:gravity="center"
+        android:lineSpacingExtra="@dimen/_6sdp"
         android:text="@string/content_not_receive_any_email"
         android:textColor="@color/color_8A000000"
         android:textSize="@dimen/_11ssp" />

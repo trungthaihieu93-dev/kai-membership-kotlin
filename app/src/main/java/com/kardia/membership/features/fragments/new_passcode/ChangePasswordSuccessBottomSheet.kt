@@ -27,7 +27,6 @@ class ChangePasswordSuccessBottomSheet: BaseBottomSheetDialogFragment() {
     override fun initEvents() {
         btOkIGotIt.setOnClickListener {
             dismiss()
-            mNavigator.showLoginNew(activity)
         }
     }
 

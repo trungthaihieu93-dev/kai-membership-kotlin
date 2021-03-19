@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             android:fontFamily="@font/text_medium"
+            android:lineSpacingExtra="@dimen/_6sdp"
             android:text="@string/content_reset_passcode"
             android:textColor="@color/color_8A000000"
             android:textSize="@dimen/_11ssp" />
@@ -56,10 +57,24 @@
                 style="@style/TextInputEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="false"
+                android:enabled="false"
+                android:focusable="false"
                 android:hint="@string/hint_email"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvMessageEmailEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:fontFamily="@font/text_regular"
+            android:text="@string/email_empty"
+            android:textColor="@color/color_C42C15"
+            android:textSize="@dimen/_10ssp"
+            android:visibility="gone" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btSendInstructions"

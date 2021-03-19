@@ -31,6 +31,7 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:fontFamily="@font/text_medium"
             android:text="@string/content_register"
+            android:lineSpacingExtra="@dimen/_6sdp"
             android:textColor="@color/color_8A000000"
             android:textSize="@dimen/_11ssp" />
 

@@ -30,6 +30,7 @@
             android:fontFamily="@font/text_medium"
             android:text="@string/content_select_account"
             android:layout_marginStart="@dimen/_16sdp"
+            android:lineSpacingExtra="@dimen/_6sdp"
             android:layout_marginEnd="@dimen/_16sdp"
             android:textColor="@color/color_8A000000"
             android:textSize="@dimen/_11ssp" />

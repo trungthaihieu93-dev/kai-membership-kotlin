@@ -13,6 +13,7 @@ import com.kardia.membership.features.fragments.check_mail.CheckMailFragment
 import com.kardia.membership.features.fragments.confirm_passcode.ConfirmPasscodeFragment
 import com.kardia.membership.features.fragments.enter_passcode.EnterPasscodeFragment
 import com.kardia.membership.features.fragments.my_profile.MyProfileFragment
+import com.kardia.membership.features.fragments.my_reward.MyRewardFragment
 import com.kardia.membership.features.fragments.new_passcode.ChangePasswordSuccessBottomSheet
 import com.kardia.membership.features.fragments.new_passcode.NewPasscodeFragment
 import com.kardia.membership.features.fragments.new_password.NewPasswordFragment
@@ -33,6 +34,15 @@ class Navigator
 @Inject constructor() {
     fun showMain(context: Activity?) = context?.startActivity(
         MainActivity.callingIntent(context).apply {
+            addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+            )
+        })
+
+    fun showMainWithTab(context: Activity?, tab: Int?) = context?.startActivity(
+        MainActivity.callingIntent(context).apply {
+            putExtra(MainActivity.TAB, tab)
             addFlags(
                 Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or
                         Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -102,12 +112,20 @@ class Navigator
         })
     }
 
-    fun showResetPasscode(activity: FragmentActivity?) {
-        BaseFragment.addFragmentByActivity(activity, ResetPasscodeFragment())
+    fun showResetPasscode(activity: FragmentActivity?, email: String?) {
+        BaseFragment.addFragmentByActivity(activity, ResetPasscodeFragment().apply {
+            arguments = Bundle().apply {
+                putString(ResetPasscodeFragment.EMAIL, email)
+            }
+        })
     }
 
-    fun showCheckMail(activity: FragmentActivity?) {
-        BaseFragment.addFragmentByActivity(activity, CheckMailFragment())
+    fun showCheckMail(activity: FragmentActivity?, email: String?) {
+        BaseFragment.addFragmentByActivity(activity, CheckMailFragment().apply {
+            arguments = Bundle().apply {
+                putString(CheckMailFragment.EMAIL, email)
+            }
+        })
     }
 
     fun showNewPasscode(activity: FragmentActivity?) {
@@ -225,4 +243,7 @@ class Navigator
         }
     }
 
+    fun showMyReward(activity: FragmentActivity?) {
+        BaseFragment.addFragmentByActivity(activity, MyRewardFragment())
+    }
 }
