@@ -25,138 +25,243 @@
             android:textColor="@color/color_DE000000"
             android:textSize="@dimen/_26ssp" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:fontFamily="@font/text_medium"
-            android:text="@string/content_register"
-            android:lineSpacingExtra="@dimen/_6sdp"
-            android:textColor="@color/color_8A000000"
-            android:textSize="@dimen/_11ssp" />
+            android:overScrollMode="never">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:fontFamily="@font/text_medium"
-            android:text="@string/email"
-            android:textAllCaps="true"
-            android:textColor="@color/color_364766"
-            android:textSize="@dimen/_9ssp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilEmail"
-            style="@style/TextInputLayoutStyleNormal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietEmail"
-                style="@style/TextInputEditTextStyle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_email"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:fontFamily="@font/text_medium"
-            android:text="@string/password"
-            android:textAllCaps="true"
-            android:textColor="@color/color_364766"
-            android:textSize="@dimen/_9ssp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilPassword"
-            style="@style/TextInputLayoutStylePassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp">
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/text_medium"
+                    android:lineSpacingExtra="@dimen/_6sdp"
+                    android:text="@string/content_register"
+                    android:textColor="@color/color_8A000000"
+                    android:textSize="@dimen/_11ssp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietPassword"
-                style="@style/TextInputEditTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_password"
-                android:imeOptions="actionNext"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:fontFamily="@font/text_medium"
+                    android:text="@string/email"
+                    android:textAllCaps="true"
+                    android:textColor="@color/color_364766"
+                    android:textSize="@dimen/_9ssp" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:fontFamily="@font/text_medium"
-            android:text="@string/confirm_password"
-            android:textAllCaps="true"
-            android:textColor="@color/color_364766"
-            android:textSize="@dimen/_9ssp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilEmail"
+                    style="@style/TextInputLayoutStyleNormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilConfirmPassword"
-            style="@style/TextInputLayoutStylePassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietEmail"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_email"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietConfirmPassword"
-                style="@style/TextInputEditTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_confirm_password"
-                android:imeOptions="actionNext"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvMessageEmailEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/text_regular"
+                    android:text="@string/email_empty"
+                    android:textColor="@color/color_C42C15"
+                    android:textSize="@dimen/_10ssp"
+                    android:visibility="gone" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btCreateAccount"
-            style="@style/UnelevatedButtonEnableStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_24sdp"
-            android:text="@string/create_account" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/text_medium"
+                    android:text="@string/password"
+                    android:textAllCaps="true"
+                    android:textColor="@color/color_364766"
+                    android:textSize="@dimen/_9ssp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:gravity="center"
-            android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
+                    style="@style/TextInputLayoutStylePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/text_medium"
-                android:text="@string/im_already_a_kaiser"
-                android:textColor="@color/color_8A000000"
-                android:textSize="@dimen/_11ssp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietPassword"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_password"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvSignIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_2sdp"
-                android:fontFamily="@font/text_medium"
-                android:text="@string/sign_in"
-                android:textColor="@color/color_94A2B2"
-                android:textSize="@dimen/_11ssp" />
-        </LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvMessagePasswordEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/text_regular"
+                    android:text="@string/email_empty"
+                    android:textColor="@color/color_C42C15"
+                    android:textSize="@dimen/_10ssp"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:fontFamily="@font/text_medium"
+                    android:text="@string/confirm_password"
+                    android:textAllCaps="true"
+                    android:textColor="@color/color_364766"
+                    android:textSize="@dimen/_9ssp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilConfirmPassword"
+                    style="@style/TextInputLayoutStylePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietConfirmPassword"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_confirm_password"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvMessageConfirmPasswordEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/text_regular"
+                    android:text="@string/confirm_password_empty"
+                    android:textColor="@color/color_C42C15"
+                    android:textSize="@dimen/_10ssp"
+                    android:visibility="gone" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivCaptcha"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@id/ivRefreshCaptcha" />
+
+                    <ImageView
+                        android:id="@+id/ivRefreshCaptcha"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/_24sdp"
+                        android:src="@drawable/ic_refresh_captcha" />
+                </RelativeLayout>
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/text_medium"
+                    android:text="@string/confirm_captcha"
+                    android:textAllCaps="true"
+                    android:textColor="@color/color_364766"
+                    android:textSize="@dimen/_9ssp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCaptcha"
+                    style="@style/TextInputLayoutStyleNormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietCaptcha"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_captcha"
+                        android:imeOptions="actionNext"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvMessageCaptchaEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/text_regular"
+                    android:text="@string/captcha_empty"
+                    android:textColor="@color/color_C42C15"
+                    android:textSize="@dimen/_10ssp"
+                    android:visibility="gone" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btCreateAccount"
+                    style="@style/UnelevatedButtonEnableStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_24sdp"
+                    android:text="@string/create_account" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/text_medium"
+                        android:text="@string/im_already_a_kaiser"
+                        android:textColor="@color/color_8A000000"
+                        android:textSize="@dimen/_11ssp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvSignIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:fontFamily="@font/text_medium"
+                        android:text="@string/sign_in"
+                        android:textColor="@color/color_94A2B2"
+                        android:textSize="@dimen/_11ssp" />
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btSkip"
+                    style="@style/OutlinedButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_24sdp"
+                    android:layout_marginBottom="@dimen/_24sdp"
+                    android:text="@string/let_me_take_a_tour" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btSkip"
-        style="@style/OutlinedButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/_16sdp"
-        android:text="@string/let_me_take_a_tour" />
 </RelativeLayout>

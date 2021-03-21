@@ -82,6 +82,10 @@
             android:name=".features.activities.ProfileActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".features.activities.SpinActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

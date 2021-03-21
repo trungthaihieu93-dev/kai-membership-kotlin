@@ -23,4 +23,5 @@ object AppConstants {
 
     const val TYPE_QUEST_DAILY = "DAILY"
     const val TYPE_QUEST_MONTH = "MONTH"
+
 }

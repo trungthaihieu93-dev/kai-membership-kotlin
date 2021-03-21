@@ -52,7 +52,7 @@ abstract class BaseFragment : Fragment() {
     abstract fun layoutId(): Int
 
     var statusBarHeight: Int = 0
-
+    var isUserLogin = false
     private var isExpired: Boolean = false
     var mFragmentLevel = 1
 
@@ -125,6 +125,9 @@ abstract class BaseFragment : Fragment() {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         getStatusBarHeight()
+        userTokenCache.get()?.let {
+            isUserLogin = true
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -523,7 +526,7 @@ abstract class BaseFragment : Fragment() {
         return Color.TRANSPARENT
     }
 
-    fun finish(){
+    fun finish() {
         activity?.finish()
     }
 
@@ -550,7 +553,7 @@ abstract class BaseFragment : Fragment() {
         return fileSizeInKB / 1024
     }
 
-    fun resetDataUser(){
+    fun resetDataUser() {
         DataConstants.TRANSACTION_ENTITY = null
         DataConstants.QUEST_ENTITY = null
         userInfoCache.clear()

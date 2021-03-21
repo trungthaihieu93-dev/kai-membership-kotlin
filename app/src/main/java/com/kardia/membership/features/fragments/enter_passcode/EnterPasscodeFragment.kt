@@ -21,7 +21,6 @@ import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.data.entities.UserToken
 import com.kardia.membership.domain.entities.auth.ResetPasswordEntity
-import com.kardia.membership.domain.entities.device.PasscodeDeviceEntity
 import com.kardia.membership.domain.entities.passcode.CheckPasscodeEntity
 import com.kardia.membership.domain.entities.passcode.LoginPasscodeEntity
 import com.kardia.membership.domain.usecases.auth.PostResetPasswordUseCase
@@ -29,10 +28,8 @@ import com.kardia.membership.domain.usecases.passcode.PostCheckPasscodeUseCase
 import com.kardia.membership.domain.usecases.passcode.PostLoginPasscodeUseCase
 import com.kardia.membership.features.utils.AppConstants
 import com.kardia.membership.features.viewmodel.AuthViewModel
-import com.kardia.membership.features.viewmodel.DeviceViewModel
 import com.kardia.membership.features.viewmodel.PasscodeViewModel
 import kotlinx.android.synthetic.main.fragment_enter_passcode.*
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class EnterPasscodeFragment : BaseFragment() {
@@ -183,7 +180,7 @@ class EnterPasscodeFragment : BaseFragment() {
         ovPasscode.setText("")
         entity?.data?.let {
             userInfoCache.clear()
-            userTokenCache.put(UserToken(it.access_token, it.refresh_token, it.expires_in))
+            userTokenCache.put(UserToken(it.access_token, it.refresh_token, it.expires_in,it.is_first))
             mNavigator.showMain(activity)
         }
         finish()

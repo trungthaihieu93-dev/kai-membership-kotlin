@@ -3,6 +3,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kardia.membership.AndroidApplication
 import com.kardia.membership.core.di.viewmodel.ViewModelModule
 import com.kardia.membership.core.navigation.RouteActivity
+import com.kardia.membership.core.platform.BaseActivity
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.features.MainActivity
 import com.kardia.membership.features.dialog.NoInternetDialog
@@ -47,6 +48,7 @@ interface ApplicationComponent {
     fun inject(application: AndroidApplication)
     fun inject(routeActivity: RouteActivity)
     fun inject(mainActivity: MainActivity)
+    fun inject(baseActivity: BaseActivity)
     fun inject(baseFragment: BaseFragment)
     fun inject(bottomSheetDialogFragment: BottomSheetDialogFragment)
     fun inject(noInternetDialog: NoInternetDialog)

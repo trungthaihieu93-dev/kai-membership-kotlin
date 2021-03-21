@@ -57,4 +57,15 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(QuestViewModel::class)
     abstract fun bindsQuestViewModel(viewModel: QuestViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TrackingViewModel::class)
+    abstract fun bindsTrackingViewModel(viewModel: TrackingViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CaptchaViewModel::class)
+    abstract fun bindsCaptchaViewModel(viewModel: CaptchaViewModel): ViewModel
+
 }

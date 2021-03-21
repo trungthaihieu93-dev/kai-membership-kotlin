@@ -100,7 +100,7 @@ class SplashFragment : BaseFragment() {
     }
 
     private fun onReceivePasscodeDeviceEntity(entity: PasscodeDeviceEntity?) {
-        finish()
+        forceHide()
         entity?.data?.let{
             if(it.user.isNullOrEmpty()){
                 mNavigator.showIntroduce(activity)
@@ -109,6 +109,7 @@ class SplashFragment : BaseFragment() {
                 mNavigator.showSelectAccount(activity,it)
             }
         }
+        finish()
     }
 
     private fun onReceiveConfigEntity(entity: ConfigEntity?) {

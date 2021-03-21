@@ -8,6 +8,7 @@ import com.kardia.membership.core.platform.BaseActivity
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.features.fragments.create_passcode.CreatePasscodeFragment
 import com.kardia.membership.features.fragments.login.LoginFragment
+import com.kardia.membership.features.fragments.select_account.SelectAccountFragment
 
 class CreatePasscodeActivity : BaseActivity() {
     companion object {
@@ -15,7 +16,15 @@ class CreatePasscodeActivity : BaseActivity() {
     }
 
     override fun fragment(): BaseFragment? {
-        return CreatePasscodeFragment()
+        return CreatePasscodeFragment().apply {
+            arguments = Bundle().apply {
+                putString(
+                    CreatePasscodeFragment.EMAIL, intent.getStringExtra(
+                        CreatePasscodeFragment.EMAIL
+                    )
+                )
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -13,17 +13,23 @@ import com.kardia.membership.R
 import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseActivity
 import com.kardia.membership.core.platform.BaseFragment
+import com.kardia.membership.domain.entities.tracking.TrackingActivityEntity
 import com.kardia.membership.domain.entities.user.UserInfoEntity
+import com.kardia.membership.domain.usecases.tracking.PostTrackingActivityUseCase
 import com.kardia.membership.features.fragments.games.GamesFragment
 import com.kardia.membership.features.fragments.mission.MissionFragment
 import com.kardia.membership.features.fragments.news.NewsFragment
 import com.kardia.membership.features.fragments.utilities.UtilitiesFragment
 import com.kardia.membership.features.fragments.wallet.WalletFragment
+import com.kardia.membership.features.utils.AppConstants
+import com.kardia.membership.features.viewmodel.TrackingViewModel
 import com.kardia.membership.features.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private lateinit var userViewModel: UserViewModel
+    private lateinit var trackingViewModel: TrackingViewModel
+    private var isTrackingLogin = false
 
     companion object {
         fun callingIntent(context: Context) = Intent(context, MainActivity::class.java)
@@ -40,19 +46,22 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         userViewModel = viewModel(viewModelFactory) {
             observe(getUserInfoEntity, ::onReceiveUserInfoEntity)
         }
+        trackingViewModel = viewModel(viewModelFactory) {
+            observe(trackingActivityEntity, ::onReceiveTrackingActivityEntity)
+        }
+
         setContentView(R.layout.activity_main)
 
         bottom_navigation.setOnNavigationItemSelectedListener(this)
         changeColorStatusBarMain(true)
-        userViewModel.getUserInfo()
         tvHeader.text = getString(R.string.text_navigation_news)
 
         ivProfileMain.setOnClickListener {
-            mNavigator.showProfile(this)
+            moveProfile()
         }
 
         ivAvatarMain.setOnClickListener {
-            mNavigator.showProfile(this)
+            moveProfile()
         }
 
         val tab = intent.getIntExtra(TAB, 0)
@@ -63,28 +72,61 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         }
     }
 
+    private fun moveProfile() {
+        if (isUserLogin) {
+            mNavigator.showProfile(this)
+        } else {
+            mNavigator.showLogin(this)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         loadData()
     }
 
-    private fun loadData(){
+    private fun loadData() {
+        if (isUserLogin) {
+            userViewModel.getUserInfo()
+        } else {
+            if (!isTrackingLogin) {
+                trackingViewModel.trackingActivity(
+                    PostTrackingActivityUseCase.Params(
+                        "guest",
+                        AppConstants.DEVICE_ID_TEST
+                    )
+                )
+            }
+        }
+    }
+
+    private fun setDataUser() {
         ivAvatarMain.gone()
-        userInfoCache.get()?.user_info?.let{user->
-           user.avatar?.let{
-               ivAvatarMain.visible()
-               ivAvatarMain.loadFromUrlRounded(it,8f)
-           }
-            user.spinturn?.let{
-                if(it>0){
+        ivSpinWallet.gone()
+        userInfoCache.get()?.user_info?.let { user ->
+            user.avatar?.let {
+                ivAvatarMain.visible()
+                ivAvatarMain.loadFromUrlRounded(it, 8f)
+            }
+            ivSpinWallet.visible()
+            ivSpinWallet.setImageResource(R.drawable.ic_spin_main)
+            ivSpinWallet.setOnClickListener {
+            }
+            user.spinturn?.let {
+                if (it > 0) {
                     ivSpinWallet.setImageResource(R.drawable.ic_spin_active_main)
-                }
-                else{
+                    ivSpinWallet.setOnClickListener {
+                        mNavigator.showSpin(this)
+                    }
+                } else {
                     ivSpinWallet.setImageResource(R.drawable.ic_spin_main)
+                    ivSpinWallet.setOnClickListener {
+                    }
                 }
             }
         }
     }
+
     fun selectNavigation(menuID: Int) {
         onNavigationItemSelected(bottom_navigation.menu.findItem(menuID))
         bottom_navigation.selectedItemId = menuID
@@ -164,8 +206,20 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     private fun onReceiveUserInfoEntity(entity: UserInfoEntity?) {
         entity?.data?.let {
             userInfoCache.put(it)
-            loadData()
+            setDataUser()
+            if (!isTrackingLogin) {
+                trackingViewModel.trackingActivity(
+                    PostTrackingActivityUseCase.Params(
+                        it.user_info?._id,
+                        AppConstants.DEVICE_ID_TEST
+                    )
+                )
+            }
         }
+    }
+
+    private fun onReceiveTrackingActivityEntity(entity: TrackingActivityEntity?) {
+        isTrackingLogin = true
     }
 
     private fun changeColorStatusBarMain(isChange: Boolean) {
@@ -181,4 +235,6 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             //                StatusBarUtil.setColorNoTranslucent(this, getResources().getColor(R.color.colorPrimary));
         }
     }
+
+
 }

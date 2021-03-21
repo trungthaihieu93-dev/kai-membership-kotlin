@@ -12,7 +12,7 @@ import javax.inject.Inject
 class PostRegisterPasscodeUseCase
 @Inject constructor(private val repository: PasscodeRepository) :
     UseCase<RegisterPasscodeEntity, PostRegisterPasscodeUseCase.Params>() {
-    data class Params(val device_id: String, val passcode: String, val refresh_token: String, val email: String, val os: String)
+    data class Params(val device_id: String?, val passcode: String?, val refresh_token: String?, val email: String?, val os: String?)
 
     override suspend fun run(params: Params): Either<Failure, RegisterPasscodeEntity> {
         return repository.register(params)

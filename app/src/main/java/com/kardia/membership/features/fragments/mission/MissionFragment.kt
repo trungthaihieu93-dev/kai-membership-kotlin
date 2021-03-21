@@ -76,7 +76,11 @@ class MissionFragment : BaseFragment() {
     private fun onReceiveQuestsEntity(entity: QuestsEntity?) {
         hideProgress()
         DataConstants.QUEST_ENTITY = entity
-        questViewModel.getQuestsUser()
+        if (isUserLogin) {
+            questViewModel.getQuestsUser()
+        } else {
+            sendData()
+        }
     }
 
     private fun onReceiveQuestsUserEntity(entity: QuestsEntity?) {

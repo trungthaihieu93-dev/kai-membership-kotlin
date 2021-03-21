@@ -12,7 +12,7 @@ class SplashActivity : BaseActivity() {
         fun callingIntent(context: Context) = Intent(context, SplashActivity::class.java)
     }
 
-    override fun fragment(): BaseFragment? = SplashFragment()
+    override fun fragment(): BaseFragment = SplashFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

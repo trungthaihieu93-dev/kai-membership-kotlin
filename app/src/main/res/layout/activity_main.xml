@@ -42,6 +42,7 @@
                 android:id="@+id/ivSpinWallet"
                 android:layout_width="@dimen/_34sdp"
                 android:layout_height="@dimen/_34sdp"
+                android:visibility="gone"
                 android:src="@drawable/ic_spin_main"/>
             <RelativeLayout
                 android:layout_width="@dimen/_34sdp"

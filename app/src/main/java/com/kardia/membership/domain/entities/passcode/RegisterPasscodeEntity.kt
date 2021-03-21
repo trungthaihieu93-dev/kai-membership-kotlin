@@ -3,7 +3,7 @@ package com.kardia.membership.domain.entities.passcode
 import com.kardia.membership.data.entities.Register
 import com.kardia.membership.domain.entities.BaseEntities
 
-data class RegisterPasscodeEntity(val data: Register?) :
+data class RegisterPasscodeEntity(val data: String?) :
     BaseEntities() {
     companion object {
         fun empty() = RegisterPasscodeEntity(null)

@@ -40,22 +40,34 @@ class WalletFragment : BaseFragment() {
 
     override fun initEvents() {
         fabReceive.setOnClickListener {
-            mNavigator.showReceive(activity)
+            if (isUserLogin) {
+                mNavigator.showReceive(activity)
+            } else {
+                mNavigator.showLogin(activity)
+            }
         }
 
         fabBuy.setOnClickListener {
-            mNavigator.showBuy(activity)
+            if (isUserLogin) {
+                mNavigator.showBuy(activity)
+            } else {
+                mNavigator.showLogin(activity)
+            }
         }
     }
 
     override fun loadData() {
-        userInfoCache.get()?.let {
-            setDataWallet(it)
-        }
-        if (DataConstants.TRANSACTION_ENTITY == null) {
-            transactionViewModel.getTransactions()
+        if (isUserLogin) {
+            userInfoCache.get()?.let {
+                setDataWallet(it)
+            }
+            if (DataConstants.TRANSACTION_ENTITY == null) {
+                transactionViewModel.getTransactions()
+            } else {
+                onReceiveTransactionsEntity(DataConstants.TRANSACTION_ENTITY)
+            }
         } else {
-            onReceiveTransactionsEntity(DataConstants.TRANSACTION_ENTITY)
+            rlNoDataTransaction.visible()
         }
     }
 

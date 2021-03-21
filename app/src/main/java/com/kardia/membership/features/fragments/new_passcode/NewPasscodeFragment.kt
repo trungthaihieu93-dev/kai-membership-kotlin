@@ -24,7 +24,7 @@ class NewPasscodeFragment : BaseFragment() {
 
     override fun initEvents() {
         btSetPasscode.setOnClickListener {
-            mNavigator.showConfirmPasscode(activity)
+//            mNavigator.showConfirmPasscode(activity)
         }
     }
 

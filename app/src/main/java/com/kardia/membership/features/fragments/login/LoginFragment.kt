@@ -55,6 +55,10 @@ class LoginFragment : BaseFragment() {
         btSignIn.setOnClickListener {
             login()
         }
+
+        btSkip.setOnClickListener {
+            mNavigator.showMain(activity)
+        }
     }
 
     override fun loadData() {
@@ -90,7 +94,7 @@ class LoginFragment : BaseFragment() {
     private fun onReceiveLoginAuthEntity(entity: LoginAuthEntity?) {
         hideProgress()
         entity?.data?.let {
-            userTokenCache.put(UserToken(it.access_token, it.refresh_token, it.expires_in))
+            userTokenCache.put(UserToken(it.access_token, it.refresh_token, it.expires_in,it.is_first))
             userViewModel.getUserInfo()
         }
     }

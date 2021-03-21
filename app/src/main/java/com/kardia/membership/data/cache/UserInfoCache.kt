@@ -23,7 +23,6 @@ class UserInfoCache
         val file = File("${context.cacheDir}${File.separator}$filename")
         if (userInfo == null) userInfo =
             serializer.deserialize(fileManager.readFileContent(file), UserInfo::class.java)
-        if (userInfo == null) userInfo = UserInfo(null,null)
         return userInfo
     }
 

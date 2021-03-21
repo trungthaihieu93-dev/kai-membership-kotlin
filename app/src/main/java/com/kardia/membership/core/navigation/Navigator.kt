@@ -11,6 +11,7 @@ import com.kardia.membership.data.entities.TopUpAmount
 import com.kardia.membership.features.activities.*
 import com.kardia.membership.features.fragments.check_mail.CheckMailFragment
 import com.kardia.membership.features.fragments.confirm_passcode.ConfirmPasscodeFragment
+import com.kardia.membership.features.fragments.create_passcode.CreatePasscodeFragment
 import com.kardia.membership.features.fragments.enter_passcode.EnterPasscodeFragment
 import com.kardia.membership.features.fragments.my_profile.MyProfileFragment
 import com.kardia.membership.features.fragments.my_reward.MyRewardFragment
@@ -64,12 +65,25 @@ class Navigator
         RegisterActivity.callingIntent(activity).apply { }
     )
 
-    fun showCreatePasscode(activity: FragmentActivity?) = activity?.startActivity(
-        CreatePasscodeActivity.callingIntent(activity).apply { }
+    fun showCreatePasscode(activity: FragmentActivity?, email: String?) = activity?.startActivity(
+        CreatePasscodeActivity.callingIntent(activity).apply {
+            putExtra(CreatePasscodeFragment.EMAIL, email)
+        }
     )
 
-    fun showConfirmPasscode(activity: FragmentActivity?) {
-        BaseFragment.addFragmentByActivity(activity, ConfirmPasscodeFragment())
+    fun showConfirmPasscode(
+        activity: FragmentActivity?,
+        email: String?,
+        otp: String?,
+        isFromRegister: Boolean = false
+    ) {
+        BaseFragment.addFragmentByActivity(activity, ConfirmPasscodeFragment().apply {
+            arguments = Bundle().apply {
+                putString(ConfirmPasscodeFragment.EMAIL, email)
+                putString(ConfirmPasscodeFragment.OTP, otp)
+                putBoolean(ConfirmPasscodeFragment.IS_FROM_REGISTER, isFromRegister)
+            }
+        })
     }
 
     fun showRegisterSuccess(activity: FragmentActivity?) {
@@ -246,4 +260,8 @@ class Navigator
     fun showMyReward(activity: FragmentActivity?) {
         BaseFragment.addFragmentByActivity(activity, MyRewardFragment())
     }
+
+    fun showSpin(activity: FragmentActivity?) = activity?.startActivity(
+        SpinActivity.callingIntent(activity).apply { }
+    )
 }

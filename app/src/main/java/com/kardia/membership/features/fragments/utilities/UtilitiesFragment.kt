@@ -20,7 +20,11 @@ class UtilitiesFragment : BaseFragment() {
 
     override fun initEvents() {
         mcvMobileTopUp.setOnClickListener {
-            mNavigator.showTopUp(activity)
+            if (isUserLogin) {
+                mNavigator.showTopUp(activity)
+            } else {
+                mNavigator.showLogin(activity)
+            }
         }
     }
 

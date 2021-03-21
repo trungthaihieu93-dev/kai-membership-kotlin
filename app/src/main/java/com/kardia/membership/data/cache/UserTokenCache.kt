@@ -22,7 +22,6 @@ class UserTokenCache
         val file = File("${context.cacheDir}${File.separator}$filename")
         if (userToken == null) userToken =
             serializer.deserialize(fileManager.readFileContent(file), UserToken::class.java)
-        if (userToken == null) userToken = UserToken()
         return userToken
     }
 

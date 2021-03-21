@@ -1,11 +1,14 @@
 package com.kardia.membership.core.extension
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
+
 import com.kardia.membership.features.utils.AppConstants
 import java.text.DateFormat
 import java.text.NumberFormat

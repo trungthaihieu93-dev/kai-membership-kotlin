@@ -18,6 +18,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -113,5 +114,13 @@ class ApplicationModule(private val application: AndroidApplication) {
     fun provideQuestRepository(dataSource: QuestRepository.Network): QuestRepository =
         dataSource
 
+    @Provides
+    @Singleton
+    fun provideTrackingRepository(dataSource: TrackingRepository.Network): TrackingRepository =
+        dataSource
 
+    @Provides
+    @Singleton
+    fun provideCaptchaRepository(dataSource: CaptchaRepository.Network): CaptchaRepository =
+        dataSource
 }

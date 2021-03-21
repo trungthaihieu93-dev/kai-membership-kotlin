@@ -30,6 +30,7 @@
     <string name="create_account">Create account</string>
     <string name="email_empty">Email can not be blank</string>
     <string name="password_empty">Password can not be blank</string>
+    <string name="hint_captcha">Type captcha</string>
 
     //Register
     <string name="be_a_member">Be a Member</string>
@@ -37,6 +38,8 @@
     <string name="confirm_password">Confirm password</string>
     <string name="hint_confirm_password">Your confirm password</string>
     <string name="im_already_a_kaiser">I’m already a KAISER !</string>
+    <string name="confirm_captcha">Confirm captcha</string>
+    <string name="captcha_empty">Captcha can not be blank</string>
 
     //Create passcode
     <string name="create_passcode">Create Passcode</string>
@@ -49,6 +52,7 @@
     <string name="confirm_passcode">Confirm Passcode</string>
     <string name="content_confirm_passcode">Confirm your passcode again. Just in case.</string>
     <string name="confirm">Confirm</string>
+    <string name="confirm_passcode_not_correct">Confirm Passcode is not correct</string>
 
     //Register success
     <string name="congrats">Congrats!</string>

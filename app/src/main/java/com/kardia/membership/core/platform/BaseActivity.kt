@@ -20,6 +20,7 @@ import com.kardia.membership.R.layout
 import com.kardia.membership.core.di.ApplicationComponent
 import com.kardia.membership.core.navigation.Navigator
 import com.kardia.membership.data.cache.UserInfoCache
+import com.kardia.membership.data.cache.UserTokenCache
 import com.kardia.membership.data.entities.UserInfo
 import com.kardia.membership.features.dialog.DialogProgress
 import kotlinx.android.synthetic.main.include_toolbar_white.view.*
@@ -40,7 +41,7 @@ abstract class BaseActivity : AppCompatActivity() {
     var isShowError = false
     var isOfflineMode = false
     var isHideKeyboardWhenClick = true
-
+    var isUserLogin :Boolean = false
     lateinit var gifDrawable: GifDrawable
 
     companion object {
@@ -54,6 +55,9 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var userInfoCache: UserInfoCache
 
     @Inject
+    lateinit var userTokenCache: UserTokenCache
+
+    @Inject
     internal lateinit var mNavigator: Navigator
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
@@ -62,11 +66,15 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appComponent.inject(this)
         (application as AndroidApplication).addThisActivityToRunningActivityies(this.javaClass)
         gifDrawable = GifDrawable(resources, R.drawable.loading_animation)
         setContentView(layout.activity_layout)
         addFragment()
         isHideKeyboardWhenClick = true
+        userTokenCache.get()?.let{
+            isUserLogin = true
+        }
     }
 
     override fun onDestroy() {
