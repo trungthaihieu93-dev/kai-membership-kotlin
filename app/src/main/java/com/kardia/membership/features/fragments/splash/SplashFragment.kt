@@ -11,13 +11,10 @@ import com.kardia.membership.R
 import com.kardia.membership.core.extension.observe
 import com.kardia.membership.core.extension.viewModel
 import com.kardia.membership.core.platform.BaseFragment
-import com.kardia.membership.data.cache.ConfigCache
 import com.kardia.membership.domain.entities.config.ConfigEntity
 import com.kardia.membership.domain.entities.device.PasscodeDeviceEntity
-import com.kardia.membership.features.utils.AppConstants
 import com.kardia.membership.features.viewmodel.ConfigViewModel
 import com.kardia.membership.features.viewmodel.DeviceViewModel
-import java.util.*
 
 
 class SplashFragment : BaseFragment() {
@@ -58,16 +55,12 @@ class SplashFragment : BaseFragment() {
     @SuppressLint("HardwareIds")
     override fun loadData() {
         activity?.let {
-            val androidId = Settings.Secure.getString(
-                context!!.contentResolver,
-                Settings.Secure.ANDROID_ID
-            )
+            val deviceId: String = Settings.Secure.getString(it.contentResolver,
+                Settings.Secure.ANDROID_ID)
+            getDeviceId(it)?.let{id->
+                deviceViewModel.getPasscodeByDevice(id)
+            }
 
-            val androidId_UUID: UUID = UUID
-                .nameUUIDFromBytes(androidId.toByteArray(charset("utf8")))
-
-            val deviceId: String = androidId_UUID.toString()
-            deviceViewModel.getPasscodeByDevice(AppConstants.DEVICE_ID_TEST)
         }
         configViewModel.getConfig()
     }
@@ -78,8 +71,7 @@ class SplashFragment : BaseFragment() {
 
     @SuppressLint("HardwareIds")
     fun getDeviceId(context: Context): String? {
-        val deviceId: String
-        deviceId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             Settings.Secure.getString(
                 context.contentResolver,
                 Settings.Secure.ANDROID_ID
@@ -96,7 +88,6 @@ class SplashFragment : BaseFragment() {
                 )
             }
         }
-        return deviceId
     }
 
     private fun onReceivePasscodeDeviceEntity(entity: PasscodeDeviceEntity?) {

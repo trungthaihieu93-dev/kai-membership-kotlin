@@ -176,7 +176,7 @@
 
     <style name="CustomTextTabItemAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
-        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:textSize">@dimen/_11ssp</item>
         <item name="android:fontFamily">@font/text_medium</item>
         <item name="tabSelectedTextColor">@color/color_DE000000</item>
         <item name="android:textColor">@color/color_8A94A6</item>
