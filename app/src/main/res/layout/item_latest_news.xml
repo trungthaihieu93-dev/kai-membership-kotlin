@@ -8,9 +8,10 @@
     android:layout_marginBottom="@dimen/_16sdp">
 
     <ImageView
+        android:id="@+id/ivThumbnailNews"
         android:layout_width="@dimen/_48sdp"
         android:layout_height="@dimen/_48sdp"
-        android:src="@drawable/img_latest_news_test" />
+        android:src="@drawable/img_background_transparent_feature_news" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,6 +19,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitleNews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -25,17 +27,16 @@
             android:fontFamily="@font/text_semi_bold"
             android:lines="2"
             android:textColor="@color/color_DE000000"
-            android:textSize="@dimen/_11ssp"
-            android:text="Lex Luger Can Write a Hit Rap Song in the Time It Takes to Read This" />
+            android:textSize="@dimen/_11ssp" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDateNews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_2sdp"
             android:fontFamily="@font/text_medium"
             android:textColor="@color/color_8A000000"
-            android:textSize="@dimen/_9ssp"
-            android:text="Wed, 10 Jun 2020" />
+            android:textSize="@dimen/_9ssp" />
     </LinearLayout>
 </LinearLayout>

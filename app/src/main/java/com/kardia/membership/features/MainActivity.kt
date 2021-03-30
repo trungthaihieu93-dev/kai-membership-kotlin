@@ -2,7 +2,6 @@ package com.kardia.membership.features
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
@@ -93,7 +92,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 trackingViewModel.trackingActivity(
                     PostTrackingActivityUseCase.Params(
                         "guest",
-                        AppConstants.DEVICE_ID_TEST
+                        AppConstants.DEVICE_ID
                     )
                 )
             }
@@ -211,7 +210,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 trackingViewModel.trackingActivity(
                     PostTrackingActivityUseCase.Params(
                         it.user_info?._id,
-                        AppConstants.DEVICE_ID_TEST
+                        AppConstants.DEVICE_ID
                     )
                 )
             }

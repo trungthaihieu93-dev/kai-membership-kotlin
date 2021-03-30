@@ -17,7 +17,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.kardia.membership"
+        applicationId "com.kai_membership"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1

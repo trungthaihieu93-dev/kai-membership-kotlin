@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.formatThousand
-import com.kardia.membership.core.extension.getDateFormat
+import com.kardia.membership.core.extension.changeDateFormat
 import com.kardia.membership.data.entities.TransactionItem
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -48,7 +48,9 @@ class TransactionItemAdapter
                     itemView.ivTypeTransaction.setImageResource(R.drawable.ic_type_send_transaction)
                 }
             }
-            itemView.tvTimeTransaction.text = item.createdDate?.getDateFormat("hh:mm aa")
+            itemView.tvTimeTransaction.text = item.createdDate?.changeDateFormat(
+                "hh:mm aa"
+            )
         }
     }
 

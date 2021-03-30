@@ -123,4 +123,14 @@ class ApplicationModule(private val application: AndroidApplication) {
     @Singleton
     fun provideCaptchaRepository(dataSource: CaptchaRepository.Network): CaptchaRepository =
         dataSource
+
+    @Provides
+    @Singleton
+    fun provideNewsRepository(dataSource: NewsRepository.Network): NewsRepository =
+        dataSource
+
+    @Provides
+    @Singleton
+    fun provideTwitterRepository(dataSource: TwitterRepository.Network): TwitterRepository =
+        dataSource
 }

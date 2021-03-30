@@ -1,8 +1,6 @@
 package com.kardia.membership.core.extension
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -59,15 +57,27 @@ fun String.appendRed(): SpannableStringBuilder {
 }
 
 @SuppressLint("SimpleDateFormat")
-fun String.getDateFormat(pattern: String): String {
-    val df: DateFormat =
-        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    val date = df.parse(this)
-    date?.let {
-        return SimpleDateFormat(pattern, Locale.getDefault()).format(date)
+fun String.changeDateFormat(
+    toPattern: String,
+    fromPattern: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+    locale: Locale? = null
+): String {
+    try {
+        var lc = Locale.getDefault()
+        locale?.let{
+            lc = locale
+        }
+        val df: DateFormat =
+            SimpleDateFormat(fromPattern, lc)
+        val date = df.parse(this)
+        date?.let {
+            return SimpleDateFormat(toPattern, Locale.getDefault()).format(date)
+        }
+    } catch (e: Exception) {
     }
     return ""
 }
+
 
 fun String.formatThousand(): String {
     val nf = NumberFormat.getInstance(Locale.US)

@@ -8,27 +8,29 @@ import com.kardia.membership.R
 import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.domain.entities.passcode.RegisterPasscodeEntity
+import com.kardia.membership.domain.entities.passcode.ResetPasscodeEntity
 import com.kardia.membership.domain.usecases.passcode.PostRegisterPasscodeUseCase
-import com.kardia.membership.features.fragments.create_passcode.CreatePasscodeFragment
+import com.kardia.membership.domain.usecases.passcode.PostResetPasscodeUseCase
 import com.kardia.membership.features.utils.AppConstants
 import com.kardia.membership.features.viewmodel.PasscodeViewModel
 import kotlinx.android.synthetic.main.fragment_confirm_passcode.*
 import kotlinx.android.synthetic.main.fragment_confirm_passcode.ovPasscode
-import kotlinx.android.synthetic.main.fragment_create_passcode.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class ConfirmPasscodeFragment : BaseFragment() {
     private lateinit var passcodeViewModel: PasscodeViewModel
 
     private var email: String? = null
-    private var otpConfirm: String? = null
-    private var otp: String? = null
+    private var passcodeConfirm: String? = null
+    private var passcode: String? = null
     private var isFromRegister: Boolean = false
+    private var token: String? = null
 
     companion object {
         const val EMAIL = "email"
-        const val OTP = "otp"
+        const val PASSCODE = "passcode"
         const val IS_FROM_REGISTER = "isFromRegister"
+        const val TOKEN = "token"
     }
 
     override fun layoutId() = R.layout.fragment_confirm_passcode
@@ -38,17 +40,18 @@ class ConfirmPasscodeFragment : BaseFragment() {
         appComponent.inject(this)
         passcodeViewModel = viewModel(viewModelFactory) {
             observe(registerEntity, ::onReceiveRegisterPasscodeEntity)
+            observe(resetEntity, ::onReceiveResetPasscodeEntity)
             observe(failureData, ::handleFailure)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         email = arguments?.getString(EMAIL)
-        otp = arguments?.getString(OTP)
+        passcode = arguments?.getString(PASSCODE)
         arguments?.getBoolean(IS_FROM_REGISTER, false)?.let {
             isFromRegister = it
         }
-
+        token = arguments?.getString(TOKEN)
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -58,8 +61,8 @@ class ConfirmPasscodeFragment : BaseFragment() {
 
     override fun initEvents() {
         btConfirm.setOnClickListener {
-            otpConfirm?.let {
-                registerPasscode(it)
+            passcodeConfirm?.let {
+                actionPasscode(it)
             }
         }
         ivBack.setOnClickListener {
@@ -67,7 +70,7 @@ class ConfirmPasscodeFragment : BaseFragment() {
         }
 
         ovPasscode.setOtpCompletionListener {
-            registerPasscode(it)
+            actionPasscode(it)
         }
         ovPasscode.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -78,7 +81,7 @@ class ConfirmPasscodeFragment : BaseFragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                otpConfirm = if (ovPasscode.text.toString().trim().length < 4) {
+                passcodeConfirm = if (ovPasscode.text.toString().trim().length < 4) {
                     null
                 } else {
                     ovPasscode.text.toString().trim()
@@ -87,23 +90,31 @@ class ConfirmPasscodeFragment : BaseFragment() {
         })
     }
 
-    private fun registerPasscode(otpConfirm: String?) {
+    private fun actionPasscode(passcodeConfirm: String?) {
         tvMessageConfirmPasscodeNotCorrect.gone()
-        if (otp == otpConfirm) {
+        if (passcode == passcodeConfirm) {
+            showProgress()
             if (isFromRegister) {
-                showProgress()
                 passcodeViewModel.registerPasscode(
                     PostRegisterPasscodeUseCase.Params(
-                        AppConstants.DEVICE_ID_TEST,
-                        otp,
+                        AppConstants.DEVICE_ID,
+                        passcode,
                         userTokenCache.get()?.refreshToken,
                         email,
                         AppConstants.DEVICE_OS
                     )
                 )
+            } else {
+                passcodeViewModel.resetPasscode(
+                    PostResetPasscodeUseCase.Params(
+                        AppConstants.DEVICE_ID,
+                        passcode,
+                        token,
+                        email
+                    )
+                )
             }
-        }
-        else {
+        } else {
             tvMessageConfirmPasscodeNotCorrect.visible()
         }
     }
@@ -117,9 +128,11 @@ class ConfirmPasscodeFragment : BaseFragment() {
 
     private fun onReceiveRegisterPasscodeEntity(entity: RegisterPasscodeEntity?) {
         hideProgress()
-        entity?.data?.let { pd ->
-            mNavigator.showLoginNew(activity)
-        }
+        mNavigator.showLoginNew(activity)
     }
 
+    private fun onReceiveResetPasscodeEntity(entity: ResetPasscodeEntity?) {
+        hideProgress()
+        mNavigator.showResetPasscodeSuccess(activity)
+    }
 }

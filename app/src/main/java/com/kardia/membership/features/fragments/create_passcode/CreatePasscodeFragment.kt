@@ -5,20 +5,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import com.kardia.membership.R
-import com.kardia.membership.core.extension.observe
-import com.kardia.membership.core.extension.viewModel
 import com.kardia.membership.core.platform.BaseFragment
-import com.kardia.membership.domain.entities.passcode.RegisterPasscodeEntity
-import com.kardia.membership.domain.usecases.passcode.PostRegisterPasscodeUseCase
-import com.kardia.membership.features.utils.AppConstants
-import com.kardia.membership.features.viewmodel.PasscodeViewModel
 import kotlinx.android.synthetic.main.fragment_create_passcode.*
 import kotlinx.android.synthetic.main.fragment_create_passcode.ovPasscode
 
 class CreatePasscodeFragment : BaseFragment() {
 
     private var email: String? = null
-    private var otp: String? = null
+    private var passcode: String? = null
 
     companion object {
         const val EMAIL = "email"
@@ -42,13 +36,13 @@ class CreatePasscodeFragment : BaseFragment() {
 
     override fun initEvents() {
         btSetPasscode.setOnClickListener {
-            otp?.let { otp ->
-                mNavigator.showConfirmPasscode(activity, email, otp, true)
+            passcode?.let { passcode ->
+                mNavigator.showConfirmPasscodeRegister(activity, email, passcode)
             }
         }
 
         ovPasscode.setOtpCompletionListener {
-            mNavigator.showConfirmPasscode(activity, email, it, true)
+            mNavigator.showConfirmPasscodeRegister(activity, email, it)
         }
         ovPasscode.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -59,7 +53,7 @@ class CreatePasscodeFragment : BaseFragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                otp = if (ovPasscode.text.toString().trim().length < 4) {
+                passcode = if (ovPasscode.text.toString().trim().length < 4) {
                     null
                 } else {
                     ovPasscode.text.toString().trim()

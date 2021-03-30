@@ -5,7 +5,6 @@ import android.webkit.*
 import android.webkit.WebView
 import androidx.annotation.Nullable
 import com.kardia.membership.R
-import com.kardia.membership.core.extension.visible
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.features.utils.AppConstants
 import kotlinx.android.synthetic.main.fragment_spin.*
@@ -75,7 +74,7 @@ class SpinFragment : BaseFragment() {
             "https://game-003-tego022.bcms.tech?token=%s&lang=%s&device=%s&platform=%s",
             userTokenCache.get()?.accessToken,
             "vi",
-            AppConstants.DEVICE_ID_TEST,
+            AppConstants.DEVICE_ID,
             AppConstants.DEVICE_OS.toLowerCase()
         )
 //        if (headers.isNotEmpty()) {

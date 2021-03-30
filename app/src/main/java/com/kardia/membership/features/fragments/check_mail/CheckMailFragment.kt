@@ -7,7 +7,6 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
-import android.widget.Toast
 import androidx.core.text.color
 import androidx.core.text.set
 import com.kardia.membership.R
@@ -69,12 +68,12 @@ class CheckMailFragment : BaseFragment() {
         ).length + 1 + getString(R.string.resend_another_mail).length + 1] =
             object : ClickableSpan() {
                 override fun onClick(view: View) {
-                    email?.let{email->
+                    email?.let { email ->
                         showProgress()
                         passcodeViewModel.forgotPasscode(
                             PostForgotPasscodeUseCase.Params(
                                 email,
-                                AppConstants.DEVICE_ID_TEST
+                                AppConstants.DEVICE_ID
                             )
                         )
                     }
@@ -91,8 +90,7 @@ class CheckMailFragment : BaseFragment() {
 
     override fun initEvents() {
         btOpenEmailApp.setOnClickListener {
-            mNavigator.showLogin(activity)
-            finish()
+            mNavigator.showVerification(activity, email)
         }
     }
 

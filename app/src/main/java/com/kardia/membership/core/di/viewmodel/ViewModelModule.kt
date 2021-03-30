@@ -68,4 +68,8 @@ abstract class ViewModelModule {
     @ViewModelKey(CaptchaViewModel::class)
     abstract fun bindsCaptchaViewModel(viewModel: CaptchaViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(NewsViewModel::class)
+    abstract fun bindsNewsViewModel(viewModel: NewsViewModel): ViewModel
 }

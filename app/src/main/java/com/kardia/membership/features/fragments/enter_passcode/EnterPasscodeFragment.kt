@@ -1,6 +1,5 @@
 package com.kardia.membership.features.fragments.enter_passcode
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -9,13 +8,9 @@ import android.text.TextPaint
 import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.view.ContextMenu
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.text.color
 import androidx.core.text.set
-import com.airbnb.paris.Paris
-import com.google.android.material.button.MaterialButton
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseFragment
@@ -116,7 +111,7 @@ class EnterPasscodeFragment : BaseFragment() {
                         PostLoginPasscodeUseCase.Params(
                             otp,
                             email,
-                            AppConstants.DEVICE_ID_TEST,
+                            AppConstants.DEVICE_ID,
                             AppConstants.DEVICE_OS
                         )
                     )
@@ -124,7 +119,7 @@ class EnterPasscodeFragment : BaseFragment() {
                     passcodeViewModel.checkPasscode(
                         PostCheckPasscodeUseCase.Params(
                             otp,
-                            AppConstants.DEVICE_ID_TEST
+                            AppConstants.DEVICE_ID
                         )
                     )
                 }
@@ -138,7 +133,7 @@ class EnterPasscodeFragment : BaseFragment() {
                     PostLoginPasscodeUseCase.Params(
                         it,
                         email,
-                        AppConstants.DEVICE_ID_TEST,
+                        AppConstants.DEVICE_ID,
                         AppConstants.DEVICE_OS
                     )
                 )
@@ -146,7 +141,7 @@ class EnterPasscodeFragment : BaseFragment() {
                 passcodeViewModel.checkPasscode(
                     PostCheckPasscodeUseCase.Params(
                         it,
-                        AppConstants.DEVICE_ID_TEST
+                        AppConstants.DEVICE_ID
                     )
                 )
             }

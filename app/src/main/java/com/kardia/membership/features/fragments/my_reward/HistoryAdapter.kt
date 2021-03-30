@@ -9,8 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.color
 import androidx.recyclerview.widget.RecyclerView
 import com.kardia.membership.R
-import com.kardia.membership.core.extension.getDateFormat
-import com.kardia.membership.core.extension.gone
+import com.kardia.membership.core.extension.changeDateFormat
 import com.kardia.membership.core.extension.visible
 import com.kardia.membership.data.entities.History
 import javax.inject.Inject
@@ -39,7 +38,7 @@ class HistoryAdapter
                     append(context.getString(R.string.received_on))
                 }
                 .append(" ")
-                .append(item.createdDate?.getDateFormat("dd/MM/yyyy"))
+                .append(item.createdDate?.changeDateFormat("dd/MM/yyyy"))
             itemView.tvDescHistory.text = myCustomizedString
             item.codeCard?.let{
                 if(it.isNotEmpty()){

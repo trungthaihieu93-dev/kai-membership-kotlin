@@ -4,15 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.kardia.membership.core.platform.BaseViewModel
 import com.kardia.membership.domain.entities.auth.LoginAuthEntity
 import com.kardia.membership.domain.entities.device.PasscodeDeviceEntity
-import com.kardia.membership.domain.entities.passcode.CheckPasscodeEntity
-import com.kardia.membership.domain.entities.passcode.ForgotPasscodeEntity
-import com.kardia.membership.domain.entities.passcode.LoginPasscodeEntity
-import com.kardia.membership.domain.entities.passcode.RegisterPasscodeEntity
+import com.kardia.membership.domain.entities.passcode.*
 import com.kardia.membership.domain.usecases.auth.PostLoginAuthUseCase
-import com.kardia.membership.domain.usecases.passcode.PostCheckPasscodeUseCase
-import com.kardia.membership.domain.usecases.passcode.PostForgotPasscodeUseCase
-import com.kardia.membership.domain.usecases.passcode.PostLoginPasscodeUseCase
-import com.kardia.membership.domain.usecases.passcode.PostRegisterPasscodeUseCase
+import com.kardia.membership.domain.usecases.passcode.*
 import javax.inject.Inject
 
 class PasscodeViewModel
@@ -20,12 +14,14 @@ class PasscodeViewModel
     private val postLoginPasscodeUseCase: PostLoginPasscodeUseCase,
     private val postCheckPasscodeUseCase: PostCheckPasscodeUseCase,
     private val postForgotPasscodeUseCase: PostForgotPasscodeUseCase,
-    private val postRegisterPasscodeUseCase: PostRegisterPasscodeUseCase
+    private val postRegisterPasscodeUseCase: PostRegisterPasscodeUseCase,
+    private val postResetPasscodeUseCase: PostResetPasscodeUseCase
 ) : BaseViewModel() {
     var loginEntity: MutableLiveData<LoginPasscodeEntity> = MutableLiveData()
     var checkEntity: MutableLiveData<CheckPasscodeEntity> = MutableLiveData()
     var forgotEntity: MutableLiveData<ForgotPasscodeEntity> = MutableLiveData()
     var registerEntity: MutableLiveData<RegisterPasscodeEntity> = MutableLiveData()
+    var resetEntity: MutableLiveData<ResetPasscodeEntity> = MutableLiveData()
 
     fun loginPasscode(params: PostLoginPasscodeUseCase.Params) = postLoginPasscodeUseCase(params) {
         it.fold(::handleFailure, ::handleLoginPasscode)
@@ -43,19 +39,29 @@ class PasscodeViewModel
         this.checkEntity.value = data
     }
 
-    fun forgotPasscode(params: PostForgotPasscodeUseCase.Params) = postForgotPasscodeUseCase(params) {
-        it.fold(::handleFailure, ::handleForgot)
-    }
+    fun forgotPasscode(params: PostForgotPasscodeUseCase.Params) =
+        postForgotPasscodeUseCase(params) {
+            it.fold(::handleFailure, ::handleForgot)
+        }
 
     private fun handleForgot(data: ForgotPasscodeEntity) {
         this.forgotEntity.value = data
     }
 
-    fun registerPasscode(params: PostRegisterPasscodeUseCase.Params) = postRegisterPasscodeUseCase(params) {
-        it.fold(::handleFailure, ::handleRegisterPasscode)
-    }
+    fun registerPasscode(params: PostRegisterPasscodeUseCase.Params) =
+        postRegisterPasscodeUseCase(params) {
+            it.fold(::handleFailure, ::handleRegisterPasscode)
+        }
 
     private fun handleRegisterPasscode(data: RegisterPasscodeEntity) {
         this.registerEntity.value = data
+    }
+
+    fun resetPasscode(params: PostResetPasscodeUseCase.Params) = postResetPasscodeUseCase(params) {
+        it.fold(::handleFailure, ::handleResetPasscode)
+    }
+
+    private fun handleResetPasscode(data: ResetPasscodeEntity) {
+        this.resetEntity.value = data
     }
 }

@@ -1,4 +1,5 @@
 package com.kardia.membership.core.di
+
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kardia.membership.AndroidApplication
 import com.kardia.membership.core.di.viewmodel.ViewModelModule
@@ -33,11 +34,13 @@ import com.kardia.membership.features.fragments.receive.ReceiveFragment
 import com.kardia.membership.features.fragments.register.RegisterFragment
 import com.kardia.membership.features.fragments.register_success.RegisterSuccessFragment
 import com.kardia.membership.features.fragments.reset_passcode.ResetPasscodeFragment
+import com.kardia.membership.features.fragments.reset_passcode_success.ResetPasscodeSuccessFragment
 import com.kardia.membership.features.fragments.select_account.SelectAccountFragment
 import com.kardia.membership.features.fragments.splash.SplashFragment
 import com.kardia.membership.features.fragments.top_up.TopUpAmountBottomSheet
 import com.kardia.membership.features.fragments.top_up.TopUpFragment
 import com.kardia.membership.features.fragments.utilities.UtilitiesFragment
+import com.kardia.membership.features.fragments.verification.VerificationFragment
 import com.kardia.membership.features.fragments.wallet.WalletFragment
 import dagger.Component
 import javax.inject.Singleton
@@ -84,4 +87,6 @@ interface ApplicationComponent {
     fun inject(missionFragment: MissionFragment)
     fun inject(subMissionFragment: SubMissionFragment)
     fun inject(myRewardFragment: MyRewardFragment)
+    fun inject(verificationFragment: VerificationFragment)
+    fun inject(resetPasscodeSuccessFragment: ResetPasscodeSuccessFragment)
 }

@@ -84,7 +84,7 @@
     <string name="token_empty">Token can not be blank</string>
 
     //New password success
-    <string name="content_new_password_success">Your new Passcode is ready.</string>
+    <string name="content_new_password_success">Your new Password is ready.</string>
     <string name="ok_i_got_it">OK, I got it</string>
     <string name="title_password_changed">Password changed</string>
     <string name="content_password_changed">Your new password is now applied.\nKeep it safe &amp; sound</string>
@@ -225,4 +225,11 @@
     <string name="send">Send</string>
     <string name="received_on">Received on:</string>
     <string name="code">Code:</string>
+
+    //Verification
+    <string name="verification">Verification</string>
+    <string name="content_verification">Check your email for token</string>
+    <string name="set_new_passcode">Set new Passcode</string>
+
+    <string name="reset_passcode_success">Your new Passcode is ready.</string>
 </resources>

@@ -16,9 +16,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/ivThumbnailNews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/img_news_test" />
+            android:src="@drawable/img_background_transparent_feature_news" />
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDateNews"

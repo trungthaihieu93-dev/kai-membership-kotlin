@@ -18,14 +18,15 @@ import com.kardia.membership.features.fragments.my_reward.MyRewardFragment
 import com.kardia.membership.features.fragments.new_passcode.ChangePasswordSuccessBottomSheet
 import com.kardia.membership.features.fragments.new_passcode.NewPasscodeFragment
 import com.kardia.membership.features.fragments.new_password.NewPasswordFragment
+import com.kardia.membership.features.fragments.news.DetailNewsBottomSheet
 import com.kardia.membership.features.fragments.overview.ClaimTopUpFailBottomSheet
 import com.kardia.membership.features.fragments.overview.ClaimTopUpSuccessBottomSheet
 import com.kardia.membership.features.fragments.overview.OverviewFragment
-import com.kardia.membership.features.fragments.profile.ProfileFragment
 import com.kardia.membership.features.fragments.register_success.RegisterSuccessFragment
 import com.kardia.membership.features.fragments.reset_passcode.ResetPasscodeFragment
 import com.kardia.membership.features.fragments.select_account.SelectAccountFragment
 import com.kardia.membership.features.fragments.top_up.TopUpAmountBottomSheet
+import com.kardia.membership.features.fragments.verification.VerificationFragment
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -71,17 +72,32 @@ class Navigator
         }
     )
 
-    fun showConfirmPasscode(
+    fun showConfirmPasscodeRegister(
         activity: FragmentActivity?,
         email: String?,
-        otp: String?,
-        isFromRegister: Boolean = false
+        passcode: String?
     ) {
         BaseFragment.addFragmentByActivity(activity, ConfirmPasscodeFragment().apply {
             arguments = Bundle().apply {
                 putString(ConfirmPasscodeFragment.EMAIL, email)
-                putString(ConfirmPasscodeFragment.OTP, otp)
-                putBoolean(ConfirmPasscodeFragment.IS_FROM_REGISTER, isFromRegister)
+                putString(ConfirmPasscodeFragment.PASSCODE, passcode)
+                putBoolean(ConfirmPasscodeFragment.IS_FROM_REGISTER, true)
+            }
+        })
+    }
+
+    fun showConfirmPasscodeReset(
+        activity: FragmentActivity?,
+        token: String?,
+        passcode: String?,
+        email: String?
+    ) {
+        BaseFragment.addFragmentByActivity(activity, ConfirmPasscodeFragment().apply {
+            arguments = Bundle().apply {
+                putString(ConfirmPasscodeFragment.TOKEN, token)
+                putString(ConfirmPasscodeFragment.PASSCODE, passcode)
+                putBoolean(ConfirmPasscodeFragment.IS_FROM_REGISTER, false)
+                putString(ConfirmPasscodeFragment.EMAIL, email)
             }
         })
     }
@@ -142,8 +158,13 @@ class Navigator
         })
     }
 
-    fun showNewPasscode(activity: FragmentActivity?) {
-        BaseFragment.addFragmentByActivity(activity, NewPasscodeFragment())
+    fun showNewPasscode(activity: FragmentActivity?, token: String?, email: String?) {
+        BaseFragment.addFragmentByActivity(activity, NewPasscodeFragment().apply {
+            arguments = Bundle().apply {
+                putString(NewPasscodeFragment.TOKEN, token)
+                putString(NewPasscodeFragment.EMAIL, email)
+            }
+        })
     }
 
     fun showReceive(activity: FragmentActivity?) = activity?.startActivity(
@@ -264,4 +285,36 @@ class Navigator
     fun showSpin(activity: FragmentActivity?) = activity?.startActivity(
         SpinActivity.callingIntent(activity).apply { }
     )
+
+    fun showDetailNews(
+        activity: FragmentActivity?,
+        link: String?,
+        callback: DetailNewsBottomSheet.CallBack
+    ) {
+        activity?.let {
+            val bottomSheet = DetailNewsBottomSheet().apply {
+                arguments = Bundle().apply {
+                    putString(DetailNewsBottomSheet.LINK_NEWS, link)
+                }
+            }
+            bottomSheet.setCallBack(callback)
+            bottomSheet.show(
+                it.supportFragmentManager,
+                bottomSheet.tag
+            )
+        }
+    }
+
+    fun showVerification(activity: FragmentActivity?, email: String?) {
+        BaseFragment.addFragmentByActivity(activity, VerificationFragment().apply {
+            arguments = Bundle().apply {
+                putString(VerificationFragment.EMAIL, email)
+            }
+        })
+    }
+
+    fun showResetPasscodeSuccess(activity: FragmentActivity?) = activity?.startActivity(
+        ResetPasscodeSuccessActivity.callingIntent(activity).apply { }
+    )
+
 }

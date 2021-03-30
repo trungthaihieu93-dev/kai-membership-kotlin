@@ -70,7 +70,7 @@ class SelectAccountFragment : BaseFragment() {
             }
         } else {
             showProgress()
-            deviceViewModel.getPasscodeByDevice(AppConstants.DEVICE_ID_TEST)
+            deviceViewModel.getPasscodeByDevice(AppConstants.DEVICE_ID)
         }
     }
 

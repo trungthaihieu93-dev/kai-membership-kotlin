@@ -6,12 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kardia.membership.R
-import com.kardia.membership.core.extension.px2dp
+import com.kardia.membership.core.extension.changeDateFormat
+import com.kardia.membership.core.extension.loadFromUrlRounded
 import com.kardia.membership.core.platform.OnItemClickListener
-import com.kardia.membership.data.entities.News
+import com.kardia.membership.data.entities.NewsLatest
 import javax.inject.Inject
 import kotlin.properties.Delegates
 import com.kardia.membership.features.fragments.news.LatestNewsAdapter.LatestNewsViewHolder
+import kotlinx.android.synthetic.main.item_latest_news.view.*
+import kotlinx.android.synthetic.main.item_latest_news.view.ivThumbnailNews
+import kotlinx.android.synthetic.main.item_latest_news.view.tvDateNews
+import kotlinx.android.synthetic.main.item_latest_news.view.tvTitleNews
+import kotlinx.android.synthetic.main.item_news.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class LatestNewsAdapter
 @Inject constructor() :
@@ -22,7 +30,7 @@ class LatestNewsAdapter
     var itemSize =
         (Resources.getSystem().displayMetrics.widthPixels / 14) * 13
 
-    internal var collection: ArrayList<News> by Delegates.observable(ArrayList()) { _, _, _ ->
+    internal var collection: ArrayList<NewsLatest> by Delegates.observable(ArrayList()) { _, _, _ ->
         notifyDataSetChanged()
     }
 
@@ -33,14 +41,27 @@ class LatestNewsAdapter
         }
 
         fun bind(position: Int) {
-//            val item = collection[position]
-//
-//            itemView.setOnClickListener {
-//                onItemClickListener?.onItemClick(
-//                    item,
-//                    position
-//                )
-//            }
+            val item = collection[position]
+            item.entities?.media?.let { mediaList ->
+                mediaList.forEach { media ->
+                    media.media_url_https?.let { urlImage ->
+                        itemView.ivThumbnailNews.loadFromUrlRounded(urlImage, 8f)
+                        return@forEach
+                    }
+                }
+            }
+            itemView.tvTitleNews.text = item.full_text
+            itemView.tvDateNews.text = item.created_at?.changeDateFormat(
+                "EEE dd MMM yyyy",
+                "EEE MMM dd HH:mm:ss Z yyyy",
+                Locale.ENGLISH
+            )
+            itemView.setOnClickListener {
+                onItemClickListener?.onItemClick(
+                    item,
+                    position
+                )
+            }
         }
     }
 
@@ -55,7 +76,7 @@ class LatestNewsAdapter
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return collection.size
     }
 
     override fun onBindViewHolder(holder: LatestNewsViewHolder, position: Int) {

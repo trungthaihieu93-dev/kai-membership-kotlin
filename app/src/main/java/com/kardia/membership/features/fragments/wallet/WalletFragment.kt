@@ -81,7 +81,9 @@ class WalletFragment : BaseFragment() {
             tvHolderWallet.text = kai.first_name
         }
         userInfo.user_info?.let { user ->
-            tvMemberSinceWallet.text = user.createdDate?.getDateFormat("MM/yyyy")
+            tvMemberSinceWallet.text = user.createdDate?.changeDateFormat(
+                "MM/yyyy"
+            )
         }
 
     }

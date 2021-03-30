@@ -1,9 +1,12 @@
 package com.kardia.membership
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.provider.Settings
 import com.kardia.membership.core.di.ApplicationComponent
 import com.kardia.membership.core.di.ApplicationModule
 import com.kardia.membership.core.di.DaggerApplicationComponent
+import com.kardia.membership.features.utils.AppConstants
 
 class AndroidApplication : Application() {
 
@@ -32,9 +35,16 @@ class AndroidApplication : Application() {
 
     private val runningActivities: ArrayList<Class<*>> = ArrayList()
 
+    @SuppressLint("HardwareIds")
     override fun onCreate() {
         super.onCreate()
         this.injectMembers()
+
+        val deviceId: String = Settings.Secure.getString(
+            contentResolver,
+            Settings.Secure.ANDROID_ID
+        )
+        AppConstants.DEVICE_ID = "e3a0a9e5a5b5d767"
     }
 
     private fun injectMembers() = appComponent.inject(this)
