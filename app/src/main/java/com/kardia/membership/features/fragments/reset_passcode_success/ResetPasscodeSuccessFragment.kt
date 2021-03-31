@@ -35,4 +35,8 @@ class ResetPasscodeSuccessFragment : BaseFragment() {
 
     }
 
+    override fun onBackPressed(): Boolean {
+        mNavigator.showLoginNew(activity)
+        return true
+    }
 }

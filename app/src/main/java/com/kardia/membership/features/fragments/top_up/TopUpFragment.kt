@@ -63,17 +63,17 @@ class TopUpFragment : BaseFragment() {
             mNavigator.showTopUpAmount(activity, callback)
         }
         btContinue.setOnClickListener {
-            tvMessageEmailPhone.gone()
+            tvMessageEmptyPhone.gone()
             phone = etPhoneTopUp.text.toString().trim()
             if (phone.isNotEmpty()) {
-                mNavigator.showOverview(
+                mNavigator.showTopUpOverview(
                     activity,
                     etPhoneTopUp.text.toString().trim(),
                     providerCode,
                     topUpAmount
                 )
             } else {
-                tvMessageEmailPhone.visible()
+                tvMessageEmptyPhone.visible()
             }
         }
     }

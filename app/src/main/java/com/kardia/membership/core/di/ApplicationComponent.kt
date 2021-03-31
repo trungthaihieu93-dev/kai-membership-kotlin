@@ -26,9 +26,9 @@ import com.kardia.membership.features.fragments.new_passcode.NewPasscodeFragment
 import com.kardia.membership.features.fragments.new_password.NewPasswordFragment
 import com.kardia.membership.features.fragments.new_password_success.NewPasswordSuccessFragment
 import com.kardia.membership.features.fragments.news.NewsFragment
-import com.kardia.membership.features.fragments.overview.ClaimTopUpFailBottomSheet
-import com.kardia.membership.features.fragments.overview.ClaimTopUpSuccessBottomSheet
-import com.kardia.membership.features.fragments.overview.OverviewFragment
+import com.kardia.membership.features.fragments.top_up_overview.ClaimTopUpFailBottomSheet
+import com.kardia.membership.features.fragments.top_up_overview.ClaimTopUpSuccessBottomSheet
+import com.kardia.membership.features.fragments.top_up_overview.TopUpOverviewFragment
 import com.kardia.membership.features.fragments.profile.ProfileFragment
 import com.kardia.membership.features.fragments.receive.ReceiveFragment
 import com.kardia.membership.features.fragments.register.RegisterFragment
@@ -36,6 +36,8 @@ import com.kardia.membership.features.fragments.register_success.RegisterSuccess
 import com.kardia.membership.features.fragments.reset_passcode.ResetPasscodeFragment
 import com.kardia.membership.features.fragments.reset_passcode_success.ResetPasscodeSuccessFragment
 import com.kardia.membership.features.fragments.select_account.SelectAccountFragment
+import com.kardia.membership.features.fragments.send.SendFragment
+import com.kardia.membership.features.fragments.send_overview.SendOverviewFragment
 import com.kardia.membership.features.fragments.splash.SplashFragment
 import com.kardia.membership.features.fragments.top_up.TopUpAmountBottomSheet
 import com.kardia.membership.features.fragments.top_up.TopUpFragment
@@ -77,7 +79,7 @@ interface ApplicationComponent {
     fun inject(buyFragment: BuyFragment)
     fun inject(utilitiesFragment: UtilitiesFragment)
     fun inject(topUpFragment: TopUpFragment)
-    fun inject(overviewFragment: OverviewFragment)
+    fun inject(overviewFragment: TopUpOverviewFragment)
     fun inject(topUpAmountBottomSheet: TopUpAmountBottomSheet)
     fun inject(claimTopUpFailBottomSheet: ClaimTopUpFailBottomSheet)
     fun inject(claimTopUpSuccessBottomSheet: ClaimTopUpSuccessBottomSheet)
@@ -89,4 +91,6 @@ interface ApplicationComponent {
     fun inject(myRewardFragment: MyRewardFragment)
     fun inject(verificationFragment: VerificationFragment)
     fun inject(resetPasscodeSuccessFragment: ResetPasscodeSuccessFragment)
+    fun inject(sendFragment: SendFragment)
+    fun inject(sendOverviewFragment: SendOverviewFragment)
 }

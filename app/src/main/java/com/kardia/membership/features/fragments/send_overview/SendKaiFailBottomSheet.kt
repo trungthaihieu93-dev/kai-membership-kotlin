@@ -1,15 +1,15 @@
-package com.kardia.membership.features.fragments.overview
+package com.kardia.membership.features.fragments.send_overview
 
 import android.os.Bundle
 import com.kardia.membership.R
 import com.kardia.membership.core.platform.BaseBottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_sheet_claim_top_up_success.*
+import kotlinx.android.synthetic.main.bottom_sheet_send_kai_fail.*
 
-class ClaimTopUpSuccessBottomSheet  : BaseBottomSheetDialogFragment() {
+class SendKaiFailBottomSheet : BaseBottomSheetDialogFragment() {
     private var callback: CallBack? = null
 
     override fun layoutId(): Int {
-        return R.layout.bottom_sheet_claim_top_up_success
+        return R.layout.bottom_sheet_send_kai_fail
     }
 
     override fun isFullHeight(): Boolean {
@@ -25,7 +25,7 @@ class ClaimTopUpSuccessBottomSheet  : BaseBottomSheetDialogFragment() {
     }
 
     override fun initEvents() {
-        btBackToUtilities.setOnClickListener {
+        btCheckAgain.setOnClickListener {
             dismiss()
             callback?.onDismiss()
         }
@@ -46,5 +46,4 @@ class ClaimTopUpSuccessBottomSheet  : BaseBottomSheetDialogFragment() {
     interface CallBack {
         fun onDismiss()
     }
-
 }

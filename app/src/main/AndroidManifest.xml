@@ -96,6 +96,13 @@
             android:name=".features.activities.ResetPasscodeSuccessActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".features.activities.SendActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.activities.ScanQRCodeActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

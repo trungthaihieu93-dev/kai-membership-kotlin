@@ -54,6 +54,14 @@ class WalletFragment : BaseFragment() {
                 mNavigator.showLogin(activity)
             }
         }
+
+        fabSend.setOnClickListener {
+            if (isUserLogin) {
+                mNavigator.showSend(activity)
+            } else {
+                mNavigator.showLogin(activity)
+            }
+        }
     }
 
     override fun loadData() {

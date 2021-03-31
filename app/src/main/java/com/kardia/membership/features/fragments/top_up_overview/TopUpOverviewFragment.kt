@@ -1,4 +1,4 @@
-package com.kardia.membership.features.fragments.overview
+package com.kardia.membership.features.fragments.top_up_overview
 
 import android.os.Bundle
 import android.view.View
@@ -7,18 +7,13 @@ import com.kardia.membership.core.exception.Failure
 import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.data.entities.TopUpAmount
-import com.kardia.membership.data.entities.UserToken
-import com.kardia.membership.domain.entities.auth.LoginAuthEntity
 import com.kardia.membership.domain.entities.topup.ClaimTopUpEntity
 import com.kardia.membership.domain.usecases.topup.PostClaimTopUpUseCase
-import com.kardia.membership.features.fragments.select_account.SelectAccountFragment
-import com.kardia.membership.features.fragments.top_up.TopUpAmountBottomSheet
-import com.kardia.membership.features.viewmodel.AuthViewModel
 import com.kardia.membership.features.viewmodel.TopUpViewModel
-import kotlinx.android.synthetic.main.fragment_overview.*
+import kotlinx.android.synthetic.main.fragment_topup_overview.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
-class OverviewFragment : BaseFragment() {
+class TopUpOverviewFragment : BaseFragment() {
     private var phone: String? = null
     private var providerCode: String? = null
     private var topUpAmount: TopUpAmount? = null
@@ -31,7 +26,7 @@ class OverviewFragment : BaseFragment() {
         const val TOP_UP_AMOUNT = "topUpAmount"
     }
 
-    override fun layoutId() = R.layout.fragment_overview
+    override fun layoutId() = R.layout.fragment_topup_overview
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

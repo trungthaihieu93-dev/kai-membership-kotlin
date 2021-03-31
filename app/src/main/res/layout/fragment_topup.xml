@@ -98,18 +98,22 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/background_edittext"
                 android:layout_marginTop="@dimen/_4sdp">
 
                 <EditText
                     android:id="@+id/etPhoneTopUp"
-                    style="@style/TextInputEditTextStyle"
+                    style="@style/TextInputEditTextStyleNoBackground"
+                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_phone_no"
                     android:inputType="phone"
+                    android:layout_toStartOf="@id/ivPhoneSetting"
                     android:maxLength="15" />
 
                 <ImageView
+                    android:id="@+id/ivPhoneSetting"
                     android:layout_width="@dimen/_14sdp"
                     android:layout_height="@dimen/_14sdp"
                     android:layout_alignParentEnd="true"
@@ -119,7 +123,7 @@
             </RelativeLayout>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvMessageEmailPhone"
+                android:id="@+id/tvMessageEmptyPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_4sdp"

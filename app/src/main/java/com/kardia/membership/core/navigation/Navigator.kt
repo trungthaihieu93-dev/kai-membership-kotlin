@@ -19,12 +19,15 @@ import com.kardia.membership.features.fragments.new_passcode.ChangePasswordSucce
 import com.kardia.membership.features.fragments.new_passcode.NewPasscodeFragment
 import com.kardia.membership.features.fragments.new_password.NewPasswordFragment
 import com.kardia.membership.features.fragments.news.DetailNewsBottomSheet
-import com.kardia.membership.features.fragments.overview.ClaimTopUpFailBottomSheet
-import com.kardia.membership.features.fragments.overview.ClaimTopUpSuccessBottomSheet
-import com.kardia.membership.features.fragments.overview.OverviewFragment
+import com.kardia.membership.features.fragments.top_up_overview.ClaimTopUpFailBottomSheet
+import com.kardia.membership.features.fragments.top_up_overview.ClaimTopUpSuccessBottomSheet
+import com.kardia.membership.features.fragments.top_up_overview.TopUpOverviewFragment
 import com.kardia.membership.features.fragments.register_success.RegisterSuccessFragment
 import com.kardia.membership.features.fragments.reset_passcode.ResetPasscodeFragment
 import com.kardia.membership.features.fragments.select_account.SelectAccountFragment
+import com.kardia.membership.features.fragments.send_overview.SendKaiFailBottomSheet
+import com.kardia.membership.features.fragments.send_overview.SendKaiSuccessBottomSheet
+import com.kardia.membership.features.fragments.send_overview.SendOverviewFragment
 import com.kardia.membership.features.fragments.top_up.TopUpAmountBottomSheet
 import com.kardia.membership.features.fragments.verification.VerificationFragment
 import javax.inject.Inject
@@ -203,17 +206,17 @@ class Navigator
         }
     }
 
-    fun showOverview(
+    fun showTopUpOverview(
         activity: FragmentActivity?,
         phone: String,
         providerCode: String?,
         topUpAmount: TopUpAmount?
     ) {
-        BaseFragment.addFragmentByActivity(activity, OverviewFragment().apply {
+        BaseFragment.addFragmentByActivity(activity, TopUpOverviewFragment().apply {
             arguments = Bundle().apply {
-                putString(OverviewFragment.PHONE, phone)
-                putString(OverviewFragment.PROVIDER_CODE, providerCode)
-                putParcelable(OverviewFragment.TOP_UP_AMOUNT, topUpAmount)
+                putString(TopUpOverviewFragment.PHONE, phone)
+                putString(TopUpOverviewFragment.PROVIDER_CODE, providerCode)
+                putParcelable(TopUpOverviewFragment.TOP_UP_AMOUNT, topUpAmount)
             }
         })
     }
@@ -317,4 +320,48 @@ class Navigator
         ResetPasscodeSuccessActivity.callingIntent(activity).apply { }
     )
 
+    fun showSend(activity: FragmentActivity?) = activity?.startActivity(
+        SendActivity.callingIntent(activity).apply { }
+    )
+
+    fun showSendOverview(
+        activity: FragmentActivity?,
+        address: String,
+        amount: String?
+    ) {
+        BaseFragment.addFragmentByActivity(activity, SendOverviewFragment().apply {
+            arguments = Bundle().apply {
+                putString(SendOverviewFragment.ADDRESS, address)
+                putString(SendOverviewFragment.AMOUNT, amount)
+            }
+        })
+    }
+
+    fun showSendKaiFail(
+        activity: FragmentActivity?,
+        callback: SendKaiFailBottomSheet.CallBack
+    ) {
+        activity?.let {
+            val bottomSheet = SendKaiFailBottomSheet()
+            bottomSheet.setCallBack(callback)
+            bottomSheet.show(
+                it.supportFragmentManager,
+                bottomSheet.tag
+            )
+        }
+    }
+
+    fun showSendKaiSuccess(
+        activity: FragmentActivity?,
+        callback: SendKaiSuccessBottomSheet.CallBack
+    ) {
+        activity?.let {
+            val bottomSheet = SendKaiSuccessBottomSheet()
+            bottomSheet.setCallBack(callback)
+            bottomSheet.show(
+                it.supportFragmentManager,
+                bottomSheet.tag
+            )
+        }
+    }
 }

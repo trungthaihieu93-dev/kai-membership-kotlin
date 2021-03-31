@@ -135,7 +135,7 @@
     <string name="recent_transactions">Recent Transactions</string>
     <string name="label_menu_fab_buy">BUY</string>
     <string name="label_menu_fab_get">RECEIVE</string>
-
+    <string name="label_menu_fab_send">SEND</string>
     //News
     <string name="latest_news">Latest News</string>
 
@@ -230,6 +230,19 @@
     <string name="verification">Verification</string>
     <string name="content_verification">Check your email for token</string>
     <string name="set_new_passcode">Set new Passcode</string>
-
     <string name="reset_passcode_success">Your new Passcode is ready.</string>
+
+    //Send
+    <string name="title_send">Send</string>
+    <string name="sender_info">Sender Info.</string>
+    <string name="hint_address_recipient">Recipient Address</string>
+    <string name="send_amount">Send amount</string>
+    <string name="hint_send_amount">KAI Amount</string>
+    <string name="send_now">Send Now</string>
+    <string name="content_send_kai_fail">Maybe the address is wrong somehow…\n Or you don\'t have enough $KAI.. Check both!</string>
+    <string name="sent">Sent</string>
+    <string name="content_send_kai_success">Happy trading!</string>
+    <string name="back_to_my_wallet">Back to My Wallet</string>
+    <string name="recipient_address_empty">Recipient Address can not be blank</string>
+    <string name="kai_amount_empty">KAI Amount can not be blank</string>
 </resources>

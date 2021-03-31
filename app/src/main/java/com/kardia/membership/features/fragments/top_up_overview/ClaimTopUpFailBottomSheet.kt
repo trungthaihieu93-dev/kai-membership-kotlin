@@ -1,9 +1,8 @@
-package com.kardia.membership.features.fragments.overview
+package com.kardia.membership.features.fragments.top_up_overview
 
 import android.os.Bundle
 import com.kardia.membership.R
 import com.kardia.membership.core.platform.BaseBottomSheetDialogFragment
-import com.kardia.membership.data.entities.TopUpAmount
 import kotlinx.android.synthetic.main.bottom_sheet_claim_top_up_fail.*
 
 class ClaimTopUpFailBottomSheet : BaseBottomSheetDialogFragment() {
