@@ -39,6 +39,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.kardia.membership.features.dialog.NoInternetDialog
 import com.kardia.membership.features.utils.CommonUtils
 import com.kardia.membership.features.utils.DataConstants
+import com.kardia.membership.features.utils.TrackingUtil
 import java.io.File
 import javax.inject.Inject
 
@@ -80,6 +81,8 @@ abstract class BaseFragment : Fragment() {
 
     @Inject
     lateinit var application: AndroidApplication
+
+    var isNotCatch401 = false
 
 //    var userID = 0
 
@@ -355,7 +358,7 @@ abstract class BaseFragment : Fragment() {
             }
             is Failure.ServerError -> {
                 AppLog.e("Duy", "${failure.error} : ${(activity as BaseActivity).isShowError}")
-                if (failure.errorCode == 401) {
+                if (failure.errorCode == 401 && !isNotCatch401) {
                     DialogAlert()
                         .setTitle("This account is already logged into on another device.")
                         .setMessage("You are currently logged in on another device. Please log out of the other device or contact your administrator.")
@@ -558,5 +561,11 @@ abstract class BaseFragment : Fragment() {
         DataConstants.QUEST_ENTITY = null
         userInfoCache.clear()
         userTokenCache.clear()
+    }
+
+    fun tracking(type: String, item: Any? = null) {
+        context?.let {
+            TrackingUtil.tracking(type, item, it)
+        }
     }
 }

@@ -2,6 +2,8 @@ package com.kardia.membership.features.utils
 
 object AppConstants {
     var DEVICE_ID = ""
+    var USER_INVITE: String? = null
+
     const val DEVICE_OS = "Android"
 
     const val TYPE_GET_TRANSACTION = "GET"
@@ -24,4 +26,6 @@ object AppConstants {
     const val TYPE_QUEST_DAILY = "DAILY"
     const val TYPE_QUEST_MONTH = "MONTH"
 
+    const val KEY_SIGN_IN = "SIGN_IN"
+    const val KEY_USER_INVITE = "user"
 }

@@ -133,4 +133,14 @@ class ApplicationModule(private val application: AndroidApplication) {
     @Singleton
     fun provideTwitterRepository(dataSource: TwitterRepository.Network): TwitterRepository =
         dataSource
+
+    @Provides
+    @Singleton
+    fun provideWalletRepository(dataSource: WalletRepository.Network): WalletRepository =
+        dataSource
+
+    @Provides
+    @Singleton
+    fun provideReferralRepository(dataSource: ReferralRepository.Network): ReferralRepository =
+        dataSource
 }

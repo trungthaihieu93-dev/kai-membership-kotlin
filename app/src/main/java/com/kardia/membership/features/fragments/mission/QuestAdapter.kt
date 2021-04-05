@@ -50,7 +50,7 @@ class QuestAdapter
                 )
                 itemView.tvContentQuest.text = context.getString(R.string.completed)
                 itemView.ivQuest.setImageResource(R.drawable.ic_check_quest)
-            } else {
+            }else {
                 item.process?.let { process ->
                     if (process == 0) {
                         itemView.tvContentQuest.visible()
@@ -60,9 +60,23 @@ class QuestAdapter
                         itemView.tvProgress.text =
                             String.format("%02d/%02d", 0, process)
                         item.processing?.let { processing ->
-                            itemView.pbQuest.progress = (processing * 100 / process)
-                            itemView.tvProgress.text =
-                                String.format("%02d/%02d", processing, process)
+                            if(process<=processing){
+                                itemView.rlProgressBarQuest.gone()
+                                itemView.tvContentQuest.visible()
+                                itemView.tvContentQuest.setTextColor(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.color_0E8C31
+                                    )
+                                )
+                                itemView.tvContentQuest.text = context.getString(R.string.completed)
+                                itemView.ivQuest.setImageResource(R.drawable.ic_check_quest)
+                            }
+                            else {
+                                itemView.pbQuest.progress = (processing * 100 / process)
+                                itemView.tvProgress.text =
+                                    String.format("%02d/%02d", processing, process)
+                            }
                         }
                     }
                 }

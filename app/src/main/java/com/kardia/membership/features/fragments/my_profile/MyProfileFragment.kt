@@ -1,5 +1,7 @@
 package com.kardia.membership.features.fragments.my_profile
 
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
 import android.view.View
 import com.kardia.membership.R
@@ -7,18 +9,18 @@ import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.domain.entities.user.UpdateUserEntity
 import com.kardia.membership.domain.entities.user.UserInfoEntity
-import com.kardia.membership.domain.usecases.auth.PostLoginAuthUseCase
 import com.kardia.membership.domain.usecases.user.PostUpdateInfoUseCase
-import com.kardia.membership.features.utils.AppConstants
 import com.kardia.membership.features.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import java.util.*
+
 
 class MyProfileFragment : BaseFragment() {
     private lateinit var userViewModel: UserViewModel
 
     override fun layoutId() = R.layout.fragment_my_profile
-
+    private val myCalendar = Calendar.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
@@ -46,6 +48,24 @@ class MyProfileFragment : BaseFragment() {
 
         btUpdateProfile.setOnClickListener {
             updateProfile()
+        }
+
+        val date =
+            OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                myCalendar[Calendar.YEAR] = year
+                myCalendar[Calendar.MONTH] = monthOfYear
+                myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
+                etDateOfBirthMyProfile.setText(myCalendar.time.time.getMonthYearDate("dd/MM/yyyy"))
+            }
+        etDateOfBirthMyProfile.setOnClickListener {
+            activity?.let { activity->
+                DatePickerDialog(
+                    activity, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)
+                ).show()
+
+            }
         }
     }
 

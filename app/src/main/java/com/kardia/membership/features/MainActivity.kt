@@ -6,21 +6,25 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseActivity
 import com.kardia.membership.core.platform.BaseFragment
+import com.kardia.membership.domain.entities.quest.UpdateProgressMissionEntity
 import com.kardia.membership.domain.entities.tracking.TrackingActivityEntity
 import com.kardia.membership.domain.entities.user.UserInfoEntity
+import com.kardia.membership.domain.usecases.quest.PostUpdateProgressMission
 import com.kardia.membership.domain.usecases.tracking.PostTrackingActivityUseCase
-import com.kardia.membership.features.fragments.games.GamesFragment
 import com.kardia.membership.features.fragments.mission.MissionFragment
 import com.kardia.membership.features.fragments.news.NewsFragment
 import com.kardia.membership.features.fragments.utilities.UtilitiesFragment
 import com.kardia.membership.features.fragments.wallet.WalletFragment
 import com.kardia.membership.features.utils.AppConstants
+import com.kardia.membership.features.viewmodel.QuestViewModel
 import com.kardia.membership.features.viewmodel.TrackingViewModel
 import com.kardia.membership.features.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,11 +32,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private lateinit var userViewModel: UserViewModel
     private lateinit var trackingViewModel: TrackingViewModel
-    private var isTrackingLogin = false
+    private lateinit var questViewModel: QuestViewModel
+    private var isFirst = false
+    private var slide_down: Animation? = null
+    private var slide_up: Animation? = null
+//    private var isTrackingLogin = false
 
     companion object {
         fun callingIntent(context: Context) = Intent(context, MainActivity::class.java)
         const val TAB = "tab"
+        const val IS_FIRST = "isFirst"
     }
 
     override fun fragment(): BaseFragment? {
@@ -47,6 +56,9 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         }
         trackingViewModel = viewModel(viewModelFactory) {
             observe(trackingActivityEntity, ::onReceiveTrackingActivityEntity)
+        }
+        questViewModel = viewModel(viewModelFactory) {
+            observe(updateProgressMissionEntity, ::onReceiveUpdateProgressMissionEntity)
         }
 
         setContentView(R.layout.activity_main)
@@ -69,6 +81,24 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 selectNavigation(tab)
             }, 500)
         }
+
+
+//        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+//        collapsingToolbarLayout.setTitle("");
+        slide_down = AnimationUtils.loadAnimation(
+            applicationContext,
+            R.anim.slide_down_noti
+        )
+
+        slide_up = AnimationUtils.loadAnimation(
+            applicationContext,
+            R.anim.slide_up_noti
+        )
+
+        userTokenCache.get()?.isFirst?.let {
+            isFirst = it
+        }
+
     }
 
     private fun moveProfile() {
@@ -87,15 +117,21 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     private fun loadData() {
         if (isUserLogin) {
             userViewModel.getUserInfo()
-        } else {
-            if (!isTrackingLogin) {
-                trackingViewModel.trackingActivity(
-                    PostTrackingActivityUseCase.Params(
-                        "guest",
-                        AppConstants.DEVICE_ID
-                    )
+            questViewModel.updateProgressMission(
+                PostUpdateProgressMission.Params(
+                    AppConstants.KEY_SIGN_IN,
+                    1
                 )
-            }
+            )
+        } else {
+//            if (!isTrackingLogin) {
+            trackingViewModel.trackingActivity(
+                PostTrackingActivityUseCase.Params(
+                    "guest",
+                    AppConstants.DEVICE_ID
+                )
+            )
+//            }
         }
     }
 
@@ -159,19 +195,19 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 }
                 return true
             }
-            R.id.navigation_games -> {
-                if (!getCurrentFragmentName().equals(
-                        GamesFragment::class.java.simpleName,
-                        true
-                    )
-                ) {
-                    BaseFragment.setFragment(supportFragmentManager, GamesFragment())
-                    tvHeader.text = getString(R.string.text_navigation_games)
-                    tvHeader.setTextColor(getColor(R.color.color_DE000000))
-                    changeColorStatusBarMain(true)
-                }
-                return true
-            }
+//            R.id.navigation_games -> {
+//                if (!getCurrentFragmentName().equals(
+//                        GamesFragment::class.java.simpleName,
+//                        true
+//                    )
+//                ) {
+//                    BaseFragment.setFragment(supportFragmentManager, GamesFragment())
+//                    tvHeader.text = getString(R.string.text_navigation_games)
+//                    tvHeader.setTextColor(getColor(R.color.color_DE000000))
+//                    changeColorStatusBarMain(true)
+//                }
+//                return true
+//            }
             R.id.navigation_wallet -> {
                 if (!getCurrentFragmentName().equals(
                         WalletFragment::class.java.simpleName,
@@ -206,19 +242,48 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         entity?.data?.let {
             userInfoCache.put(it)
             setDataUser()
-            if (!isTrackingLogin) {
-                trackingViewModel.trackingActivity(
-                    PostTrackingActivityUseCase.Params(
-                        it.user_info?._id,
-                        AppConstants.DEVICE_ID
-                    )
+//            if (!isTrackingLogin) {
+            trackingViewModel.trackingActivity(
+                PostTrackingActivityUseCase.Params(
+                    it.user_info?._id,
+                    AppConstants.DEVICE_ID
                 )
-            }
+            )
+//            }
         }
     }
 
     private fun onReceiveTrackingActivityEntity(entity: TrackingActivityEntity?) {
-        isTrackingLogin = true
+//        isTrackingLogin = true
+    }
+
+    private fun onReceiveUpdateProgressMissionEntity(entity: UpdateProgressMissionEntity?) {
+        entity?.data?.is_completed?.let {
+            when {
+                it -> {
+                    tvContentReceiveSpin.text = getString(R.string.content_noti_receive_spin, 2)
+                    rlNotification.visible()
+                    rlNotification.startAnimation(slide_down)
+                    Handler().postDelayed({
+                        rlNotification.startAnimation(slide_up)
+                        rlNotification.clearAnimation()
+                        rlNotification.gone()
+                    }, 3000)
+                }
+                isFirst -> {
+                    tvContentReceiveSpin.text = getString(R.string.content_noti_receive_spin, 1)
+                    rlNotification.visible()
+                    rlNotification.startAnimation(slide_down)
+                    Handler().postDelayed({
+                        rlNotification.startAnimation(slide_up)
+                        rlNotification.clearAnimation()
+                        rlNotification.gone()
+                    }, 3000)
+                }
+                else -> {
+                }
+            }
+        }
     }
 
     private fun changeColorStatusBarMain(isChange: Boolean) {

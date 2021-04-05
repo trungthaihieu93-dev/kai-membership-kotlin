@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
             android:fontFamily="@font/text_regular"
-            android:text="@string/email_empty"
+            android:text="@string/password_empty"
             android:textColor="@color/color_C42C15"
             android:textSize="@dimen/_10ssp"
             android:visibility="gone" />

@@ -122,7 +122,7 @@
     <string name="text_navigation_games">Games</string>
     <string name="text_navigation_wallet">My Wallet</string>
     <string name="text_navigation_utilities">Utilities</string>
-
+    <string name="content_noti_receive_spin">You have %02d free spin</string>
     //Wallet
     <string name="balance">Balance</string>
     <string name="holder">Holder</string>
@@ -239,7 +239,7 @@
     <string name="send_amount">Send amount</string>
     <string name="hint_send_amount">KAI Amount</string>
     <string name="send_now">Send Now</string>
-    <string name="content_send_kai_fail">Maybe the address is wrong somehow…\n Or you don\'t have enough $KAI.. Check both!</string>
+    <string name="content_send_kai_fail">Maybe the address is wrong somehow… \nOr you don\'t have enough $KAI… Check both!</string>
     <string name="sent">Sent</string>
     <string name="content_send_kai_success">Happy trading!</string>
     <string name="back_to_my_wallet">Back to My Wallet</string>

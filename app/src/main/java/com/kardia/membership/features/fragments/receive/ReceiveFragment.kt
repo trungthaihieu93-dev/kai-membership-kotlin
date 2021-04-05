@@ -62,7 +62,7 @@ class ReceiveFragment : BaseFragment() {
         try {
             userInfoCache.get()?.kai_info?.wallet?.wallet_address?.let {
                 val barcodeEncoder = BarcodeEncoder()
-                val bitmap = barcodeEncoder.encodeBitmap(it, BarcodeFormat.QR_CODE, 800, 800)
+                val bitmap = barcodeEncoder.encodeBitmap(it, BarcodeFormat.QR_CODE, 500, 500)
                 ivQRCodeWalletAddressReceive.setImageBitmap(bitmap)
                 tvWalletAddressReceive.text = it
             }

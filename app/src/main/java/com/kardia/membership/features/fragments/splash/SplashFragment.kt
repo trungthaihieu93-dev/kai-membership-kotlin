@@ -8,12 +8,18 @@ import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.view.View
 import com.kardia.membership.R
+import com.kardia.membership.core.exception.Failure
 import com.kardia.membership.core.extension.observe
 import com.kardia.membership.core.extension.viewModel
+import com.kardia.membership.core.platform.BaseActivity
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.domain.entities.config.ConfigEntity
 import com.kardia.membership.domain.entities.device.PasscodeDeviceEntity
+import com.kardia.membership.features.dialog.DialogAlert
+import com.kardia.membership.features.dialog.NoInternetDialog
 import com.kardia.membership.features.utils.AppConstants
+import com.kardia.membership.features.utils.AppLog
+import com.kardia.membership.features.utils.CommonUtils
 import com.kardia.membership.features.viewmodel.ConfigViewModel
 import com.kardia.membership.features.viewmodel.DeviceViewModel
 
@@ -28,12 +34,12 @@ class SplashFragment : BaseFragment() {
         appComponent.inject(this)
         deviceViewModel = viewModel(viewModelFactory) {
             observe(passcodeDeviceEntity, ::onReceivePasscodeDeviceEntity)
-            observe(failureData, ::handleFailure)
+            observe(failureData, ::handleFailurePasscodeDevice)
         }
 
         configViewModel = viewModel(viewModelFactory) {
             observe(configEntity, ::onReceiveConfigEntity)
-            observe(failureData, ::handleFailure)
+            observe(failureData, ::handleFailureConfig)
         }
     }
 
@@ -55,42 +61,6 @@ class SplashFragment : BaseFragment() {
 
     @SuppressLint("HardwareIds")
     override fun loadData() {
-        activity?.let {
-            deviceViewModel.getPasscodeByDevice(AppConstants.DEVICE_ID)
-//            deviceViewModel.getPasscodeByDevice("983360F3DA2D7AEC")
-//            deviceViewModel.getPasscodeByDevice("3c9a8afd7a3463c4")
-
-//            val m_wm = it.getSystemService(Context.WIFI_SERVICE) as WifiManager?
-//            val m_wlanMacAdd = m_wm!!.connectionInfo.macAddress
-//
-//            m_wlanMacAdd?.let{ id->
-//                deviceViewModel.getPasscodeByDevice(id)
-//            }
-
-//            val m_BluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-//            val m_bluetoothAdd = m_BluetoothAdapter.address
-//            m_bluetoothAdd?.let{ id->
-//                deviceViewModel.getPasscodeByDevice(id)
-
-//            val TelephonyMgr = it.getSystemService(TELEPHONY_SERVICE) as TelephonyManager?
-//            val m_deviceId = TelephonyMgr!!.deviceId
-//            m_deviceId?.let{ id->
-//                deviceViewModel.getPasscodeByDevice(id)
-//            }
-
-//            val androidId = Settings.Secure.getString(
-//                context!!.contentResolver,
-//                Settings.Secure.ANDROID_ID
-//            )
-//
-//            val androidId_UUID: UUID = UUID
-//                .nameUUIDFromBytes(androidId.toByteArray(charset("utf8")))
-//
-//            val unique_id: String = androidId_UUID.toString()
-//            unique_id?.let{ id->
-//                deviceViewModel.getPasscodeByDevice(id)
-//            }
-        }
         configViewModel.getConfig()
     }
 
@@ -135,7 +105,20 @@ class SplashFragment : BaseFragment() {
     private fun onReceiveConfigEntity(entity: ConfigEntity?) {
         entity?.let{
             configCache.put(it)
+            activity?.let {
+                deviceViewModel.getPasscodeByDevice(AppConstants.DEVICE_ID)
+            }
         }
-        finish()
+    }
+
+    private fun handleFailureConfig(failure: Failure?) {
+        activity?.let {
+            deviceViewModel.getPasscodeByDevice(AppConstants.DEVICE_ID)
+        }
+    }
+
+    private fun handleFailurePasscodeDevice(failure: Failure?) {
+        forceHide()
+        mNavigator.showIntroduce(activity)
     }
 }

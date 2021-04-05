@@ -10,10 +10,10 @@
         android:id="@+id/navigation_mission"
         android:icon="@drawable/ic_rocket_home"
         android:title="@string/text_navigation_mission" />
-    <item
-        android:id="@+id/navigation_games"
-        android:icon="@drawable/ic_games_home"
-        android:title="@string/text_navigation_games" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_games"-->
+<!--        android:icon="@drawable/ic_games_home"-->
+<!--        android:title="@string/text_navigation_games" />-->
 
     <item
         android:id="@+id/navigation_wallet"

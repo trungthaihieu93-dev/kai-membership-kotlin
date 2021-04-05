@@ -1,5 +1,6 @@
 package com.kardia.membership.features.fragments.send_overview
 
+import android.content.DialogInterface
 import android.os.Bundle
 import com.kardia.membership.R
 import com.kardia.membership.core.platform.BaseBottomSheetDialogFragment
@@ -21,13 +22,17 @@ class SendKaiFailBottomSheet : BaseBottomSheetDialogFragment() {
         appComponent.inject(this)
     }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        callback?.onDismiss()
+    }
     override fun initViews() {
     }
 
     override fun initEvents() {
         btCheckAgain.setOnClickListener {
             dismiss()
-            callback?.onDismiss()
+            callback?.onCheckAgain()
         }
     }
 
@@ -45,5 +50,6 @@ class SendKaiFailBottomSheet : BaseBottomSheetDialogFragment() {
 
     interface CallBack {
         fun onDismiss()
+        fun onCheckAgain()
     }
 }

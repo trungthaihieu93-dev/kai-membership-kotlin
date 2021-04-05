@@ -54,7 +54,10 @@ class ProfileFragment : BaseFragment() {
         btShareIdUser.setOnClickListener {
             val share = Intent(Intent.ACTION_SEND)
             share.type = "text/plain"
-            share.putExtra(Intent.EXTRA_TEXT, userInfoCache.get()?.user_info?._id)
+            share.putExtra(
+                Intent.EXTRA_TEXT,
+                userInfoCache.get()?.user_info?.refarral_appflyer_link
+            )
             startActivity(Intent.createChooser(share, "Share Text"))
         }
 

@@ -27,7 +27,12 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField "String", "KEY_APPS_FLYER", "\"hf9GFLkT7jnwPGtGs3LQRW\""
+        }
         release {
+            buildConfigField "String", "KEY_APPS_FLYER", "\"hf9GFLkT7jnwPGtGs3LQRW\""
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -121,4 +126,6 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.2'
 
     implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
+
+    implementation 'com.appsflyer:af-android-sdk:6.2.3'
 }

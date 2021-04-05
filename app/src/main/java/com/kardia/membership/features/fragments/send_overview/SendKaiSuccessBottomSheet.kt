@@ -1,5 +1,6 @@
 package com.kardia.membership.features.fragments.send_overview
 
+import android.content.DialogInterface
 import android.os.Bundle
 import com.kardia.membership.R
 import com.kardia.membership.core.platform.BaseBottomSheetDialogFragment
@@ -21,13 +22,18 @@ class SendKaiSuccessBottomSheet : BaseBottomSheetDialogFragment() {
         appComponent.inject(this)
     }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        callback?.onDismiss()
+    }
+
     override fun initViews() {
     }
 
     override fun initEvents() {
         btBackToMyWallet.setOnClickListener {
             dismiss()
-            callback?.onDismiss()
+            callback?.onBackToMyWallet()
         }
     }
 
@@ -45,6 +51,7 @@ class SendKaiSuccessBottomSheet : BaseBottomSheetDialogFragment() {
 
     interface CallBack {
         fun onDismiss()
+        fun onBackToMyWallet()
     }
 
 }

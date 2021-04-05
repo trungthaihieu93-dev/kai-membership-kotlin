@@ -56,6 +56,7 @@ class ConfirmPasscodeFragment : BaseFragment() {
     }
 
     override fun initViews() {
+        isNotCatch401 = true
         ivBack.visible()
     }
 

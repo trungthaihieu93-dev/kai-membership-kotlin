@@ -14,11 +14,18 @@ import com.kardia.membership.data.entities.UserToken
 import com.kardia.membership.domain.entities.auth.RegisterAuthEntity
 import com.kardia.membership.domain.entities.captcha.CreateCaptchaEntity
 import com.kardia.membership.domain.entities.captcha.VerifyCaptchaEntity
+import com.kardia.membership.domain.entities.referral.ReferralEntity
+import com.kardia.membership.domain.entities.user.UserInfoEntity
 import com.kardia.membership.domain.usecases.auth.PostRegisterAuthUseCase
 import com.kardia.membership.domain.usecases.auth.PostResetPasswordConfirmUseCase
 import com.kardia.membership.domain.usecases.captcha.PostVerifyCaptchaUseCase
+import com.kardia.membership.domain.usecases.referral.PostReferralUseCase
+import com.kardia.membership.features.utils.AppConstants
+import com.kardia.membership.features.utils.TrackingUtil
 import com.kardia.membership.features.viewmodel.AuthViewModel
 import com.kardia.membership.features.viewmodel.CaptchaViewModel
+import com.kardia.membership.features.viewmodel.ReferralViewModel
+import com.kardia.membership.features.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.tietConfirmPassword
 import kotlinx.android.synthetic.main.fragment_register.tvMessageConfirmPasswordEmpty
@@ -30,6 +37,8 @@ import java.util.*
 class RegisterFragment : BaseFragment() {
     private lateinit var captchaViewModel: CaptchaViewModel
     private lateinit var authViewModel: AuthViewModel
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var referralViewModel: ReferralViewModel
     private var captchaId = ""
     override fun layoutId() = R.layout.fragment_register
 
@@ -47,6 +56,14 @@ class RegisterFragment : BaseFragment() {
             observe(registerEntity, ::onReceiveRegisterEntity)
             observe(failureData, ::handleFailure)
         }
+        userViewModel = viewModel(viewModelFactory) {
+            observe(getUserInfoEntity, ::onReceiveUserInfoEntity)
+        }
+        referralViewModel = viewModel(viewModelFactory) {
+            observe(referralEntity, ::onReceiveReferralEntity)
+        }
+
+        tracking(TrackingUtil.START)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,6 +71,8 @@ class RegisterFragment : BaseFragment() {
     }
 
     override fun initViews() {
+        isNotCatch401 = true
+
         ivBack.visible()
         flPaddingTop.visible()
     }
@@ -105,22 +124,23 @@ class RegisterFragment : BaseFragment() {
     private fun onReceiveVerifyCaptchaEntity(entity: VerifyCaptchaEntity?) {
         val firstName = "User"
         val lastName = Date().time.toString()
-//        authViewModel.registerAuth(
-//            PostRegisterAuthUseCase.Params(
-//                firstName + lastName,
-//                tietPassword.text.toString().trim(),
-//                tietEmail.text.toString().trim(),
-//                firstName,
-//                lastName
-//            )
-//        )
-        mNavigator.showCreatePasscode(activity,tietEmail.text.toString().trim())
-        finish()
+        authViewModel.registerAuth(
+            PostRegisterAuthUseCase.Params(
+                firstName + lastName,
+                tietPassword.text.toString().trim(),
+                tietEmail.text.toString().trim(),
+                firstName,
+                lastName
+            )
+        )
+//        mNavigator.showCreatePasscode(activity, tietEmail.text.toString().trim())
+//        finish()
     }
 
     private fun onReceiveRegisterEntity(entity: RegisterAuthEntity?) {
         forceHide()
         entity?.data?.let {
+            referralViewModel.referral(PostReferralUseCase.Params(AppConstants.USER_INVITE))
             userTokenCache.put(
                 UserToken(
                     it.access_token,
@@ -129,15 +149,12 @@ class RegisterFragment : BaseFragment() {
                     it.is_first
                 )
             )
-            mNavigator.showCreatePasscode(activity,tietEmail.text.toString().trim())
+            mNavigator.showCreatePasscode(activity, tietEmail.text.toString().trim())
             finish()
         }
     }
 
-    override fun handleFailure(failure: Failure?) {
-        super.handleFailure(failure)
-        reloadData()
-    }
+
     private fun register() {
         tvMessageEmailEmpty.gone()
         tvMessagePasswordEmpty.gone()
@@ -170,5 +187,15 @@ class RegisterFragment : BaseFragment() {
                     getString(R.string.confirm_password_not_correct)
             }
         }
+    }
+
+    private fun onReceiveUserInfoEntity(entity: UserInfoEntity?) {
+        entity?.data?.let {
+            tracking(TrackingUtil.COMPLETE_REGISTRATION, it.user_info)
+        }
+    }
+
+    private fun onReceiveReferralEntity(entity: ReferralEntity?) {
+
     }
 }

@@ -1,5 +1,6 @@
 package com.kardia.membership.features.fragments.top_up_overview
 
+import android.content.DialogInterface
 import android.os.Bundle
 import com.kardia.membership.R
 import com.kardia.membership.core.platform.BaseBottomSheetDialogFragment
@@ -27,10 +28,14 @@ class ClaimTopUpSuccessBottomSheet  : BaseBottomSheetDialogFragment() {
     override fun initEvents() {
         btBackToUtilities.setOnClickListener {
             dismiss()
-            callback?.onDismiss()
+            callback?.onBackToUtilities()
         }
     }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        callback?.onDismiss()
+    }
     override fun loadData() {
     }
 
@@ -45,6 +50,7 @@ class ClaimTopUpSuccessBottomSheet  : BaseBottomSheetDialogFragment() {
 
     interface CallBack {
         fun onDismiss()
+        fun onBackToUtilities()
     }
 
 }

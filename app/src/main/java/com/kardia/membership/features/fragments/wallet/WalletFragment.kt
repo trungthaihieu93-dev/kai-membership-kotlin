@@ -64,11 +64,14 @@ class WalletFragment : BaseFragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        userInfoCache.get()?.let {
+            setDataWallet(it)
+        }
+    }
     override fun loadData() {
         if (isUserLogin) {
-            userInfoCache.get()?.let {
-                setDataWallet(it)
-            }
             if (DataConstants.TRANSACTION_ENTITY == null) {
                 transactionViewModel.getTransactions()
             } else {
@@ -89,9 +92,18 @@ class WalletFragment : BaseFragment() {
             tvHolderWallet.text = kai.first_name
         }
         userInfo.user_info?.let { user ->
-            tvMemberSinceWallet.text = user.createdDate?.changeDateFormat(
+            var createDate = user.createdDate?.changeDateFormat(
                 "MM/yyyy"
             )
+            createDate?.let{
+                if(it.isEmpty()){
+                    createDate = user.createdDate?.changeDateFormat(
+                        "MM/yyyy",
+                        "yyyy-MM-dd'T'HH:mm:ss'Z'"
+                    )
+                }
+            }
+            tvMemberSinceWallet.text = createDate
         }
 
     }

@@ -9,6 +9,7 @@ import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.data.entities.TopUpAmount
 import com.kardia.membership.domain.entities.topup.ClaimTopUpEntity
 import com.kardia.membership.domain.usecases.topup.PostClaimTopUpUseCase
+import com.kardia.membership.features.utils.TrackingUtil
 import com.kardia.membership.features.viewmodel.TopUpViewModel
 import kotlinx.android.synthetic.main.fragment_topup_overview.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
@@ -56,7 +57,13 @@ class TopUpOverviewFragment : BaseFragment() {
 
         btTopUpNow.setOnClickListener {
             showProgress()
-            topUpViewModel.claimTopUp(PostClaimTopUpUseCase.Params(phone,providerCode,topUpAmount?.priceValue?.toLong()))
+            topUpViewModel.claimTopUp(
+                PostClaimTopUpUseCase.Params(
+                    phone,
+                    providerCode,
+                    topUpAmount?.priceValue?.toLong()
+                )
+            )
         }
     }
 
@@ -76,10 +83,15 @@ class TopUpOverviewFragment : BaseFragment() {
         hideProgress()
         val callback = object : ClaimTopUpSuccessBottomSheet.CallBack {
             override fun onDismiss() {
+                close()
+            }
+
+            override fun onBackToUtilities() {
                 finish()
             }
         }
-        mNavigator.showClaimTopUpSuccess(activity,callback)
+        mNavigator.showClaimTopUpSuccess(activity, callback)
+        tracking(TrackingUtil.TOP_UP,userInfoCache.get()?.user_info)
     }
 
     override fun handleFailure(failure: Failure?) {
@@ -89,7 +101,7 @@ class TopUpOverviewFragment : BaseFragment() {
 
             }
         }
-        mNavigator.showClaimTopUpFail(activity,callback)
+        mNavigator.showClaimTopUpFail(activity, callback)
     }
 
 }

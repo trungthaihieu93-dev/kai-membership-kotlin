@@ -50,6 +50,7 @@ class NewPasswordFragment : BaseFragment() {
     }
 
     override fun initViews() {
+        isNotCatch401 = true
         ivBack.visible()
         flPaddingTop.visible()
 //        llToken.gone()

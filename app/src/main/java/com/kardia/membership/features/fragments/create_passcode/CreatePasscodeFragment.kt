@@ -31,7 +31,7 @@ class CreatePasscodeFragment : BaseFragment() {
     }
 
     override fun initViews() {
-
+        isNotCatch401 = true
     }
 
     override fun initEvents() {

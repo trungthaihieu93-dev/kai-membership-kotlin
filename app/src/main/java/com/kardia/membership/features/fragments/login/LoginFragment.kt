@@ -40,6 +40,7 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun initViews() {
+        isNotCatch401 = true
         resetDataUser()
     }
 

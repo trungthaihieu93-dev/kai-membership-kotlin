@@ -72,4 +72,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(NewsViewModel::class)
     abstract fun bindsNewsViewModel(viewModel: NewsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WalletViewModel::class)
+    abstract fun bindsWalletViewModel(viewModel: WalletViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReferralViewModel::class)
+    abstract fun bindsReferralViewModel(viewModel: ReferralViewModel): ViewModel
 }

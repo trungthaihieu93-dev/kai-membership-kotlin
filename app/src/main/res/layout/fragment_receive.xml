@@ -16,6 +16,7 @@
         android:layout_below="@id/lToolbar">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/text_regular"
@@ -27,8 +28,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:layout_below="@id/tvTitle"
+            android:gravity="center"
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
@@ -44,7 +47,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/_28sdp">
+                    android:paddingBottom="@dimen/_28sdp"
+                    android:paddingStart="@dimen/_28sdp"
+                    android:paddingEnd="@dimen/_28sdp">
 
                     <ImageView
                         android:id="@+id/ivQRCodeWalletAddressReceive"
@@ -58,6 +63,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/text_medium"
                         android:text="@string/my_address"
+                        android:layout_marginTop="@dimen/_12sdp"
                         android:textColor="@color/color_364766"
                         android:textSize="@dimen/_9ssp" />
 
