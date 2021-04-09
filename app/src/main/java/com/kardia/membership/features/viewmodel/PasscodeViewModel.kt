@@ -15,13 +15,15 @@ class PasscodeViewModel
     private val postCheckPasscodeUseCase: PostCheckPasscodeUseCase,
     private val postForgotPasscodeUseCase: PostForgotPasscodeUseCase,
     private val postRegisterPasscodeUseCase: PostRegisterPasscodeUseCase,
-    private val postResetPasscodeUseCase: PostResetPasscodeUseCase
+    private val postResetPasscodeUseCase: PostResetPasscodeUseCase,
+    private val postVerifyPasscodeUseCase: PostVerifyPasscodeUseCase
 ) : BaseViewModel() {
     var loginEntity: MutableLiveData<LoginPasscodeEntity> = MutableLiveData()
     var checkEntity: MutableLiveData<CheckPasscodeEntity> = MutableLiveData()
     var forgotEntity: MutableLiveData<ForgotPasscodeEntity> = MutableLiveData()
     var registerEntity: MutableLiveData<RegisterPasscodeEntity> = MutableLiveData()
     var resetEntity: MutableLiveData<ResetPasscodeEntity> = MutableLiveData()
+    var verifyEntity: MutableLiveData<VerifyPasscodeEntity> = MutableLiveData()
 
     fun loginPasscode(params: PostLoginPasscodeUseCase.Params) = postLoginPasscodeUseCase(params) {
         it.fold(::handleFailure, ::handleLoginPasscode)
@@ -63,5 +65,14 @@ class PasscodeViewModel
 
     private fun handleResetPasscode(data: ResetPasscodeEntity) {
         this.resetEntity.value = data
+    }
+
+    fun verifyPasscode(params: PostVerifyPasscodeUseCase.Params) =
+        postVerifyPasscodeUseCase(params) {
+            it.fold(::handleFailure, ::handleVerifyPasscode)
+        }
+
+    private fun handleVerifyPasscode(data: VerifyPasscodeEntity) {
+        this.verifyEntity.value = data
     }
 }

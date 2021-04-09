@@ -16,6 +16,7 @@ import com.kardia.membership.features.fragments.enter_passcode.EnterPasscodeFrag
 import com.kardia.membership.features.fragments.forgot_password.ForgotPasswordFragment
 import com.kardia.membership.features.fragments.introduce.IntroduceFragment
 import com.kardia.membership.features.fragments.introduce.IntroduceManagementFragment
+import com.kardia.membership.features.fragments.kai_starter.KAIStarterFragment
 import com.kardia.membership.features.fragments.login.LoginFragment
 import com.kardia.membership.features.fragments.mission.MissionFragment
 import com.kardia.membership.features.fragments.mission.SubMissionFragment
@@ -93,4 +94,5 @@ interface ApplicationComponent {
     fun inject(resetPasscodeSuccessFragment: ResetPasscodeSuccessFragment)
     fun inject(sendFragment: SendFragment)
     fun inject(sendOverviewFragment: SendOverviewFragment)
+    fun inject(kaiStarterFragment: KAIStarterFragment)
 }

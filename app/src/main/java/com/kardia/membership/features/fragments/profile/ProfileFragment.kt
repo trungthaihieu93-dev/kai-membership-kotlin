@@ -41,6 +41,7 @@ class ProfileFragment : BaseFragment() {
     }
 
     override fun initViews() {
+        swipeRefreshLayout = srlProfile
         ivBack.visible()
         ivCamera.visible()
         flPaddingTop.visible()
@@ -94,13 +95,15 @@ class ProfileFragment : BaseFragment() {
         userInfoCache.get()?.let { userInfo ->
             ivAvatarProfile.loadFromUrl(userInfo.user_info?.avatar)
             tvIdProfile.text = userInfo.user_info?._id
-            tvNameProfile.text = userInfo.kai_info?.first_name
+            tvNameProfile.text =
+                String.format("%s%s", userInfo.kai_info?.first_name, userInfo.kai_info?.last_name)
             tvEmailProfile.text = userInfo.kai_info?.email
         }
+
     }
 
     override fun reloadData() {
-
+        userViewModel.getUserInfo()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

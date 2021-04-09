@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.gone
 import com.kardia.membership.core.extension.visible
+import com.kardia.membership.core.platform.OnItemClickListener
 import com.kardia.membership.data.entities.Quest
 import com.kardia.membership.features.fragments.mission.QuestAdapter.MissionViewHolder
+import com.kardia.membership.features.utils.AppConstants
 import kotlinx.android.synthetic.main.item_quest.view.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -18,6 +20,8 @@ import kotlin.properties.Delegates
 class QuestAdapter
 @Inject constructor(val context: Context) :
     RecyclerView.Adapter<MissionViewHolder>() {
+
+    var onItemClickListener: OnItemClickListener? = null
 
     internal var collection: ArrayList<Quest> by Delegates.observable(ArrayList()) { _, _, _ ->
         notifyDataSetChanged()
@@ -59,6 +63,23 @@ class QuestAdapter
                         itemView.pbQuest.progress = 0
                         itemView.tvProgress.text =
                             String.format("%02d/%02d", 0, process)
+                        when(item.key){
+                            AppConstants.KEY_VERIFY_EMAIL,AppConstants.KEY_FOLLOW_TWITTER,AppConstants.KEY_LIKE_FACEBOOK,AppConstants.KEY_JOIN_TELEGRAM->{
+                                itemView.rlProgressBarQuest.gone()
+                                itemView.tvContentQuest.visible()
+                                itemView.tvContentQuest.setTextColor(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.color_4E5D78
+                                    )
+                                )
+                                itemView.tvContentQuest.text = context.getString(R.string.unverified)
+                            }
+                            AppConstants.KEY_RATE_APP ->{
+                                itemView.rlProgressBarQuest.gone()
+                                itemView.tvContentQuest.gone()
+                            }
+                        }
                         item.processing?.let { processing ->
                             if(process<=processing){
                                 itemView.rlProgressBarQuest.gone()
@@ -73,13 +94,27 @@ class QuestAdapter
                                 itemView.ivQuest.setImageResource(R.drawable.ic_check_quest)
                             }
                             else {
-                                itemView.pbQuest.progress = (processing * 100 / process)
-                                itemView.tvProgress.text =
-                                    String.format("%02d/%02d", processing, process)
+                                when(item.key){
+                                    AppConstants.KEY_VERIFY_EMAIL,AppConstants.KEY_FOLLOW_TWITTER,AppConstants.KEY_LIKE_FACEBOOK,AppConstants.KEY_JOIN_TELEGRAM,AppConstants.KEY_RATE_APP->{
+                                    }
+                                    else->{
+                                        itemView.pbQuest.progress = (processing * 100 / process)
+                                        itemView.tvProgress.text =
+                                            String.format("%02d/%02d", processing, process)
+                                    }
+                                }
+
                             }
                         }
                     }
                 }
+            }
+
+            itemView.setOnClickListener {
+                onItemClickListener?.onItemClick(
+                    item,
+                    position
+                )
             }
 //            when (item.key) {
 //                AppConstants.KEY_QUEST_HIGHEST_SCORES -> {

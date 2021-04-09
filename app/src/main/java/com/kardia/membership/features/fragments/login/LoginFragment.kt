@@ -95,7 +95,15 @@ class LoginFragment : BaseFragment() {
     private fun onReceiveLoginAuthEntity(entity: LoginAuthEntity?) {
         hideProgress()
         entity?.data?.let {
-            userTokenCache.put(UserToken(it.access_token, it.refresh_token, it.expires_in,it.is_first))
+            userTokenCache.put(
+                UserToken(
+                    it.access_token,
+                    it.refresh_token,
+                    it.expires_in,
+                    it.is_first,
+                    it.has_passcode
+                )
+            )
             userViewModel.getUserInfo()
         }
     }
@@ -103,7 +111,14 @@ class LoginFragment : BaseFragment() {
     private fun onReceiveUserInfoEntity(entity: UserInfoEntity?) {
         entity?.data?.let {
             userInfoCache.put(it)
-            mNavigator.showEnterPasscode(activity, it.user_info?.email)
+            userTokenCache.get()?.hasPasscode?.let { hasPasscode ->
+                if (hasPasscode) {
+                    mNavigator.showEnterPasscode(activity, it.user_info?.email)
+                } else {
+                    mNavigator.showCreatePasscode(activity, it.user_info?.email)
+                }
+            }
+
         }
     }
 }

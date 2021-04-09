@@ -35,4 +35,8 @@ class PasscodeService @Inject constructor(retrofit: Retrofit) : PasscodeAPI {
         return passcodeAPI.reset(params)
     }
 
+    override fun verify(params: PostVerifyPasscodeUseCase.Params): Call<VerifyPasscodeEntity> {
+        return passcodeAPI.verify(params)
+    }
+
 }

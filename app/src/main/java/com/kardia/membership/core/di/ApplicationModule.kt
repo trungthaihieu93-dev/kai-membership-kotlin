@@ -38,7 +38,7 @@ class ApplicationModule(private val application: AndroidApplication) {
     @Singleton
     fun provideRetrofit(userTokenCache: UserTokenCache, gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://membership-backend.kardiachain.io/api/")
+            .baseUrl(BuildConfig.URL_APP)
             .client(createClient(userTokenCache))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

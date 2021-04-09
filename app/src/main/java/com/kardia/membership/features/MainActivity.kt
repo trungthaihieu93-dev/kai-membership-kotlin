@@ -14,6 +14,8 @@ import com.kardia.membership.R
 import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.platform.BaseActivity
 import com.kardia.membership.core.platform.BaseFragment
+import com.kardia.membership.data.entities.eventbus.ReloadMissionEvent
+import com.kardia.membership.data.entities.eventbus.ShowDialogReceiveSpinEvent
 import com.kardia.membership.domain.entities.quest.UpdateProgressMissionEntity
 import com.kardia.membership.domain.entities.tracking.TrackingActivityEntity
 import com.kardia.membership.domain.entities.user.UserInfoEntity
@@ -28,6 +30,9 @@ import com.kardia.membership.features.viewmodel.QuestViewModel
 import com.kardia.membership.features.viewmodel.TrackingViewModel
 import com.kardia.membership.features.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private lateinit var userViewModel: UserViewModel
@@ -36,12 +41,12 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     private var isFirst = false
     private var slide_down: Animation? = null
     private var slide_up: Animation? = null
-//    private var isTrackingLogin = false
-
+    private var trackingActivityEntity: TrackingActivityEntity? = null
+    private var isShowSpin = false
     companion object {
         fun callingIntent(context: Context) = Intent(context, MainActivity::class.java)
         const val TAB = "tab"
-        const val IS_FIRST = "isFirst"
+        const val IS_SHOW_SPIN = "isShowSpin"
     }
 
     override fun fragment(): BaseFragment? {
@@ -98,7 +103,33 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         userTokenCache.get()?.isFirst?.let {
             isFirst = it
         }
+        loadData()
 
+        if(intent.getBooleanExtra(IS_SHOW_SPIN,false)){
+            mNavigator.showSpin(this)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun onEventShow(showDialogReceiveSpinEvent: ShowDialogReceiveSpinEvent) {
+        Handler().postDelayed({
+            showDialogReceiveSpin(getString(R.string.content_noti_receive_spin, 1))
+        }, 500)
+        val eventReload =
+            EventBus.getDefault().getStickyEvent(ShowDialogReceiveSpinEvent::class.java)
+        eventReload?.let {
+            EventBus.getDefault().removeStickyEvent(it)
+        }
     }
 
     private fun moveProfile() {
@@ -111,12 +142,11 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
     override fun onResume() {
         super.onResume()
-        loadData()
+        userViewModel.getUserInfo()
     }
 
     private fun loadData() {
         if (isUserLogin) {
-            userViewModel.getUserInfo()
             questViewModel.updateProgressMission(
                 PostUpdateProgressMission.Params(
                     AppConstants.KEY_SIGN_IN,
@@ -242,43 +272,29 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         entity?.data?.let {
             userInfoCache.put(it)
             setDataUser()
-//            if (!isTrackingLogin) {
-            trackingViewModel.trackingActivity(
-                PostTrackingActivityUseCase.Params(
-                    it.user_info?._id,
-                    AppConstants.DEVICE_ID
+            if (trackingActivityEntity == null) {
+                trackingViewModel.trackingActivity(
+                    PostTrackingActivityUseCase.Params(
+                        it.user_info?._id,
+                        AppConstants.DEVICE_ID
+                    )
                 )
-            )
-//            }
+            }
         }
     }
 
     private fun onReceiveTrackingActivityEntity(entity: TrackingActivityEntity?) {
-//        isTrackingLogin = true
+        trackingActivityEntity = entity
     }
 
     private fun onReceiveUpdateProgressMissionEntity(entity: UpdateProgressMissionEntity?) {
         entity?.data?.is_completed?.let {
             when {
                 it -> {
-                    tvContentReceiveSpin.text = getString(R.string.content_noti_receive_spin, 2)
-                    rlNotification.visible()
-                    rlNotification.startAnimation(slide_down)
-                    Handler().postDelayed({
-                        rlNotification.startAnimation(slide_up)
-                        rlNotification.clearAnimation()
-                        rlNotification.gone()
-                    }, 3000)
+                    showDialogReceiveSpin(getString(R.string.content_noti_receive_spin, 2))
                 }
                 isFirst -> {
-                    tvContentReceiveSpin.text = getString(R.string.content_noti_receive_spin, 1)
-                    rlNotification.visible()
-                    rlNotification.startAnimation(slide_down)
-                    Handler().postDelayed({
-                        rlNotification.startAnimation(slide_up)
-                        rlNotification.clearAnimation()
-                        rlNotification.gone()
-                    }, 3000)
+                    showDialogReceiveSpin(getString(R.string.content_noti_receive_spin, 1))
                 }
                 else -> {
                 }
@@ -300,5 +316,14 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         }
     }
 
-
+    private fun showDialogReceiveSpin(message: String) {
+        tvContentReceiveSpin.text = message
+        rlNotification.visible()
+        rlNotification.startAnimation(slide_down)
+        Handler().postDelayed({
+            rlNotification.startAnimation(slide_up)
+            rlNotification.clearAnimation()
+            rlNotification.gone()
+        }, 3000)
+    }
 }

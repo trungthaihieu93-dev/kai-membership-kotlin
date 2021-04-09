@@ -22,7 +22,7 @@
     <string name="content_sign_in">Sign in and start our journey with KAI.</string>
     <string name="email">Email</string>
     <string name="username">Username</string>
-    <string name="hint_email">eg. an.nguyen@kardianchain.io</string>
+    <string name="hint_email">Your email</string>
     <string name="password">Password</string>
     <string name="hint_password">Your password</string>
     <string name="question_forgot_password">Forgot password?</string>
@@ -159,7 +159,9 @@
     <string name="title_get_vouchers">Get Vouchers</string>
     <string name="content_get_vouchers">Voucher here, vouchers there, vouchers everywhere.</string>
     <string name="get_my_vouchers">Get my Vouchers</string>
-
+    <string name="title_KAI_starter">KAI Starter</string>
+    <string name="content_KAI_starter">Think Kickstarter meets Lock&amp;Earn</string>
+    <string name="invest">Invest</string>
     //Top-up
     <string name="title_top_up">Top-up</string>
     <string name="my_balance">My Balance</string>
@@ -199,6 +201,7 @@
     <string name="content_mission">01 spin for every finished mission.\nGet it now!</string>
     <string name="completed">Completed</string>
     <string name="content_top_score">Top score: %s (%s)</string>
+    <string name="unverified">Unverified</string>
 
     //My Reward
     <string name="my_reward">My reward</string>
@@ -245,4 +248,5 @@
     <string name="back_to_my_wallet">Back to My Wallet</string>
     <string name="recipient_address_empty">Recipient Address can not be blank</string>
     <string name="kai_amount_empty">KAI Amount can not be blank</string>
+
 </resources>

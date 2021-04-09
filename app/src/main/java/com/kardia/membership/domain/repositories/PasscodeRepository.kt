@@ -16,6 +16,7 @@ interface PasscodeRepository {
     fun check(params: PostCheckPasscodeUseCase.Params): Either<Failure, CheckPasscodeEntity>
     fun forgot(params: PostForgotPasscodeUseCase.Params): Either<Failure, ForgotPasscodeEntity>
     fun reset(params: PostResetPasscodeUseCase.Params): Either<Failure, ResetPasscodeEntity>
+    fun verify(params: PostVerifyPasscodeUseCase.Params): Either<Failure, VerifyPasscodeEntity>
     class Network
     @Inject constructor(
         private val networkHandler: NetworkHandler,
@@ -62,6 +63,15 @@ interface PasscodeRepository {
                 true -> request(service.reset(params), {
                     it
                 }, ResetPasscodeEntity.empty())
+                false, null -> Either.Left(Failure.NetworkConnection)
+            }
+        }
+
+        override fun verify(params: PostVerifyPasscodeUseCase.Params): Either<Failure, VerifyPasscodeEntity> {
+            return when (networkHandler.isConnected) {
+                true -> request(service.verify(params), {
+                    it
+                }, VerifyPasscodeEntity.empty())
                 false, null -> Either.Left(Failure.NetworkConnection)
             }
         }

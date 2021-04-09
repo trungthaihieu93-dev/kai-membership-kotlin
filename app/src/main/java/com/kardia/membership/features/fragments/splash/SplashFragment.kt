@@ -20,6 +20,7 @@ import com.kardia.membership.features.dialog.NoInternetDialog
 import com.kardia.membership.features.utils.AppConstants
 import com.kardia.membership.features.utils.AppLog
 import com.kardia.membership.features.utils.CommonUtils
+import com.kardia.membership.features.utils.DataConstants
 import com.kardia.membership.features.viewmodel.ConfigViewModel
 import com.kardia.membership.features.viewmodel.DeviceViewModel
 
@@ -92,6 +93,7 @@ class SplashFragment : BaseFragment() {
     private fun onReceivePasscodeDeviceEntity(entity: PasscodeDeviceEntity?) {
         forceHide()
         entity?.data?.let{
+            DataConstants.PASSCODE_DEVICE = it
             if(it.user.isNullOrEmpty()){
                 mNavigator.showIntroduce(activity)
             }

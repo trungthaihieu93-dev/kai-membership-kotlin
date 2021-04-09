@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/lToolbar"
+        layout="@layout/layout_toolbar" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:fontFamily="@font/text_regular"
+        android:text="@string/title_KAI_starter"
+        android:textColor="@color/color_DE000000"
+        android:textSize="@dimen/_26ssp" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/text_regular"
+                    android:text="Ongoing Projects"
+                    android:textColor="@color/color_DE000000"
+                    android:textSize="@dimen/_16ssp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/text_regular"
+                    android:text="View all"
+                    android:textColor="@color/color_023AFF"
+                    android:textSize="@dimen/_11ssp" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvOngoingProject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:paddingStart="@dimen/_16sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_16sdp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/text_regular"
+                    android:text="Locking Projects"
+                    android:textColor="@color/color_DE000000"
+                    android:textSize="@dimen/_16ssp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/text_regular"
+                    android:text="View all"
+                    android:textColor="@color/color_023AFF"
+                    android:textSize="@dimen/_11ssp" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvLockingProject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:paddingStart="@dimen/_16sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_16sdp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/text_regular"
+                    android:text="Completed Projects"
+                    android:textColor="@color/color_DE000000"
+                    android:textSize="@dimen/_16ssp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/text_regular"
+                    android:text="View all"
+                    android:textColor="@color/color_023AFF"
+                    android:textSize="@dimen/_11ssp" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCompletedProjects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:paddingStart="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

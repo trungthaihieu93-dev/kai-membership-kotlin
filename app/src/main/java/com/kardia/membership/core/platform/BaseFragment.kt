@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.dhaval2404.imagepicker.util.FileUriUtils
 import com.kardia.membership.AndroidApplication
@@ -34,12 +35,9 @@ import com.kardia.membership.core.extension.*
 import com.kardia.membership.core.navigation.Navigator
 import com.kardia.membership.data.cache.*
 import com.kardia.membership.features.dialog.DialogAlert
-import com.kardia.membership.features.utils.AppLog
 import com.google.android.material.snackbar.Snackbar
 import com.kardia.membership.features.dialog.NoInternetDialog
-import com.kardia.membership.features.utils.CommonUtils
-import com.kardia.membership.features.utils.DataConstants
-import com.kardia.membership.features.utils.TrackingUtil
+import com.kardia.membership.features.utils.*
 import java.io.File
 import javax.inject.Inject
 
@@ -83,7 +81,7 @@ abstract class BaseFragment : Fragment() {
     lateinit var application: AndroidApplication
 
     var isNotCatch401 = false
-
+    var swipeRefreshLayout: SwipeRefreshLayout? = null
 //    var userID = 0
 
     override fun onCreateView(
@@ -140,6 +138,13 @@ abstract class BaseFragment : Fragment() {
         initViews()
         initEvents()
         loadData()
+        swipeRefreshLayout?.let { srl ->
+            srl.setOnRefreshListener {
+                Handler().postDelayed({
+                    reloadData()
+                }, 250)
+            }
+        }
     }
 
     private fun getStatusBarHeight() {
@@ -158,7 +163,12 @@ abstract class BaseFragment : Fragment() {
     internal fun showProgress() = activity?.let { (it as BaseActivity).showProgress() }
 
     internal fun hideProgress(delayTime: Int = 100) =
-        activity?.let { (it as BaseActivity).hideProgress(delayTime) }
+        activity?.let {
+            swipeRefreshLayout?.let { srl ->
+                srl.isRefreshing = false
+            }
+            (it as BaseActivity).hideProgress(delayTime)
+        }
 
     internal fun forceHide() =
         activity?.let { (it as BaseActivity).forceHide() }
@@ -567,5 +577,13 @@ abstract class BaseFragment : Fragment() {
         context?.let {
             TrackingUtil.tracking(type, item, it)
         }
+    }
+
+    fun showLogin(activity: FragmentActivity?) {
+        DataConstants.PASSCODE_DEVICE?.let {
+            mNavigator.showSelectAccount(activity, it)
+            return
+        }
+        mNavigator.showLogin(activity)
     }
 }

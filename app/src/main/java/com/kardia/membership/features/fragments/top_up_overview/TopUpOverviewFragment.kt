@@ -83,7 +83,7 @@ class TopUpOverviewFragment : BaseFragment() {
         hideProgress()
         val callback = object : ClaimTopUpSuccessBottomSheet.CallBack {
             override fun onDismiss() {
-                close()
+//                close()
             }
 
             override fun onBackToUtilities() {

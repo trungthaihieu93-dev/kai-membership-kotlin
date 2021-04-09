@@ -31,6 +31,7 @@ class SelectAccountAdapter @Inject constructor() :
         fun bind(position: Int) {
             val item = collection[position]
             itemView.ivPhotoUser.loadFromUrlRounded(item.avatar,6f)
+            itemView.tvNameUser.text = item.email
             itemView.tvEmailUser.text = item.email
             itemView.setOnClickListener {
                 onItemClickListener?.onItemClick(

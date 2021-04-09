@@ -21,6 +21,7 @@ class MyProfileFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.fragment_my_profile
     private val myCalendar = Calendar.getInstance()
+    private var birthDate: Long? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
@@ -56,15 +57,15 @@ class MyProfileFragment : BaseFragment() {
                 myCalendar[Calendar.MONTH] = monthOfYear
                 myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
                 etDateOfBirthMyProfile.setText(myCalendar.time.time.getMonthYearDate("dd/MM/yyyy"))
+                birthDate = myCalendar.timeInMillis
             }
         etDateOfBirthMyProfile.setOnClickListener {
-            activity?.let { activity->
+            activity?.let { activity ->
                 DatePickerDialog(
                     activity, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                     myCalendar.get(Calendar.DAY_OF_MONTH)
                 ).show()
-
             }
         }
     }
@@ -72,6 +73,7 @@ class MyProfileFragment : BaseFragment() {
     override fun loadData() {
         etFullNameMyProfile.setText(userInfoCache.get()?.kai_info?.first_name)
         etPhoneMyProfile.setText(userInfoCache.get()?.user_info?.phone)
+        etDateOfBirthMyProfile.setText(userInfoCache.get()?.user_info?.birthday_time?.getMonthYearDate("dd/MM/yyyy"))
     }
 
     override fun reloadData() {
@@ -106,7 +108,7 @@ class MyProfileFragment : BaseFragment() {
             showProgress()
             userViewModel.updateUserInfo(
                 PostUpdateInfoUseCase.Params(
-                    firstName, phone
+                    firstName, phone, birthDate
                 )
             )
         }

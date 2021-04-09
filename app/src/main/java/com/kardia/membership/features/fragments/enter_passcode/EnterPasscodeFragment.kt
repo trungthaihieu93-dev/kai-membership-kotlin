@@ -25,6 +25,8 @@ import com.kardia.membership.features.utils.AppConstants
 import com.kardia.membership.features.viewmodel.AuthViewModel
 import com.kardia.membership.features.viewmodel.PasscodeViewModel
 import kotlinx.android.synthetic.main.fragment_enter_passcode.*
+import kotlinx.android.synthetic.main.fragment_enter_passcode.ovPasscode
+import kotlinx.android.synthetic.main.fragment_new_passcode.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class EnterPasscodeFragment : BaseFragment() {
@@ -66,6 +68,7 @@ class EnterPasscodeFragment : BaseFragment() {
     }
 
     override fun initViews() {
+        isNotCatch401 = true
         ivBack.visible()
 
         if (!fromChangePassword) {
@@ -155,8 +158,10 @@ class EnterPasscodeFragment : BaseFragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (ovPasscode.text.toString().trim().length < 4) {
-                    otp = null
+                otp = if (ovPasscode.text.toString().trim().length < 4) {
+                    null
+                } else {
+                    ovPasscode.text.toString().trim()
                 }
             }
         })
@@ -175,7 +180,14 @@ class EnterPasscodeFragment : BaseFragment() {
         ovPasscode.setText("")
         entity?.data?.let {
             userInfoCache.clear()
-            userTokenCache.put(UserToken(it.access_token, it.refresh_token, it.expires_in,it.is_first))
+            userTokenCache.put(
+                UserToken(
+                    it.access_token,
+                    it.refresh_token,
+                    it.expires_in,
+                    it.is_first
+                )
+            )
             mNavigator.showMain(activity)
         }
         finish()

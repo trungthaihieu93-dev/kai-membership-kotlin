@@ -36,8 +36,7 @@
             android:layout_marginBottom="@dimen/_12sdp"
             android:fontFamily="@font/text_medium"
             android:textColor="@color/color_B2FFFFFF"
-            android:textSize="@dimen/_11ssp"
-            android:text="Today, 27 Nov 2020" />
+            android:textSize="@dimen/_11ssp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvTitleNews"
@@ -49,8 +48,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:fontFamily="@font/text_semi_bold"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13ssp"
-            android:text="KardiaChain X DID Alliance to reinforce the pioneering DID proposition in Vietnam" />
+            android:textSize="@dimen/_13ssp" />
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

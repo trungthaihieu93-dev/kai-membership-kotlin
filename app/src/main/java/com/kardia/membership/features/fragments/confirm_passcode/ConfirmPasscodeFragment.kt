@@ -129,7 +129,7 @@ class ConfirmPasscodeFragment : BaseFragment() {
 
     private fun onReceiveRegisterPasscodeEntity(entity: RegisterPasscodeEntity?) {
         hideProgress()
-        mNavigator.showLoginNew(activity)
+        mNavigator.showRegisterSuccess(activity)
     }
 
     private fun onReceiveResetPasscodeEntity(entity: ResetPasscodeEntity?) {

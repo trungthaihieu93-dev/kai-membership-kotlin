@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingEnd="@dimen/_16sdp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_3sdp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="@dimen/_3sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_12sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/test_img_project_kai_starter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="H,342:213"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTitleProject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_semi_bold"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Sugar Baby 3"
+                android:textColor="@color/color_DE000000"
+                android:textSize="@dimen/_16ssp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvContentProject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_medium"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="A web drama produced by Big Cat Entertainment and broadcast on 6 million-subscribers Youtube channel - Ghien Mi Go."
+                android:textColor="@color/color_8A000000"
+                android:textSize="@dimen/_11ssp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvKAIQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/text_medium"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="8,700,000 KAI"
+                    android:textColor="@color/color_DE000000"
+                    android:textSize="@dimen/_11ssp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvBackerQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/text_medium"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="31 backers"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/color_DE000000"
+                    android:textSize="@dimen/_11ssp" />
+            </RelativeLayout>
+            <ProgressBar
+                android:id="@+id/pbProject"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:progressDrawable="@drawable/background_progressbar_project"
+                android:progress="87" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPercentTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_medium"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="87% of 10,000,000 KAI"
+                android:textColor="@color/color_8A000000"
+                android:textSize="@dimen/_11ssp" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

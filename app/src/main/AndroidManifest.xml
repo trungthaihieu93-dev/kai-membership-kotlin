@@ -38,6 +38,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="kaimembership.onelink.me"
                     android:pathPrefix="/lqzR"
@@ -50,8 +51,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:scheme="kai-membership" />
+                <data android:scheme="kai-membership" />
             </intent-filter>
         </activity>
 
@@ -124,6 +124,15 @@
         <activity
             android:name=".features.activities.ScanQRCodeActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.activities.KAIStarterActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.activities.CheckMailActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.kardia.membership.features.fragments.news
 
 import android.os.Bundle
 import com.kardia.membership.R
+import com.kardia.membership.core.extension.gone
 import com.kardia.membership.core.extension.observe
 import com.kardia.membership.core.extension.viewModel
 import com.kardia.membership.core.platform.BaseFragment
@@ -40,6 +41,7 @@ class NewsFragment : BaseFragment() {
     }
 
     override fun initViews() {
+        swipeRefreshLayout = srlNews
         rvNews.adapter = newsAdapter.apply {
             onItemClickListener = object : OnItemClickListener {
                 override fun onItemClick(item: Any?, position: Int) {
@@ -86,11 +88,15 @@ class NewsFragment : BaseFragment() {
     }
 
     override fun reloadData() {
+        newsViewModel.getFeatureNews()
+        newsViewModel.getLatestNews()
     }
 
     private fun onReceiveFeatureNewsEntity(entity: FeatureNewsEntity?) {
         hideProgress()
         DataConstants.FEATURE_NEWS_ENTITY = entity
+        sflNews.stopShimmer()
+        sflNews.gone()
         entity?.items?.let {
             newsAdapter.collection = it as ArrayList<NewsFeature>
         }
@@ -99,6 +105,8 @@ class NewsFragment : BaseFragment() {
     private fun onReceiveLatestNewsEntity(entity: LatestNewsEntity?) {
         hideProgress()
         DataConstants.LATEST_NEWS_ENTITY = entity
+        sflLatestNews.stopShimmer()
+        sflLatestNews.gone()
         entity?.statuses?.let {
             latestNewsAdapter.collection = it as ArrayList<NewsLatest>
         }

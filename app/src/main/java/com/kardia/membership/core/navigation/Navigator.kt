@@ -37,8 +37,9 @@ import javax.inject.Singleton
 @Singleton
 class Navigator
 @Inject constructor() {
-    fun showMain(context: Activity?) = context?.startActivity(
+    fun showMain(context: Activity?, isShowSpin: Boolean = false) = context?.startActivity(
         MainActivity.callingIntent(context).apply {
+            putExtra(MainActivity.IS_SHOW_SPIN, isShowSpin)
             addFlags(
                 Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or
                         Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -160,6 +161,13 @@ class Navigator
             }
         })
     }
+
+    fun showCheckMailActivity(activity: FragmentActivity?, email: String?) =
+        activity?.startActivity(
+            CheckMailActivity.callingIntent(activity).apply {
+                putExtra(CheckMailFragment.EMAIL, email)
+            }
+        )
 
     fun showNewPasscode(activity: FragmentActivity?, token: String?, email: String?) {
         BaseFragment.addFragmentByActivity(activity, NewPasscodeFragment().apply {
@@ -364,4 +372,8 @@ class Navigator
             )
         }
     }
+
+    fun showKAIStarter(activity: FragmentActivity?) = activity?.startActivity(
+        KAIStarterActivity.callingIntent(activity).apply { }
+    )
 }

@@ -49,7 +49,11 @@ class SelectAccountFragment : BaseFragment() {
             onItemClickListener = object : OnItemClickListener {
                 override fun onItemClick(item: Any?, position: Int) {
                     val account = item as User
-                    mNavigator.showEnterPasscode(activity, account.email)
+                    if (!account.refreshToken.isNullOrBlank()) {
+                        mNavigator.showEnterPasscode(activity, account.email)
+                    } else {
+                        mNavigator.showCreatePasscode(activity, account.email)
+                    }
                 }
             }
         }
@@ -80,7 +84,7 @@ class SelectAccountFragment : BaseFragment() {
 
     private fun onReceivePasscodeDeviceEntity(entity: PasscodeDeviceEntity?) {
         hideProgress()
-        entity?.data?.let {pd->
+        entity?.data?.let { pd ->
             passcodeDevice = pd
             passcodeDevice?.user?.let {
                 if (selectAccountAdapter.collection.size == 0) {

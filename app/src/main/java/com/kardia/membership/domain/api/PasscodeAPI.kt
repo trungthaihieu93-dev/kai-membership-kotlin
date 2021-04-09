@@ -14,6 +14,7 @@ internal interface PasscodeAPI {
         private const val CHECK = "v1/passcodes/check"
         private const val FORGOT = "v1/passcodes/forgot"
         private const val RESET = "v1/passcodes/reset"
+        private const val VERIFY = "v1/passcodes/verify"
     }
 
     @POST(LOGIN)
@@ -30,4 +31,7 @@ internal interface PasscodeAPI {
 
     @POST(RESET)
     fun reset(@Body params: PostResetPasscodeUseCase.Params): Call<ResetPasscodeEntity>
+
+    @POST(VERIFY)
+    fun verify(@Body params: PostVerifyPasscodeUseCase.Params): Call<VerifyPasscodeEntity>
 }

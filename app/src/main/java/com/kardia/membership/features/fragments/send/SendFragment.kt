@@ -11,6 +11,7 @@ import com.kardia.membership.core.extension.gone
 import com.kardia.membership.core.extension.visible
 import com.kardia.membership.core.platform.BaseFragment
 import com.kardia.membership.features.activities.ScanQRCodeActivity
+import com.kardia.membership.features.viewmodel.QuestViewModel
 import kotlinx.android.synthetic.main.fragment_send.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 

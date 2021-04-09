@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_16sdp"
+    android:layout_marginEnd="@dimen/_16sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="@dimen/_3sdp"
+    app:strokeColor="@color/color_F1F2F4"
+    app:strokeWidth="@dimen/_1sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_shimmer"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/_7sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_10sdp">
+
+        <ImageView
+            android:layout_width="@dimen/_42sdp"
+            android:layout_height="@dimen/_42sdp"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/text_medium"
+                android:textColor="@color/color_DE000000"
+                android:textSize="@dimen/_11ssp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/text_medium"
+                    android:textColor="@color/color_4E5D78"
+                    android:textSize="@dimen/_9ssp"
+                    android:visibility="gone"
+                    tools:text="Unverified" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_4sdp"
+                        android:layout_centerVertical="true"
+                        android:progressDrawable="@drawable/background_progressbar_quest"
+                        android:progress="0" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/text_medium"
+                        android:textColor="@color/color_4E5D78"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginEnd="@dimen/_42sdp"
+                        android:textSize="@dimen/_9ssp"
+                        tools:text="04/05" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

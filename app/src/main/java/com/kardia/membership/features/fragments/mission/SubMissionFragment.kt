@@ -1,5 +1,6 @@
 package com.kardia.membership.features.fragments.mission
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.kardia.membership.R
@@ -39,14 +40,14 @@ class SubMissionFragment : BaseFragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         EventBus.getDefault().register(this)
     }
 
-    override fun onStop() {
+    override fun onDetach() {
+        super.onDetach()
         EventBus.getDefault().unregister(this)
-        super.onStop()
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)

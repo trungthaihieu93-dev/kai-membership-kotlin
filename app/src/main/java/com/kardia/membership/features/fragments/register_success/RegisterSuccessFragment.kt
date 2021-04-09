@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.kardia.membership.R
 import com.kardia.membership.core.platform.BaseFragment
+import kotlinx.android.synthetic.main.fragment_register_success.*
 
 class RegisterSuccessFragment : BaseFragment() {
     override fun layoutId() = R.layout.fragment_register_success
@@ -22,7 +23,12 @@ class RegisterSuccessFragment : BaseFragment() {
     }
 
     override fun initEvents() {
-
+        btSpinLater.setOnClickListener {
+            mNavigator.showMain(activity)
+        }
+        btSpinNow.setOnClickListener {
+            mNavigator.showMain(activity, true)
+        }
     }
 
     override fun loadData() {

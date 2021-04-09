@@ -2,15 +2,11 @@ package com.kardia.membership
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Intent
 import android.provider.Settings
 import android.util.Log
 import com.appsflyer.AppsFlyerConversionListener
 import com.appsflyer.AppsFlyerLib
-import com.appsflyer.deeplink.DeepLink
 import com.appsflyer.deeplink.DeepLinkListener
-import com.appsflyer.deeplink.DeepLinkResult
-import com.google.gson.Gson
 import com.kardia.membership.core.di.ApplicationComponent
 import com.kardia.membership.core.di.ApplicationModule
 import com.kardia.membership.core.di.DaggerApplicationComponent
@@ -52,10 +48,13 @@ class AndroidApplication : Application() {
         this.injectMembers()
         initAppsFlyer()
 
-        val deviceId: String = Settings.Secure.getString(
+        var deviceId: String = Settings.Secure.getString(
             contentResolver,
             Settings.Secure.ANDROID_ID
         )
+       /* if(BuildConfig.DEBUG){
+            deviceId = "e3a0a9e5a5b5d767"
+        }*/
         AppConstants.DEVICE_ID = deviceId
     }
 
@@ -109,7 +108,7 @@ class AndroidApplication : Application() {
                     Log.d(LOG_TAG, "This is a direct deep link")
                 }
             }
-            deepLinkObj.getStringValue(AppConstants.KEY_USER_INVITE)?.let{
+            deepLinkObj.getStringValue(AppConstants.KEY_REFERRAL_USER)?.let{
                 AppConstants.USER_INVITE = it
             }
 //            // An example for using a generic getter

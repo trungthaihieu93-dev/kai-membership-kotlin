@@ -23,8 +23,12 @@ class UtilitiesFragment : BaseFragment() {
             if (isUserLogin) {
                 mNavigator.showTopUp(activity)
             } else {
-                mNavigator.showLogin(activity)
+                showLogin(activity)
             }
+        }
+
+        mcvKAIStarter.setOnClickListener {
+            mNavigator.showKAIStarter(activity)
         }
     }
 

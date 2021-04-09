@@ -70,9 +70,7 @@
             style="@style/TextInputEditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="false"
             android:layout_marginTop="@dimen/_4sdp"
-            android:enabled="false"
             android:focusable="false"/>
 
         <com.google.android.material.textview.MaterialTextView

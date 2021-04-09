@@ -34,6 +34,7 @@
             android:fontFamily="@font/text_medium"
             android:textColor="@color/color_42000000"
             android:textSize="@dimen/_9ssp"
+            android:layout_marginTop="@dimen/_2sdp"
             android:ellipsize="middle"
             tools:text ="From: L1A4NydsadasdsadMhoq"
             android:singleLine="true" />
@@ -61,6 +62,7 @@
             android:fontFamily="@font/text_medium"
             android:textColor="@color/color_42000000"
             android:textSize="@dimen/_9ssp"
+            android:layout_marginTop="@dimen/_2sdp"
             android:ellipsize="middle"
             tools:text ="05:21 PM"
             android:singleLine="true" />

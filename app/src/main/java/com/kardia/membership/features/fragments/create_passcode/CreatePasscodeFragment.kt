@@ -38,11 +38,13 @@ class CreatePasscodeFragment : BaseFragment() {
         btSetPasscode.setOnClickListener {
             passcode?.let { passcode ->
                 mNavigator.showConfirmPasscodeRegister(activity, email, passcode)
+                ovPasscode.text?.clear()
             }
         }
 
         ovPasscode.setOtpCompletionListener {
             mNavigator.showConfirmPasscodeRegister(activity, email, it)
+            ovPasscode.text?.clear()
         }
         ovPasscode.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

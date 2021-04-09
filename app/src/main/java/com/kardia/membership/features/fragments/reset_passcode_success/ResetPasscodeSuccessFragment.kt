@@ -24,7 +24,7 @@ class ResetPasscodeSuccessFragment : BaseFragment() {
 
     override fun initEvents() {
         btOKIGotIt.setOnClickListener {
-            mNavigator.showLoginNew(activity)
+            mNavigator.showSelectAccountNew(activity)
         }
     }
 
@@ -36,7 +36,7 @@ class ResetPasscodeSuccessFragment : BaseFragment() {
     }
 
     override fun onBackPressed(): Boolean {
-        mNavigator.showLoginNew(activity)
+        mNavigator.showSelectAccountNew(activity)
         return true
     }
 }

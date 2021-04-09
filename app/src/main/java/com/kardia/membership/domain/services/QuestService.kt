@@ -1,8 +1,10 @@
 package com.kardia.membership.domain.services
 
 import com.kardia.membership.domain.api.QuestAPI
+import com.kardia.membership.domain.entities.quest.CheckProgressMissionEntity
 import com.kardia.membership.domain.entities.quest.QuestsEntity
 import com.kardia.membership.domain.entities.quest.UpdateProgressMissionEntity
+import com.kardia.membership.domain.usecases.quest.PostCheckProgressMission
 import com.kardia.membership.domain.usecases.quest.PostUpdateProgressMission
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -26,5 +28,12 @@ class QuestService
 
     override fun updateProgressMission(params: PostUpdateProgressMission.Params): Call<UpdateProgressMissionEntity> {
         return questAPI.updateProgressMission(params)
+    }
+
+    override fun checkProgressMission(
+        user_id: String?,
+        key: String?
+    ): Call<CheckProgressMissionEntity> {
+        return questAPI.checkProgressMission(user_id, key)
     }
 }
