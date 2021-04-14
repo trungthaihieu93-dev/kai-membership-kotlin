@@ -72,7 +72,7 @@
                                 android:fontFamily="@font/text_medium"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_16ssp"
-                                tools:text="3,002.123" />
+                                android:text="0" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
@@ -226,6 +226,7 @@
                     android:id="@+id/llDataTransaction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView

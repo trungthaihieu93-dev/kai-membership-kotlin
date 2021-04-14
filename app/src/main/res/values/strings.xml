@@ -119,7 +119,7 @@
     //Main
     <string name="text_navigation_news">News</string>
     <string name="text_navigation_mission">Mission</string>
-    <string name="text_navigation_games">Games</string>
+    <string name="text_navigation_games">NFT</string>
     <string name="text_navigation_wallet">My Wallet</string>
     <string name="text_navigation_utilities">Utilities</string>
     <string name="content_noti_receive_spin">You have %02d free spin</string>
@@ -202,7 +202,10 @@
     <string name="completed">Completed</string>
     <string name="content_top_score">Top score: %s (%s)</string>
     <string name="unverified">Unverified</string>
-
+    <string name="rate_me">Rate me</string>
+    <string name="content_rate_me">Thanks for choosing us.\nPlease take 1 minute for rate app or write suggestion message for us. We would be glad to hear your opinion. 🤗</string>
+    <string name="rate_later">Rate later</string>
+    <string name="rate_us">Rate us ⭐</string>
     //My Reward
     <string name="my_reward">My reward</string>
     <string name="title_no_data_reward">No Reward</string>
@@ -249,4 +252,11 @@
     <string name="recipient_address_empty">Recipient Address can not be blank</string>
     <string name="kai_amount_empty">KAI Amount can not be blank</string>
 
+    //Mission
+    <string name="summon_now">Summon Now</string>
+    <string name="status">Status</string>
+    <string name="text_agi">agi</string>
+    <string name="text_str">str</string>
+    <string name="text_int">int</string>
+    <string name="mall">Mall</string>
 </resources>

@@ -21,6 +21,7 @@ import com.kardia.membership.domain.entities.tracking.TrackingActivityEntity
 import com.kardia.membership.domain.entities.user.UserInfoEntity
 import com.kardia.membership.domain.usecases.quest.PostUpdateProgressMission
 import com.kardia.membership.domain.usecases.tracking.PostTrackingActivityUseCase
+import com.kardia.membership.features.fragments.games.GamesFragment
 import com.kardia.membership.features.fragments.mission.MissionFragment
 import com.kardia.membership.features.fragments.news.NewsFragment
 import com.kardia.membership.features.fragments.utilities.UtilitiesFragment
@@ -43,6 +44,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     private var slide_up: Animation? = null
     private var trackingActivityEntity: TrackingActivityEntity? = null
     private var isShowSpin = false
+    private var isGame = false
+
     companion object {
         fun callingIntent(context: Context) = Intent(context, MainActivity::class.java)
         const val TAB = "tab"
@@ -105,7 +108,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         }
         loadData()
 
-        if(intent.getBooleanExtra(IS_SHOW_SPIN,false)){
+        if (intent.getBooleanExtra(IS_SHOW_SPIN, false)) {
             mNavigator.showSpin(this)
         }
     }
@@ -136,7 +139,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         if (isUserLogin) {
             mNavigator.showProfile(this)
         } else {
-            mNavigator.showLogin(this)
+            showLogin(this)
         }
     }
 
@@ -205,6 +208,12 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                         true
                     )
                 ) {
+                    isGame = false
+                    if (isUserLogin) {
+                        ivSpinWallet.visible()
+                        ivAvatarMain.visible()
+                    }
+                    ivProfileMain.visible()
                     BaseFragment.setFragment(supportFragmentManager, NewsFragment())
                     tvHeader.text = getString(R.string.text_navigation_news)
                     tvHeader.setTextColor(getColor(R.color.color_DE000000))
@@ -218,6 +227,12 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                         true
                     )
                 ) {
+                    isGame = false
+                    if (isUserLogin) {
+                        ivSpinWallet.visible()
+                        ivAvatarMain.visible()
+                    }
+                    ivProfileMain.visible()
                     BaseFragment.setFragment(supportFragmentManager, MissionFragment())
                     tvHeader.text = getString(R.string.text_navigation_mission)
                     tvHeader.setTextColor(getColor(R.color.white))
@@ -225,25 +240,35 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 }
                 return true
             }
-//            R.id.navigation_games -> {
-//                if (!getCurrentFragmentName().equals(
-//                        GamesFragment::class.java.simpleName,
-//                        true
-//                    )
-//                ) {
-//                    BaseFragment.setFragment(supportFragmentManager, GamesFragment())
-//                    tvHeader.text = getString(R.string.text_navigation_games)
-//                    tvHeader.setTextColor(getColor(R.color.color_DE000000))
-//                    changeColorStatusBarMain(true)
-//                }
-//                return true
-//            }
+            R.id.navigation_games -> {
+                if (!getCurrentFragmentName().equals(
+                        GamesFragment::class.java.simpleName,
+                        true
+                    )
+                ) {
+                    isGame = true
+                    ivSpinWallet.gone()
+                    ivProfileMain.gone()
+                    ivAvatarMain.gone()
+                    BaseFragment.setFragment(supportFragmentManager, GamesFragment())
+                    tvHeader.text = ""
+                    tvHeader.setTextColor(getColor(R.color.color_DE000000))
+                    changeColorStatusBarMain(true)
+                }
+                return true
+            }
             R.id.navigation_wallet -> {
                 if (!getCurrentFragmentName().equals(
                         WalletFragment::class.java.simpleName,
                         true
                     )
                 ) {
+                    isGame = false
+                    if (isUserLogin) {
+                        ivSpinWallet.visible()
+                        ivAvatarMain.visible()
+                    }
+                    ivProfileMain.visible()
                     BaseFragment.setFragment(supportFragmentManager, WalletFragment())
                     tvHeader.text = getString(R.string.text_navigation_wallet)
                     tvHeader.setTextColor(getColor(R.color.color_DE000000))
@@ -257,6 +282,12 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                         true
                     )
                 ) {
+                    isGame = false
+                    if (isUserLogin) {
+                        ivSpinWallet.visible()
+                        ivAvatarMain.visible()
+                    }
+                    ivProfileMain.visible()
                     BaseFragment.setFragment(supportFragmentManager, UtilitiesFragment())
                     tvHeader.text = getString(R.string.text_navigation_utilities)
                     tvHeader.setTextColor(getColor(R.color.color_DE000000))

@@ -5,9 +5,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import com.kardia.membership.R
+import com.kardia.membership.core.extension.clear
 import com.kardia.membership.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_create_passcode.*
 import kotlinx.android.synthetic.main.fragment_create_passcode.ovPasscode
+import kotlinx.android.synthetic.main.fragment_enter_passcode.*
 
 class CreatePasscodeFragment : BaseFragment() {
 
@@ -32,19 +34,21 @@ class CreatePasscodeFragment : BaseFragment() {
 
     override fun initViews() {
         isNotCatch401 = true
+
+        showKeyboardWithEditText(ovPasscode)
     }
 
     override fun initEvents() {
         btSetPasscode.setOnClickListener {
             passcode?.let { passcode ->
                 mNavigator.showConfirmPasscodeRegister(activity, email, passcode)
-                ovPasscode.text?.clear()
+                ovPasscode.clear()
             }
         }
 
         ovPasscode.setOtpCompletionListener {
             mNavigator.showConfirmPasscodeRegister(activity, email, it)
-            ovPasscode.text?.clear()
+            ovPasscode.clear()
         }
         ovPasscode.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

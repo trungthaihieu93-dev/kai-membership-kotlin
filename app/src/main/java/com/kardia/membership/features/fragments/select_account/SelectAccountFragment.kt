@@ -49,11 +49,11 @@ class SelectAccountFragment : BaseFragment() {
             onItemClickListener = object : OnItemClickListener {
                 override fun onItemClick(item: Any?, position: Int) {
                     val account = item as User
-                    if (!account.refreshToken.isNullOrBlank()) {
+//                    if (!account.refreshToken.isNullOrBlank()) {
                         mNavigator.showEnterPasscode(activity, account.email)
-                    } else {
-                        mNavigator.showCreatePasscode(activity, account.email)
-                    }
+//                    } else {
+//                        mNavigator.showCreatePasscode(activity, account.email)
+//                    }
                 }
             }
         }

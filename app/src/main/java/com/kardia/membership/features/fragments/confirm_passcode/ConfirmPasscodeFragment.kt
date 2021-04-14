@@ -15,6 +15,7 @@ import com.kardia.membership.features.utils.AppConstants
 import com.kardia.membership.features.viewmodel.PasscodeViewModel
 import kotlinx.android.synthetic.main.fragment_confirm_passcode.*
 import kotlinx.android.synthetic.main.fragment_confirm_passcode.ovPasscode
+import kotlinx.android.synthetic.main.fragment_enter_passcode.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class ConfirmPasscodeFragment : BaseFragment() {
@@ -58,6 +59,8 @@ class ConfirmPasscodeFragment : BaseFragment() {
     override fun initViews() {
         isNotCatch401 = true
         ivBack.visible()
+
+        showKeyboardWithEditText(ovPasscode)
     }
 
     override fun initEvents() {

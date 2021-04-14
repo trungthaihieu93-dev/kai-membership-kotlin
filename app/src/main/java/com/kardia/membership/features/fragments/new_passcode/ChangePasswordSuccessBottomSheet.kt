@@ -1,5 +1,6 @@
 package com.kardia.membership.features.fragments.new_passcode
 
+import android.content.DialogInterface
 import android.os.Bundle
 import com.kardia.membership.R
 import com.kardia.membership.core.platform.BaseBottomSheetDialogFragment
@@ -44,5 +45,10 @@ class ChangePasswordSuccessBottomSheet: BaseBottomSheetDialogFragment() {
 
     interface CallBack {
         fun onDismiss()
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        callback?.onDismiss()
     }
 }

@@ -160,7 +160,7 @@ class NewPasswordFragment : BaseFragment() {
         if (fromChangePassword) {
             val callback = object : ChangePasswordSuccessBottomSheet.CallBack {
                 override fun onDismiss() {
-                    mNavigator.showLoginNew(activity)
+                    finish()
                 }
             }
             mNavigator.showChangePasswordSuccess(activity, callback)

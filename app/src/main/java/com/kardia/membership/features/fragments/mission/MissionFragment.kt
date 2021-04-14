@@ -1,15 +1,24 @@
 package com.kardia.membership.features.fragments.mission
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
+import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.button.MaterialButton
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
+import com.kardia.membership.BuildConfig
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.gone
 import com.kardia.membership.core.extension.observe
@@ -160,35 +169,13 @@ class MissionFragment : BaseFragment() {
     private fun handleQuest(key: String) {
         when (key) {
             AppConstants.KEY_RATE_APP -> {
-                activity?.let { activity ->
-                    reviewManager = ReviewManagerFactory.create(activity)
-                    val request = reviewManager.requestReviewFlow()
-                    request.addOnCompleteListener { request ->
-                        if (request.isSuccessful) {
-                            // We got the ReviewInfo object
-                            reviewInfo = request.result
-                        } else {
-                            // There was some problem, continue regardless of the result.
-                            reviewInfo = null
-                        }
+                if (isUserLogin) {
+                    activity?.let { activity ->
+                        showDialogRatingApp(activity)
                     }
-                    reviewInfo?.let {
-                        val flow = reviewManager.launchReviewFlow(activity, it)
-                        flow.addOnSuccessListener {
-//                            updateProgressMission(AppConstants.KEY_RATE_APP)
-                            AppLog.d("ReviewApp", "Success")
-                        }
-                        flow.addOnFailureListener { exception ->
-                            exception.message?.let { message ->
-                                AppLog.d("ReviewApp", message)
-                            }
-                        }
-                        flow.addOnCompleteListener {
-                            AppLog.d("ReviewApp", "Complete")
-                        }
-                    }
+                } else {
+                    showLogin(activity)
                 }
-
             }
             AppConstants.KEY_SEND_KAI -> {
                 if (isUserLogin) {
@@ -339,6 +326,71 @@ class MissionFragment : BaseFragment() {
             if (it) {
                 questViewModel.getQuests()
             }
+        }
+    }
+
+    private fun showDialogRatingApp(activity: Activity) {
+        val dialog: MaterialDialog = MaterialDialog.Builder(activity)
+            .customView(R.layout.dialog_rating_app, false)
+            .build()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val customView = dialog.customView
+        customView?.let {
+            val btRateLater = customView.findViewById<View>(R.id.btRateLater) as MaterialButton
+            val btRateUs = customView.findViewById<View>(R.id.btRateUs) as MaterialButton
+            btRateLater.setOnClickListener {
+                dialog.dismiss()
+            }
+            btRateUs.setOnClickListener {
+                dialog.dismiss()
+                val uri: Uri = Uri.parse("market://details?id=${BuildConfig.APPLICATION_ID}")
+                val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+                // To count with Play market backstack, After pressing back button,
+                // to taken back to our application, we need to add following flags to intent.
+                goToMarket.addFlags(
+                    Intent.FLAG_ACTIVITY_NO_HISTORY or
+                            Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                )
+                try {
+                    startActivity(goToMarket)
+                } catch (e: ActivityNotFoundException) {
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("http://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}")
+                        )
+                    )
+                }
+                updateProgressMission(AppConstants.KEY_RATE_APP)
+//                reviewManager = ReviewManagerFactory.create(activity)
+//                val request = reviewManager.requestReviewFlow()
+//                request.addOnCompleteListener { request ->
+//                    if (request.isSuccessful) {
+//                        // We got the ReviewInfo object
+//                        reviewInfo = request.result
+//                    } else {
+//                        // There was some problem, continue regardless of the result.
+//                        reviewInfo = null
+//                    }
+//                }
+//                reviewInfo?.let {
+//                    val flow = reviewManager.launchReviewFlow(activity, it)
+//                    flow.addOnSuccessListener {
+////                            updateProgressMission(AppConstants.KEY_RATE_APP)
+//                        AppLog.d("ReviewApp", "Success")
+//                    }
+//                    flow.addOnFailureListener { exception ->
+//                        exception.message?.let { message ->
+//                            AppLog.d("ReviewApp", message)
+//                        }
+//                    }
+//                    flow.addOnCompleteListener {
+//                        AppLog.d("ReviewApp", "Complete")
+//                    }
+//                }
+            }
+            dialog.show()
         }
     }
 }

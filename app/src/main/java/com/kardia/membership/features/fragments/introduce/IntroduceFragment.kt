@@ -57,7 +57,7 @@ class IntroduceFragment : BaseFragment() {
     override fun initEvents() {
         btSkip.setOnClickListener {
             finish()
-//            mNavigator.showSelectAccount(activity)
+            mNavigator.showMain(activity)
         }
         btSignIn.setOnClickListener {
             finish()

@@ -1,5 +1,6 @@
 package com.kardia.membership.features.fragments.enter_passcode
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -9,6 +10,7 @@ import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.core.text.color
 import androidx.core.text.set
 import com.kardia.membership.R
@@ -95,9 +97,11 @@ class EnterPasscodeFragment : BaseFragment() {
                     ds.isUnderlineText = false // set to false to remove underline
                 }
             }
-        tvResetPasscode.highlightColor = Color.TRANSPARENT;
+        tvResetPasscode.highlightColor = Color.TRANSPARENT
         tvResetPasscode.movementMethod = LinkMovementMethod()
         tvResetPasscode.text = myCustomizedString
+
+        showKeyboardWithEditText(ovPasscode)
     }
 
     override fun initEvents() {

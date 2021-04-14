@@ -7,6 +7,7 @@ import android.view.View
 import com.kardia.membership.R
 import com.kardia.membership.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_create_passcode.*
+import kotlinx.android.synthetic.main.fragment_enter_passcode.*
 import kotlinx.android.synthetic.main.fragment_new_passcode.*
 import kotlinx.android.synthetic.main.fragment_new_passcode.btSetPasscode
 import kotlinx.android.synthetic.main.fragment_new_passcode.ovPasscode
@@ -36,7 +37,7 @@ class NewPasscodeFragment : BaseFragment() {
     }
 
     override fun initViews() {
-
+        showKeyboardWithEditText(ovPasscode)
     }
 
     override fun initEvents() {

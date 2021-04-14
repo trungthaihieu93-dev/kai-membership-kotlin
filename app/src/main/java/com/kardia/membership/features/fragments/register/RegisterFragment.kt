@@ -101,7 +101,7 @@ class RegisterFragment : BaseFragment() {
     }
 
     override fun reloadData() {
-        tietCaptcha.text?.clear()
+        tietCaptcha.clear()
         loadData()
     }
 

@@ -10,8 +10,8 @@ import retrofit2.http.*
 
 internal interface QuestAPI {
     companion object {
-        private const val QUESTS = "v1/quests"
-        private const val QUESTS_USER = "v1/quests/users"
+        private const val QUESTS = "v1/quests?type=new"
+        private const val QUESTS_USER = "v1/quests/users?type=new"
         private const val CHECK_QUESTS = "v1/quests/get"
     }
 

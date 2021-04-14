@@ -15,6 +15,8 @@ import android.os.Handler
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
@@ -585,5 +587,11 @@ abstract class BaseFragment : Fragment() {
             return
         }
         mNavigator.showLogin(activity)
+    }
+
+    fun showKeyboardWithEditText(et:EditText){
+        et.requestFocus()
+        val imm: InputMethodManager? = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm?.showSoftInput(et, InputMethodManager.SHOW_IMPLICIT)
     }
 }

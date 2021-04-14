@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kardia.membership.R
 import com.kardia.membership.core.extension.gone
+import com.kardia.membership.core.extension.invisible
 import com.kardia.membership.core.extension.visible
 import com.kardia.membership.core.platform.OnItemClickListener
 import com.kardia.membership.data.entities.Quest
@@ -77,7 +78,7 @@ class QuestAdapter
                             }
                             AppConstants.KEY_RATE_APP ->{
                                 itemView.rlProgressBarQuest.gone()
-                                itemView.tvContentQuest.gone()
+                                itemView.tvContentQuest.invisible()
                             }
                         }
                         item.processing?.let { processing ->

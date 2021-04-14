@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.kardia.membership.AndroidApplication
 import com.kardia.membership.R
@@ -23,6 +24,7 @@ import com.kardia.membership.data.cache.UserInfoCache
 import com.kardia.membership.data.cache.UserTokenCache
 import com.kardia.membership.data.entities.UserInfo
 import com.kardia.membership.features.dialog.DialogProgress
+import com.kardia.membership.features.utils.DataConstants
 import kotlinx.android.synthetic.main.include_toolbar_white.view.*
 import pl.droidsonroids.gif.GifDrawable
 import javax.inject.Inject
@@ -256,6 +258,14 @@ abstract class BaseActivity : AppCompatActivity() {
         for (fragment in supportFragmentManager.fragments) {
             fragment.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    fun showLogin(activity: FragmentActivity?) {
+        DataConstants.PASSCODE_DEVICE?.let {
+            mNavigator.showSelectAccount(activity, it)
+            return
+        }
+        mNavigator.showLogin(activity)
     }
 }
 
